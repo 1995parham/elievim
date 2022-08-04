@@ -13,4 +13,17 @@ plugin({
   config = conf.nvim_treesitter,
 })
 
-plugin({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
+plugin({
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  after = 'nvim-treesitter'
+})
+
+-- markdown vim mode
+plugin({
+  'plasticboy/vim-markdown',
+  config = function()
+    vim.g.vim_markdown_folding_disabled = 1
+    vim.g.vim_markdown_math = 1
+  end,
+  requires = { 'godlygeek/tabular' }
+})

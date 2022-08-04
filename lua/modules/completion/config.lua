@@ -59,7 +59,7 @@ function config.mason.installer()
     -- will happen on startup. You can use :MasonToolsInstall or
     -- :MasonToolsUpdate to install tools and check for updates.
     -- Default: true
-    run_on_start = false,
+    run_on_start = true,
 
     -- set a delay (in ms) before the installation starts. This is only
     -- effective if run_on_start is set to true.
