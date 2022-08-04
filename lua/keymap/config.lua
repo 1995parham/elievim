@@ -38,8 +38,8 @@ nmap({
 
 -- insert mode
 -- imap({
-  -- { '<C-h>', '<Bs>', opts(noremap) },
-  -- { '<C-e>', '<End>', opts(noremap) },
+-- { '<C-h>', '<Bs>', opts(noremap) },
+-- { '<C-e>', '<End>', opts(noremap) },
 -- })
 
 -- commandline remap

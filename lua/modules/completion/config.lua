@@ -10,14 +10,14 @@ function config.nvim_lsp() end
 config.mason = {}
 
 function config.mason.setup()
-  require("mason").setup({
+  require('mason').setup({
     ui = {
       icons = {
-        package_installed = "✓",
-        package_pending = "➜",
-        package_uninstalled = "✗"
-      }
-    }
+        package_installed = '✓',
+        package_pending = '➜',
+        package_uninstalled = '✗',
+      },
+    },
   })
 end
 
@@ -58,7 +58,7 @@ function config.mason.installer()
       'mypy',
       'flake8',
       -- toml
-      "taplo",
+      'taplo',
       -- etc
       'editorconfig-checker',
       'impl',
@@ -83,25 +83,43 @@ function config.mason.installer()
     -- effective if run_on_start is set to true.
     -- e.g.: 5000 = 5 second delay, 10000 = 10 second delay, etc...
     -- Default: 0
-    start_delay = 3000,  -- 3 second delay
+    start_delay = 3000, -- 3 second delay
   })
 end
 
 function config.mason.lspconfig()
-  require("mason-lspconfig").setup({
+  require('mason-lspconfig').setup({
     ensure_installed = {
-      "golangci_lint_ls",
-      "gopls",
-      "pyright",
-      "taplo",
+      'golangci_lint_ls',
+      'gopls',
+      'pyright',
+      'taplo',
+      'sumneko_lua',
     },
-    automatic_installation = false,
+    automatic_installation = true,
   })
 end
 
 function config.null_ls()
-  local null_ls = require("null-ls")
+  local null_ls = require('null-ls')
+  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
   null_ls.setup({
+    -- you can reuse a shared lspconfig on_attach callback here
+    on_attach = function(client, bufnr)
+      if client.supports_method('textDocument/formatting') then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            -- on 0.8, you should use
+            -- vim.lsp.buf.format({ bufnr = bufnr }) instead
+            vim.lsp.buf.formatting_sync()
+          end,
+        })
+      end
+    end,
     sources = {
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.sql_formatter,
@@ -111,16 +129,31 @@ function config.null_ls()
       null_ls.builtins.diagnostics.jsonlint,
       null_ls.builtins.diagnostics.luacheck,
       null_ls.builtins.diagnostics.pylint,
-      null_ls.builtins.diagnostics.pyproject_flake8,
+      -- null_ls.builtins.diagnostics.pyproject_flake8,
       null_ls.builtins.diagnostics.flake8,
     },
   })
 end
 
-function config.lspsaga()
-  local saga = require("lspsaga")
+function config.cmp()
+  local cmp = require('cmp')
 
-  saga.init_lsp_saga({
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+    }, {
+      { name = 'buffer' },
+    }),
   })
 end
 
@@ -140,7 +173,7 @@ function config.lua_snip()
     },
   })
   require('luasnip.loaders.from_lua').lazy_load({
-    paths = vim.fn.stdpath('config') .. '/snippets'
+    paths = vim.fn.stdpath('config') .. '/snippets',
   })
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({

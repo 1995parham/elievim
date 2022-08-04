@@ -18,12 +18,12 @@ function config.dashboard()
   local db = require('dashboard')
   local version = vim.version()
   local relationship_start_time = os.time({
-    year=2020,
-    month=2,
-    day=13,
-    hour=22,
-    min=26,
-    sec=0,
+    year = 2020,
+    month = 2,
+    day = 13,
+    hour = 22,
+    min = 26,
+    sec = 0,
   })
 
   db.session_directory = home .. '/.cache/nvim/session'
@@ -54,20 +54,13 @@ function config.dashboard()
   }
   db.custom_footer = {
     '',
-    string.format(
-    '💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)
-    ),
-    string.format(
-    '💞 %d days ago',
-    os.difftime(os.time(), relationship_start_time) / (3600 * 24)
-    ),
+    string.format('💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)),
+    string.format('💞 %d days ago', os.difftime(os.time(), relationship_start_time) / (3600 * 24)),
     '',
   }
   if packer_plugins ~= nil then
     local count = #vim.tbl_keys(packer_plugins)
-    table.insert(
-    db.custom_footer, string.format('🎉 neovim loaded %d plugins', count)
-    )
+    table.insert(db.custom_footer, string.format('🎉 neovim loaded %d plugins', count))
   end
 end
 
@@ -99,8 +92,8 @@ function config.fterm()
       height = 0.8,
       width = 0.8,
       x = 0.5,
-      y = 0.5
-    }
+      y = 0.5,
+    },
   })
 
   local ipython = fterm:new({
@@ -110,13 +103,17 @@ function config.fterm()
       height = 0.8,
       width = 0.8,
       x = 0.5,
-      y = 0.5
-    }
+      y = 0.5,
+    },
   })
 
   vim.api.nvim_create_user_command('FTermToggle', fterm.toggle, { bang = true })
-  vim.api.nvim_create_user_command('LDToggle', function() lazydocker:toggle() end, { bang = true })
-  vim.api.nvim_create_user_command('IPToggle', function() ipython:toggle() end, { bang = true })
+  vim.api.nvim_create_user_command('LDToggle', function()
+    lazydocker:toggle()
+  end, { bang = true })
+  vim.api.nvim_create_user_command('IPToggle', function()
+    ipython:toggle()
+  end, { bang = true })
 end
 
 return config
