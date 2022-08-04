@@ -99,12 +99,25 @@ plugin {'nvim-telescope/telescope.nvim',
 In cosynvim there are some apis that make it easy to set keymap. All apis are defined in `core/keymap.lua`.
 
 ```lua
-keymap.(n/i/c/v/x/t)map -- function to generate keymap by vim.keymap.set
-keymap.new_opts -- generate opts into vim.keymap.set
+-- functions to generate keymap by vim.keymap.set
+keymap.nmap()
+keymap.imap()
+keymap.cmap()
+keymap.vmap()
+keymap.xmap()
+keymap.tmap()
+-- generate opts into vim.keymap.set
+keymap.new_opts()
 -- function type that work with keymap.new_opts
-keymap.silent keymap.noremap keymap.expr keymap.nowait keymap.remap
-keymap.cmd -- just return string with <Cmd> and <CR>
-keymap.cu -- work like cmd but for visual map
+keymap.silent()
+keymap.noremap()
+keymap.expr()
+keymap.nowait()
+keymap.remap()
+-- just return string with <Cmd> and <CR>
+keymap.cmd()
+-- work like cmd but for visual map
+keymap.cu()
 ```
 
 Use these apis to config your keymap in `keymap` folder. In this folder `keymap/init.lua` is necessary but if you
@@ -133,7 +146,7 @@ confused what is `<cmd>` check `:h <cmd>` you will get answer
 
 ```lua
   -- window jump
-  {"<C-h>",'<C-w>h',opts(noremap)},
+  {"<C-h>",'<C-w>h',opts(noremap)}
 ```
 
 also you can pass a table not include sub table to `map` like
