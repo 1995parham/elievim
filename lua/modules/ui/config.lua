@@ -1,4 +1,5 @@
 -- author: glepnr https://github.com/glepnir
+--
 -- date: 2022-07-02
 -- License: MIT
 
@@ -91,7 +92,31 @@ end
 function config.fterm()
   local fterm = require('FTerm')
 
+  local lazydocker = fterm:new({
+    ft = 'fterm_lazydocker',
+    cmd = 'lazydocker',
+    dimensions = {
+      height = 0.8,
+      width = 0.8,
+      x = 0.5,
+      y = 0.5
+    }
+  })
+
+  local ipython = fterm:new({
+    ft = 'fterm_ipython',
+    cmd = 'ipython',
+    dimensions = {
+      height = 0.8,
+      width = 0.8,
+      x = 0.5,
+      y = 0.5
+    }
+  })
+
   vim.api.nvim_create_user_command('FTermToggle', fterm.toggle, { bang = true })
+  vim.api.nvim_create_user_command('LDToggle', function() lazydocker:toggle() end, { bang = true })
+  vim.api.nvim_create_user_command('IPToggle', function() ipython:toggle() end, { bang = true })
 end
 
 return config

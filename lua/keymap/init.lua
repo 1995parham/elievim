@@ -5,7 +5,7 @@
 
 require('keymap.config')
 local key = require('core.keymap')
-local nmap, xmap = key.nmap, key.xmap
+local nmap, tmap = key.nmap, key.tmap
 local silent, noremap = key.silent, key.noremap
 local opts = key.new_opts
 local cmd = key.cmd
@@ -27,9 +27,15 @@ nmap({
   { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
   { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
   { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent) },
-})
-
-xmap({
   -- FTerm
   { '<Leader>ot', cmd('FTermToggle'), opts(silent) },
+  { '<Leader>od', cmd('LDToggle'), opts(silent) },
+  { '<Leader>oi', cmd('IPToggle'), opts(silent) },
+})
+
+tmap({
+  -- FTerm
+  { '<Leader>ot', cmd('FTermToggle'), opts(silent) },
+  { '<Leader>od', cmd('LDToggle'), opts(silent) },
+  { '<Leader>oi', cmd('IPToggle'), opts(silent) },
 })

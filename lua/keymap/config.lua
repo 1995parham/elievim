@@ -16,18 +16,17 @@ vim.g.mapleader = ' '
 nmap({ ' ', '', opts(noremap) })
 xmap({ ' ', '', opts(noremap) })
 
--- usage example
+-- noremal remap
 nmap({
-  -- noremal remap
   -- close buffer
-  { '<C-x>k', cmd('bdelete'), opts(noremap, silent) },
+  { '<Leader>k', cmd('bdelete'), opts(noremap, silent) },
   -- save
-  { '<C-s>', cmd('write'), opts(noremap) },
+  -- { '<C-s>', cmd('write'), opts(noremap) },
   -- yank
-  { 'Y', 'y$', opts(noremap) },
+  -- { 'Y', 'y$', opts(noremap) },
   -- buffer jump
-  { ']b', cmd('bn'), opts(noremap) },
-  { '[b', cmd('bp'), opts(noremap) },
+  -- { ']b', cmd('bn'), opts(noremap) },
+  -- { '[b', cmd('bp'), opts(noremap) },
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
   -- window jump
@@ -37,11 +36,11 @@ nmap({
   { '<C-w>c', cmd('tabnew'), opts(noremap) },
 })
 
-imap({
-  -- insert mode
-  { '<C-h>', '<Bs>', opts(noremap) },
-  { '<C-e>', '<End>', opts(noremap) },
-})
+-- insert mode
+-- imap({
+  -- { '<C-h>', '<Bs>', opts(noremap) },
+  -- { '<C-e>', '<End>', opts(noremap) },
+-- })
 
 -- commandline remap
-cmap({ '<C-b>', '<Left>', opts(noremap) })
+-- cmap({ '<C-b>', '<Left>', opts(noremap) })
