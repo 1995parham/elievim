@@ -4,16 +4,17 @@
 
 ```
 ├── init.lua
-├── lua
-│   ├── core                       heart of cosynvim provide api
+├── 📂 lua
+│   ├── 📂 core                    heart of elievim provide api
 │   │   ├── init.lua
 │   │   ├── keymap.lua             keymap api
 │   │   ├── options.lua            vim options
 │   │   └── pack.lua               hack packer
-│   ├── keymap                     your keymap in here
+│   ├── 📂 keymap
 │   │   ├── config.lua
 │   │   └── init.lua
-│   └── modules                    plugins module usage example
+│   │   └── plugins.lua
+│   └── 📂 modules
 │       ├── completion
 │       │   ├── config.lua
 │       │   └── plugins.lua
@@ -27,7 +28,7 @@
 │           ├── config.lua
 │           ├── eviline.lua
 │           └── plugins.lua
-├── snippets                       snippets 
+├── snippets                       snippets
 │   ├── lua.json
 │   └── package.json
 └── static                         dashboard logo
