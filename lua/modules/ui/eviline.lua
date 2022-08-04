@@ -7,7 +7,20 @@ if not status_ok then
   return
 end
 
-local colors = require('galaxyline.theme').default
+local colors = {
+  bg = '#525252',
+  black = '#2c2c2c',
+  yellow = '#fabd2f',
+  cyan = '#00e6e6',
+  darkblue = '#081633',
+  green = '#afd700',
+  orange = '#FF8800',
+  purple = '#5d4d7a',
+  magenta = '#d16d9e',
+  grey = '#c0c0c0',
+  blue = '#0087d7',
+  red = '#ec5f67'
+}
 local condition = require('galaxyline.condition')
 local gls = galaxyline.section
 galaxyline.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer' }
@@ -17,7 +30,7 @@ gls.left[1] = {
     provider = function()
       return '▊ '
     end,
-    highlight = { colors.blue, colors.bg },
+    highlight = { colors.orange, colors.bg },
   },
 }
 
@@ -48,7 +61,15 @@ gls.left[2] = {
         V = colors.blue,
       }
       vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
-      return '  '
+      local mode_name = {
+        n = 'NORMAL',
+        i = 'INSERT',
+        c = 'COMMAND',
+        v = 'VISUAL',
+        V = 'VISUAL LINE',
+        [''] = 'VISUAL BLOCK'
+      }
+      return string.format('%s ', mode_name[vim.fn.mode()])
     end,
   },
 }
@@ -222,7 +243,7 @@ gls.right[9] = {
     provider = function()
       return ' ▊'
     end,
-    highlight = { colors.blue, colors.bg },
+    highlight = { colors.orange, colors.bg },
   },
 }
 

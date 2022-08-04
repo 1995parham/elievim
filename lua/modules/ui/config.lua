@@ -4,8 +4,8 @@
 
 local config = {}
 
-function config.zephyr()
-  vim.cmd('colorscheme zephyr')
+function config.naz()
+  require('colorbuddy').colorscheme('naz')
 end
 
 function config.galaxyline()
@@ -15,11 +15,28 @@ end
 function config.dashboard()
   local home = os.getenv('HOME')
   local db = require('dashboard')
+  local version = vim.version()
+  local relationship_start_time = os.time({
+    year=2020,
+    month=2,
+    day=13,
+    hour=22,
+    min=26,
+    sec=0,
+  })
+
   db.session_directory = home .. '/.cache/nvim/session'
-  db.preview_command = 'cat | lolcat -F 0.3'
-  db.preview_file_path = home .. '/.config/nvim/static/neovim.cat'
-  db.preview_file_height = 12
-  db.preview_file_width = 80
+  db.custom_header = {
+    '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',
+    '█▀░██▀▄▄▀█▀▄▄▀█░▄▄█▀▄▄▀█░▄▄▀█░▄▄▀█░████░▄▄▀█░▄▀▄░',
+    '██░██▄▀▀░█▄▀▀░█▄▄▀█░▀▀░█░▀▀░█░▀▀▄█░▄▄░█░▀▀░█░█▄█░',
+    '█▀░▀██▀▀▄██▀▀▄█▀▀▄█░████▄██▄█▄█▄▄█▄██▄█▄██▄█▄███▄',
+    '▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀',
+    string.format('neovim %d.%d.%d', version.major, version.minor, version.patch),
+    vim.fn.strftime('%c') .. ' on ' .. vim.fn.hostname(),
+    '',
+    '',
+  }
   db.custom_center = {
     {
       icon = '  ',
@@ -34,6 +51,23 @@ function config.dashboard()
       shortcut = 'SPC f f',
     },
   }
+  db.custom_footer = {
+    '',
+    string.format(
+      '💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)
+    ),
+    string.format(
+      '💞 %d days ago',
+      os.difftime(os.time(), relationship_start_time) / (3600 * 24)
+    ),
+    '',
+  }
+  if packer_plugins ~= nil then
+    local count = #vim.tbl_keys(packer_plugins)
+    table.insert(
+      db.custom_footer, string.format('🎉 neovim loaded %d plugins', count)
+    )
+  end
 end
 
 function config.nvim_bufferline()
