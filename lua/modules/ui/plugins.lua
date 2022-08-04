@@ -33,3 +33,10 @@ plugin({
   config = conf.nvim_bufferline,
   requires = 'kyazdani42/nvim-web-devicons'
 })
+
+
+-- No-nonsense floating terminal plugin for neovim
+plugin({
+  'numToStr/FTerm.nvim',
+  config = conf.fterm,
+})

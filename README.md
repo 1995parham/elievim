@@ -3,7 +3,7 @@
 # Structure
 
 ```
-├── init.lua  
+├── init.lua
 ├── lua
 │   ├── core                       heart of cosynvim provide api
 │   │   ├── init.lua
@@ -125,14 +125,14 @@ nmap {
 }
 ```
 
-map` foreach every table and generate a new table that can pass to `vim.keymap.set`. `cmd('PackerUpdate')` just
+`map` foreach every table and generate a new table that can pass to `vim.keymap.set`. `cmd('PackerUpdate')` just
 return a string `<cmd>PackerUpdate<CR>` as rhs. lhs is `<leader>pu>`, `opts(noremap,silent,'Packer update')` generate options table
 `{noremap = true,silent = true, desc = 'Packer Update' }` . for some vim mode remap. not need use `cmd` function. oh maybe you will be
 confused what is `<cmd>` check `:h <cmd>` you will get answer
 
 ```lua
-  -- window jump
-  {"<C-h>",'<C-w>h',opts(noremap)}
+-- window jump
+{"<C-h>",'<C-w>h',opts(noremap)}
 ```
 
 also you can pass a table not include sub table to `map` like

@@ -47,6 +47,8 @@ function config.mason.installer()
       'shfmt',
       'staticcheck',
       'vint',
+      'sql-formatter',
+      'jq',
     },
 
     -- if set to true this will check each tool for updates. If updates
@@ -71,28 +73,29 @@ end
 
 function config.mason.lspconfig()
   require("mason-lspconfig").setup({
-    ensure_installed = {},
+    ensure_installed = {
+      "golangci_lint_ls",
+      "gopls",
+    },
     automatic_installation = false,
   })
 end
 
 function config.null_ls()
-  require("null-ls").setup({
+  local null_ls = require("null-ls")
+  null_ls.setup({
     sources = {
-      require("null-ls").builtins.formatting.stylua,
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.sql_formatter,
+      null_ls.builtins.formatting.jq,
     },
   })
 end
 
-function config.nvim_cmp()
-  local cmp = require('cmp')
+function config.lspsaga()
+  local saga = require("lspsaga")
 
-  cmp.setup({
-    preselect = cmp.PreselectMode.Item,
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
+  saga.init_lsp_saga({
   })
 end
 
@@ -111,7 +114,9 @@ function config.lua_snip()
       },
     },
   })
-  require('luasnip.loaders.from_lua').lazy_load({ paths = vim.fn.stdpath('config') .. '/snippets' })
+  require('luasnip.loaders.from_lua').lazy_load({
+    paths = vim.fn.stdpath('config') .. '/snippets'
+  })
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({
     paths = { './snippets/' },

@@ -88,4 +88,10 @@ function config.nvim_tree()
   })
 end
 
+function config.fterm()
+  local fterm = require('FTerm')
+
+  vim.api.nvim_create_user_command('FTermToggle', fterm.toggle, { bang = true })
+end
+
 return config
