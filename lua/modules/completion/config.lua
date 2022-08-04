@@ -7,7 +7,9 @@ local config = {}
 -- config server in this function
 function config.nvim_lsp() end
 
-function config.mason()
+config.mason = {}
+
+function config.mason.setup()
   require("mason").setup({
     ui = {
       icons = {
@@ -19,16 +21,16 @@ function config.mason()
   })
 end
 
-function config.mason_installer()
-  require'mason-tool-installer'.setup({
+function config.mason.installer()
+  require('mason-tool-installer').setup({
     -- a list of all tools you want to ensure are installed upon
     -- start; they should be the names Mason uses for each tool
     ensure_installed = {
       'golangci-lint',
+      'gopls',
       'bash-language-server',
       'lua-language-server',
       'vim-language-server',
-      'gopls',
       'stylua',
       'shellcheck',
       'editorconfig-checker',
@@ -64,6 +66,21 @@ function config.mason_installer()
     -- e.g.: 5000 = 5 second delay, 10000 = 10 second delay, etc...
     -- Default: 0
     start_delay = 3000,  -- 3 second delay
+  })
+end
+
+function config.mason.lspconfig()
+  require("mason-lspconfig").setup({
+    ensure_installed = {},
+    automatic_installation = false,
+  })
+end
+
+function config.null_ls()
+  require("null-ls").setup({
+    sources = {
+      require("null-ls").builtins.formatting.stylua,
+    },
   })
 end
 

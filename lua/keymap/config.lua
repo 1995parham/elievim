@@ -31,10 +31,10 @@ nmap({
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
   -- window jump
-  { '<C-h>', '<C-w>h', opts(noremap) },
-  { '<C-l>', '<C-w>l', opts(noremap) },
-  { '<C-j>', '<C-w>j', opts(noremap) },
-  { '<C-k>', '<C-w>k', opts(noremap) },
+  { '<C-w>n', cmd('tabnext'), opts(noremap) },
+  { '<C-w>p', cmd('tabprevious'), opts(noremap) },
+  -- window create
+  { '<C-w>c', cmd('tabnew'), opts(noremap) },
 })
 
 imap({
