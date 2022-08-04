@@ -24,6 +24,7 @@ nmap({
   { '<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent) },
   -- Telescope
   { '<Leader>bb', cmd('Telescope buffers'), opts(noremap, silent) },
+  { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
   { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('Telescope find_files'), opts(noremap, silent) },
+  { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent) },
 })

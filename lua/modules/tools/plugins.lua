@@ -10,8 +10,13 @@ plugin({
   cmd = 'Telescope',
   config = conf.telescope,
   requires = {
-    { 'nvim-lua/popup.nvim', opt = true },
-    { 'nvim-lua/plenary.nvim', opt = true },
-    { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-file-browser.nvim',
   },
+})
+
+-- wakatime
+plugin({
+  'wakatime/vim-wakatime'
 })

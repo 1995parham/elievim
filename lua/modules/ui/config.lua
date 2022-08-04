@@ -54,18 +54,18 @@ function config.dashboard()
   db.custom_footer = {
     '',
     string.format(
-      '💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)
+    '💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)
     ),
     string.format(
-      '💞 %d days ago',
-      os.difftime(os.time(), relationship_start_time) / (3600 * 24)
+    '💞 %d days ago',
+    os.difftime(os.time(), relationship_start_time) / (3600 * 24)
     ),
     '',
   }
   if packer_plugins ~= nil then
     local count = #vim.tbl_keys(packer_plugins)
     table.insert(
-      db.custom_footer, string.format('🎉 neovim loaded %d plugins', count)
+    db.custom_footer, string.format('🎉 neovim loaded %d plugins', count)
     )
   end
 end
