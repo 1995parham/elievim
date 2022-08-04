@@ -88,13 +88,27 @@ function config.mason.installer()
 end
 
 function config.mason.lspconfig()
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  local on_attach = function(_, bufnr)
+    local function buf_set_option(...)
+      vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  end
+
   require('mason-lspconfig').setup()
   require('mason-lspconfig').setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-      require('lspconfig')[server_name].setup({})
+      require('lspconfig')[server_name].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
     end,
   })
 end
@@ -123,6 +137,7 @@ function config.null_ls()
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.sql_formatter,
       null_ls.builtins.formatting.jq,
+      null_ls.builtins.formatting.gofumpt,
 
       null_ls.builtins.diagnostics.golangci_lint,
       null_ls.builtins.diagnostics.jsonlint,

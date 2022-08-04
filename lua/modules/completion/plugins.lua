@@ -34,6 +34,7 @@ plugin({
   },
   after = {
     'nvim-lspconfig',
+    'nvim-cmp',
   },
   config = conf.mason.lspconfig,
 })
