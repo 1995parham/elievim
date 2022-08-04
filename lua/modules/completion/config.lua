@@ -39,7 +39,7 @@ function config.mason.installer()
       'shellcheck',
       'shellcheck',
       -- lua
-      -- 'lua-language-server',
+      'lua-language-server',
       'stylua',
       'luacheck',
       -- vim
