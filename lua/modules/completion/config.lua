@@ -26,29 +26,45 @@ function config.mason.installer()
     -- a list of all tools you want to ensure are installed upon
     -- start; they should be the names Mason uses for each tool
     ensure_installed = {
+      -- golang
       'golangci-lint',
       'gopls',
-      'bash-language-server',
-      'lua-language-server',
-      'vim-language-server',
-      'stylua',
-      'shellcheck',
-      'editorconfig-checker',
       'gofumpt',
       'golines',
-      'gomodifytags',
-      'gotests',
-      'impl',
-      'json-to-struct',
-      'luacheck',
-      'misspell',
       'revive',
-      'shellcheck',
+      'json-to-struct',
+      'gotests',
+      'gomodifytags',
+      -- shell
+      'bash-language-server',
       'shfmt',
+      'shellcheck',
+      'shellcheck',
+      -- lua
+      'lua-language-server',
+      'stylua',
+      'luacheck',
+      -- vim
+      'vim-language-server',
+      -- sql
+      'sql-formatter',
+      -- json
+      'jq',
+      -- python
+      'mypy',
+      'pyright',
+      'pylint',
+      'python-lsp-server',
+      'mypy',
+      'flake8',
+      -- toml
+      "taplo",
+      -- etc
+      'editorconfig-checker',
+      'impl',
+      'misspell',
       'staticcheck',
       'vint',
-      'sql-formatter',
-      'jq',
     },
 
     -- if set to true this will check each tool for updates. If updates
@@ -76,6 +92,8 @@ function config.mason.lspconfig()
     ensure_installed = {
       "golangci_lint_ls",
       "gopls",
+      "pyright",
+      "taplo",
     },
     automatic_installation = false,
   })
@@ -88,6 +106,13 @@ function config.null_ls()
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.sql_formatter,
       null_ls.builtins.formatting.jq,
+
+      null_ls.builtins.diagnostics.golangci_lint,
+      null_ls.builtins.diagnostics.jsonlint,
+      null_ls.builtins.diagnostics.luacheck,
+      null_ls.builtins.diagnostics.pylint,
+      null_ls.builtins.diagnostics.pyproject_flake8,
+      null_ls.builtins.diagnostics.flake8,
     },
   })
 end

@@ -143,6 +143,14 @@ nmap {'key','rhs',opts(noremap,silent)}
 
 use `:h vim.keymap.set` to know more about.
 
+# LSP Tools Requirements
+
+```sh
+luarocks
+npm / node
+pip / python
+```
+
 # Tips
 
 - Improve key repeat
