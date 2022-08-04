@@ -1,5 +1,7 @@
 # Introduction
 
+## Based on neovim 0.8.0
+
 # Structure
 
 ```
@@ -28,11 +30,9 @@
 │           ├── config.lua
 │           ├── eviline.lua
 │           └── plugins.lua
-├── snippets                       snippets
-│   ├── lua.json
-│   └── package.json
-└── static                         dashboard logo
-    └── neovim.cat
+└── snippets                       snippets
+    ├── lua.json
+    └── package.json
 
 ```
 
@@ -147,9 +147,9 @@ use `:h vim.keymap.set` to know more about.
 # LSP Tools Requirements
 
 ```sh
-luarocks
-npm / node
-pip / python
+- luarocks
+- npm / node
+- pip / python
 ```
 
 # Tips
