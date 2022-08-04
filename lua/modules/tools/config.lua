@@ -5,7 +5,7 @@
 local config = {}
 
 function config.telescope()
-  local fb_actions = require("telescope").extensions.file_browser.actions
+  local fb_actions = require('telescope').extensions.file_browser.actions
 
   require('telescope').setup({
     defaults = {
@@ -20,12 +20,12 @@ function config.telescope()
       file_browser = {
         theme = 'ivy',
         mappings = {
-          ["n"] = {
-            ["ma"] = fb_actions.create,
-            ["mm"] = fb_actions.move,
-            ["mr"] = fb_actions.rename,
-            ["my"] = fb_actions.copy,
-            ["mh"] = fb_actions.toggle_hidden,
+          ['n'] = {
+            ['ma'] = fb_actions.create,
+            ['mm'] = fb_actions.move,
+            ['mr'] = fb_actions.rename,
+            ['my'] = fb_actions.copy,
+            ['mh'] = fb_actions.toggle_hidden,
           },
         },
       },

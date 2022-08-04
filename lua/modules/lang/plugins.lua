@@ -15,7 +15,7 @@ plugin({
 
 plugin({
   'nvim-treesitter/nvim-treesitter-textobjects',
-  after = 'nvim-treesitter'
+  after = 'nvim-treesitter',
 })
 
 -- markdown vim mode
@@ -25,5 +25,5 @@ plugin({
     vim.g.vim_markdown_folding_disabled = 1
     vim.g.vim_markdown_math = 1
   end,
-  requires = { 'godlygeek/tabular' }
+  requires = { 'godlygeek/tabular' },
 })

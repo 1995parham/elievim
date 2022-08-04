@@ -9,7 +9,7 @@ plugin({
   '1995parham/naz.vim',
   branch = 'main',
   config = conf.naz,
-  requires = {'tjdevries/colorbuddy.nvim'}
+  requires = { 'tjdevries/colorbuddy.nvim' },
 })
 
 plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
@@ -31,9 +31,8 @@ plugin({
 plugin({
   'akinsho/nvim-bufferline.lua',
   config = conf.nvim_bufferline,
-  requires = 'kyazdani42/nvim-web-devicons'
+  requires = 'kyazdani42/nvim-web-devicons',
 })
-
 
 -- No-nonsense floating terminal plugin for neovim
 plugin({

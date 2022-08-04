@@ -41,7 +41,7 @@ function config.mason.installer()
       'shellcheck',
       'shellcheck',
       -- lua
-      'lua-language-server',
+      -- 'lua-language-server',
       'stylua',
       'luacheck',
       -- vim
@@ -88,15 +88,14 @@ function config.mason.installer()
 end
 
 function config.mason.lspconfig()
-  require('mason-lspconfig').setup({
-    ensure_installed = {
-      'golangci_lint_ls',
-      'gopls',
-      'pyright',
-      'taplo',
-      'sumneko_lua',
-    },
-    automatic_installation = true,
+  require('mason-lspconfig').setup()
+  require('mason-lspconfig').setup_handlers({
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function(server_name) -- default handler (optional)
+      require('lspconfig')[server_name].setup({})
+    end,
   })
 end
 
@@ -144,10 +143,7 @@ function config.cmp()
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
+    window = {},
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
@@ -155,6 +151,12 @@ function config.cmp()
       { name = 'buffer' },
     }),
   })
+end
+
+function config.lspsaga()
+  local saga = require('lspsaga')
+
+  saga.init_lsp_saga({})
 end
 
 function config.lua_snip()

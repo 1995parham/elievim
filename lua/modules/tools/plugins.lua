@@ -18,5 +18,5 @@ plugin({
 
 -- wakatime
 plugin({
-  'wakatime/vim-wakatime'
+  'wakatime/vim-wakatime',
 })

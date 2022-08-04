@@ -19,7 +19,7 @@ local colors = {
   magenta = '#d16d9e',
   grey = '#c0c0c0',
   blue = '#0087d7',
-  red = '#ec5f67'
+  red = '#ec5f67',
 }
 local condition = require('galaxyline.condition')
 local gls = galaxyline.section
@@ -67,7 +67,7 @@ gls.left[2] = {
         c = 'COMMAND',
         v = 'VISUAL',
         V = 'VISUAL LINE',
-        [''] = 'VISUAL BLOCK'
+        [''] = 'VISUAL BLOCK',
       }
       return string.format('%s ', mode_name[vim.fn.mode()])
     end,

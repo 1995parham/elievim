@@ -22,7 +22,7 @@ plugin({
 plugin({
   'WhoIsSethDaniel/mason-tool-installer.nvim',
   requires = { 'williamboman/mason.nvim' },
-  config = conf.mason.installer
+  config = conf.mason.installer,
 })
 
 -- extension to mason.nvim that makes it easier
@@ -35,7 +35,7 @@ plugin({
   after = {
     'nvim-lspconfig',
   },
-  config = conf.mason.lspconfig
+  config = conf.mason.lspconfig,
 })
 
 plugin({ 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.lua_snip })
@@ -43,7 +43,7 @@ plugin({ 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.lua_snip })
 plugin({
   'jose-elias-alvarez/null-ls.nvim',
   config = conf.null_ls,
-  requires = { "nvim-lua/plenary.nvim" },
+  requires = { 'nvim-lua/plenary.nvim' },
 })
 
 plugin({
@@ -58,8 +58,8 @@ plugin({
   config = conf.cmp,
 })
 
--- plugin({
-  --    "glepnir/lspsaga.nvim",
-  --    branch = "main",
-  --    config = conf.lspsaga,
-  -- })
+plugin({
+  'glepnir/lspsaga.nvim',
+  branch = 'main',
+  config = conf.lspsaga,
+})
