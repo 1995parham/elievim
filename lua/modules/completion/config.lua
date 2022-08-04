@@ -30,6 +30,7 @@ function config.mason.installer()
       'gopls',
       'golangci-lint-langserver',
       'json-to-struct',
+      'gofumpt',
       'gotests',
       'gomodifytags',
       -- shell
@@ -89,11 +90,27 @@ function config.mason.lspconfig()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   local on_attach = function(_, bufnr)
-    local function buf_set_option(...)
-      vim.api.nvim_buf_set_option(bufnr, ...)
-    end
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<Leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, bufopts)
   end
 
   require('mason-lspconfig').setup()
@@ -163,12 +180,6 @@ function config.cmp()
       { name = 'buffer' },
     }),
   })
-end
-
-function config.lspsaga()
-  local saga = require('lspsaga')
-
-  saga.init_lsp_saga({})
 end
 
 function config.lua_snip()
