@@ -58,8 +58,8 @@ plugin({
   config = conf.cmp,
 })
 
-plugin({
-  'glepnir/lspsaga.nvim',
-  branch = 'main',
-  config = conf.lspsaga,
-})
+-- plugin({
+--  'glepnir/lspsaga.nvim',
+--  branch = 'main',
+--  config = conf.lspsaga,
+-- })
