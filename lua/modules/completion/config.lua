@@ -27,11 +27,8 @@ function config.mason.installer()
     -- start; they should be the names Mason uses for each tool
     ensure_installed = {
       -- golang
-      'golangci-lint',
       'gopls',
-      'gofumpt',
-      'golines',
-      'revive',
+      'golangci-lint-langserver',
       'json-to-struct',
       'gotests',
       'gomodifytags',
@@ -137,9 +134,9 @@ function config.null_ls()
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.sql_formatter,
       null_ls.builtins.formatting.jq,
-      null_ls.builtins.formatting.gofumpt,
+      -- null_ls.builtins.formatting.gofumpt,
 
-      null_ls.builtins.diagnostics.golangci_lint,
+      -- null_ls.builtins.diagnostics.golangci_lint,
       null_ls.builtins.diagnostics.jsonlint,
       null_ls.builtins.diagnostics.luacheck,
       null_ls.builtins.diagnostics.pylint,

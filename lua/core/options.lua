@@ -63,6 +63,7 @@ vim.opt.sidescrolloff = 5
 vim.opt.foldlevelstart = 99
 vim.opt.ruler = false
 vim.opt.list = true
+vim.opt.listchars = 'tab:  ,nbsp:+,trail:·,extends:→,precedes:←'
 vim.opt.showtabline = 2
 vim.opt.winwidth = 30
 vim.opt.winminwidth = 10
@@ -77,7 +78,6 @@ vim.opt.equalalways = false
 vim.opt.laststatus = 2
 vim.opt.display = 'lastline'
 vim.opt.showbreak = '↳  '
-vim.opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 vim.opt.pumblend = 10
 vim.opt.winblend = 10
 
