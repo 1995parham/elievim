@@ -31,6 +31,8 @@ plugin({
   'williamboman/mason-lspconfig.nvim',
   requires = {
     'williamboman/mason.nvim',
+    'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
   },
   after = {
     'nvim-lspconfig',

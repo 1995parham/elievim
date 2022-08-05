@@ -52,8 +52,6 @@ function config.mason.installer()
       'mypy',
       'pyright',
       'pylint',
-      'python-lsp-server',
-      'mypy',
       'flake8',
       'black',
       -- toml
@@ -62,6 +60,8 @@ function config.mason.installer()
       'dockerfile-language-server',
       -- markdown
       'markdownlint',
+      -- jinja
+      'djlint',
       -- etc
       'editorconfig-checker',
       'impl',
@@ -126,14 +126,15 @@ function config.null_ls()
       null_ls.builtins.formatting.jq,
       null_ls.builtins.formatting.gofumpt,
       null_ls.builtins.formatting.markdownlint,
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.djlint,
 
-      -- null_ls.builtins.diagnostics.golangci_lint,
       null_ls.builtins.diagnostics.jsonlint,
       null_ls.builtins.diagnostics.luacheck,
       null_ls.builtins.diagnostics.pylint,
       -- null_ls.builtins.diagnostics.pyproject_flake8,
       null_ls.builtins.diagnostics.flake8,
-      null_ls.builtins.formatting.black,
+      null_ls.builtins.diagnostics.djlint,
       null_ls.builtins.diagnostics.actionlint,
       null_ls.builtins.diagnostics.markdownlint,
     },
