@@ -58,6 +58,8 @@ function config.mason.installer()
       'black',
       -- toml
       'taplo',
+      -- docker
+      'dockerfile-language-server',
       -- etc
       'editorconfig-checker',
       'impl',
