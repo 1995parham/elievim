@@ -4,7 +4,7 @@
 -- recommend some vim mode key defines in this file
 
 local keymap = require('core.keymap')
-local nmap, imap, cmap, xmap = keymap.nmap, keymap.imap, keymap.cmap, keymap.xmap
+local nmap, xmap = keymap.nmap, keymap.xmap
 local silent, noremap = keymap.silent, keymap.noremap
 local opts = keymap.new_opts
 local cmd = keymap.cmd
@@ -19,7 +19,7 @@ xmap({ ' ', '', opts(noremap) })
 -- noremal remap
 nmap({
   -- close buffer
-  { '<Leader>k', cmd('bdelete'), opts(noremap, silent) },
+  { '<Leader>bk', cmd('bdelete'), opts(noremap, silent) },
   -- save
   -- { '<C-s>', cmd('write'), opts(noremap) },
   -- yank
