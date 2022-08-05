@@ -55,6 +55,7 @@ plugin({
     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
     { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
   },
+  after = 'nvim-lspconfig',
   config = conf.cmp,
 })
 

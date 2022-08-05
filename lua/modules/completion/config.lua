@@ -60,6 +60,8 @@ function config.mason.installer()
       'taplo',
       -- docker
       'dockerfile-language-server',
+      -- markdown
+      'markdownlint',
       -- etc
       'editorconfig-checker',
       'impl',
@@ -132,6 +134,7 @@ function config.null_ls()
       null_ls.builtins.diagnostics.flake8,
       null_ls.builtins.formatting.black,
       null_ls.builtins.diagnostics.actionlint,
+      null_ls.builtins.diagnostics.markdownlint,
     },
   })
 end
