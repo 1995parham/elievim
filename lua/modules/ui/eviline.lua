@@ -38,6 +38,7 @@ gls.left[2] = {
   ViMode = {
     provider = function()
       -- auto change color according the vim mode
+      -- there are some guards againest newly added mode.
       local mode_color = {
         ['!'] = colors.red,
         [''] = colors.blue,
@@ -60,16 +61,20 @@ gls.left[2] = {
         v = colors.blue,
         V = colors.blue,
       }
-      vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
+      if mode_color[vim.fn.mode()] then
+        vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
+      end
       local mode_name = {
         n = 'NORMAL',
         i = 'INSERT',
         c = 'COMMAND',
         v = 'VISUAL',
         V = 'VISUAL LINE',
+        R = 'REPLACE',
+        Rv = 'REPLACE VISUAL',
         [''] = 'VISUAL BLOCK',
       }
-      return string.format('%s ', mode_name[vim.fn.mode()])
+      return string.format('%s ', mode_name[vim.fn.mode()] or '-')
     end,
   },
 }
