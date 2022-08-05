@@ -48,13 +48,12 @@ plugin({
 })
 
 plugin({
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
   'hrsh7th/nvim-cmp',
-  after = {
-    'nvim-lspconfig',
+  requires = {
+    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-lspconfig' },
+    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+    { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
   },
   config = conf.cmp,
 })
