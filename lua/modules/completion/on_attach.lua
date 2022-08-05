@@ -1,4 +1,6 @@
-local lsp_formatting = function(bufnr)
+local lsp = {}
+
+function lsp.formatting(bufnr)
   vim.lsp.buf.format({
     filter = function(client)
       -- apply whatever logic you want (in this example, we'll only use null-ls)
@@ -8,7 +10,7 @@ local lsp_formatting = function(bufnr)
   })
 end
 
-return function(client, bufnr)
+function lsp.on_attach(client, bufnr)
   local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
   -- Enable completion triggered by <c-x><c-o>
@@ -39,8 +41,46 @@ return function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        lsp_formatting(bufnr)
+        lsp.formatting(bufnr)
       end,
     })
   end
 end
+
+function lsp.sumneko_lua()
+  -- local sumneko_binary_path = vim.fn.exepath('lua-language-server')
+  -- local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
+
+  local runtime_path = vim.split(package.path, ';')
+  table.insert(runtime_path, 'lua/?.lua')
+  table.insert(runtime_path, 'lua/?/init.lua')
+
+  return {
+    -- cmd = { sumneko_binary_path, '-E', sumneko_root_path .. '/main.lua' },
+    on_attach = lsp.on_attach,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+          -- Setup your lua path
+          path = runtime_path,
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file('', true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
+end
+
+return lsp

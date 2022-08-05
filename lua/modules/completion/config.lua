@@ -87,7 +87,7 @@ end
 
 function config.mason.lspconfig()
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local lsp_on_attach = require('modules.completion.on_attach')
+  local _lsp = require('modules.completion.on_attach')
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   require('mason-lspconfig').setup()
@@ -97,20 +97,24 @@ function config.mason.lspconfig()
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
       require('lspconfig')[server_name].setup({
-        on_attach = lsp_on_attach,
+        on_attach = _lsp.on_attach,
         capabilities = capabilities,
       })
+    end,
+
+    ['sumneko_lua'] = function()
+      require('lspconfig').sumneko_lua.setup(_lsp.sumneko_lua())
     end,
   })
 end
 
 function config.null_ls()
   local null_ls = require('null-ls')
-  local lsp_on_attach = require('modules.completion.on_attach')
+  local _lsp = require('modules.completion.on_attach')
 
   null_ls.setup({
     -- you can reuse a shared lspconfig on_attach callback here
-    on_attach = lsp_on_attach,
+    on_attach = _lsp.on_attach,
     sources = {
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.sql_formatter,
