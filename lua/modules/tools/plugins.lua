@@ -27,3 +27,6 @@ plugin({ 'airblade/vim-gitgutter' })
 plugin({ 'cohama/agit.vim' })
 -- fugitive.vim: a git wrapper so awesome, it should be illegal
 plugin({ 'tpope/vim-fugitive' })
+
+-- quickly insert templates into file
+-- plugin({ 'glepnir/template.nvim', config = conf.template })
