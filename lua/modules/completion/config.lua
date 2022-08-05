@@ -92,7 +92,7 @@ end
 
 function config.mason.lspconfig()
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local _lsp = require('modules.completion.on_attach')
+  local _lsp = require('modules.completion.on-attach')
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   require('mason-lspconfig').setup()
@@ -115,29 +115,13 @@ end
 
 function config.null_ls()
   local null_ls = require('null-ls')
-  local _lsp = require('modules.completion.on_attach')
+  local _lsp = require('modules.completion.on-attach')
+  local _sources = require('modules.completion.null-ls-sources')
 
   null_ls.setup({
     -- you can reuse a shared lspconfig on_attach callback here
     on_attach = _lsp.on_attach,
-    sources = {
-      null_ls.builtins.formatting.stylua,
-      null_ls.builtins.formatting.sql_formatter,
-      null_ls.builtins.formatting.jq,
-      null_ls.builtins.formatting.gofumpt,
-      null_ls.builtins.formatting.markdownlint,
-      null_ls.builtins.formatting.black,
-      null_ls.builtins.formatting.djlint,
-
-      null_ls.builtins.diagnostics.jsonlint,
-      null_ls.builtins.diagnostics.luacheck,
-      null_ls.builtins.diagnostics.pylint,
-      -- null_ls.builtins.diagnostics.pyproject_flake8,
-      null_ls.builtins.diagnostics.flake8,
-      null_ls.builtins.diagnostics.djlint,
-      null_ls.builtins.diagnostics.actionlint,
-      null_ls.builtins.diagnostics.markdownlint,
-    },
+    sources = _sources,
   })
 end
 

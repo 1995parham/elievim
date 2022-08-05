@@ -20,3 +20,10 @@ plugin({
 plugin({
   'wakatime/vim-wakatime',
 })
+
+-- a vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
+plugin({ 'airblade/vim-gitgutter' })
+-- a powerful git log viewer
+plugin({ 'cohama/agit.vim' })
+-- fugitive.vim: a git wrapper so awesome, it should be illegal
+plugin({ 'tpope/vim-fugitive' })

@@ -43,12 +43,13 @@ function Packer:load_packer()
     disable_commands = true,
   })
   packer.reset()
-  local use = packer.use
   self:load_plugins()
-  use({ 'wbthomason/packer.nvim', opt = true })
-  for _, repo in ipairs(self.repos) do
-    use(repo)
-  end
+  packer.startup(function(use)
+    use({ 'wbthomason/packer.nvim', opt = true })
+    for _, repo in ipairs(self.repos) do
+      use(repo)
+    end
+  end)
 end
 
 function Packer:init_ensure_plugins()
@@ -58,9 +59,11 @@ function Packer:init_ensure_plugins()
     local cmd = '!git clone https://github.com/wbthomason/packer.nvim ' .. packer_dir
     api.nvim_command(cmd)
     uv.fs_mkdir(data_dir .. 'lua', 511, function()
-      assert('make compile path dir faield')
+      assert('make compile path dir failed')
     end)
-    self:load_packer()
+  end
+  self:load_packer()
+  if not state then
     packer.sync()
   end
 end
@@ -80,24 +83,6 @@ end
 
 function plugins.register_plugin(repo)
   table.insert(Packer.repos, repo)
-end
-
--- function plugins.compile_notify()
---   plugins.compile()
---   vim.notify('Compile Done!','info',{ title = 'Packer' })
--- end
-
-function plugins.auto_compile()
-  local file = vim.fn.expand('%:p')
-  if not file:match(vim_path) then
-    return
-  end
-
-  if file:match('plugins.lua') then
-    plugins.clean()
-  end
-  plugins.compile()
-  require('packer_compiled')
 end
 
 function plugins.load_compile()
@@ -129,13 +114,6 @@ function plugins.load_compile()
     end,
     group = PackerHooks,
   })
-
-  vim.cmd([[command! PackerCompile lua require('core.pack').compile()]])
-  vim.cmd([[command! PackerInstall lua require('core.pack').install()]])
-  vim.cmd([[command! PackerUpdate lua require('core.pack').update()]])
-  vim.cmd([[command! PackerSync lua require('core.pack').sync()]])
-  vim.cmd([[command! PackerClean lua require('core.pack').clean()]])
-  vim.cmd([[command! PackerStatus  lua require('packer').status()]])
 end
 
 return plugins
