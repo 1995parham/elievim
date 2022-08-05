@@ -62,6 +62,8 @@ function config.mason.installer()
       'markdownlint',
       -- jinja
       'djlint',
+      -- rust
+      'rust-analyzer',
       -- etc
       'editorconfig-checker',
       'impl',
