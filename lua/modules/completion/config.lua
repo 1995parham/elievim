@@ -55,6 +55,7 @@ function config.mason.installer()
       'python-lsp-server',
       'mypy',
       'flake8',
+      'black',
       -- toml
       'taplo',
       -- etc
@@ -127,6 +128,7 @@ function config.null_ls()
       null_ls.builtins.diagnostics.pylint,
       -- null_ls.builtins.diagnostics.pyproject_flake8,
       null_ls.builtins.diagnostics.flake8,
+      null_ls.builtins.formatting.black,
     },
   })
 end
