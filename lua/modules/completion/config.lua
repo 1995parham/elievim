@@ -125,6 +125,7 @@ function config.null_ls()
       null_ls.builtins.formatting.sql_formatter,
       null_ls.builtins.formatting.jq,
       null_ls.builtins.formatting.gofumpt,
+      null_ls.builtins.formatting.markdownlint,
 
       -- null_ls.builtins.diagnostics.golangci_lint,
       null_ls.builtins.diagnostics.jsonlint,
