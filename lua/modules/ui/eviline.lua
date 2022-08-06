@@ -210,42 +210,65 @@ gls.right[4] = {
   GitBranch = {
     condition = condition.check_git_workspace,
     highlight = { colors.violet, colors.bg, 'bold' },
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
     provider = 'GitBranch',
   },
 }
 
 gls.right[5] = {
-  Separator = {
-    provider = function()
-      return ' '
-    end,
-  },
-}
-
-gls.right[6] = {
   DiffAdd = {
     condition = condition.hide_in_width,
     highlight = { colors.green, colors.bg },
     icon = '  ',
     provider = 'DiffAdd',
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
   },
 }
 
-gls.right[7] = {
+gls.right[6] = {
   DiffModified = {
     condition = condition.hide_in_width,
     highlight = { colors.orange, colors.bg },
     icon = ' 柳',
     provider = 'DiffModified',
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
   },
 }
 
-gls.right[8] = {
+gls.right[7] = {
   DiffRemove = {
     condition = condition.hide_in_width,
     highlight = { colors.red, colors.bg },
     icon = '  ',
     provider = 'DiffRemove',
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
+  },
+}
+
+gls.right[8] = {
+  TreeSitter = {
+    provider = function()
+      local ok, nt = pcall(require, 'nvim-treesitter')
+      if not ok then
+        return
+      end
+
+      return nt.statusline({
+        indicator_size = 100,
+        type_patterns = { 'class', 'function', 'method' },
+        transform_fn = function(line)
+          return line:gsub('%s*[%[%(%{]*%s*$', '')
+        end,
+        separator = ' -> ',
+      })
+    end,
+    highlight = { colors.grey, colors.bg },
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
   },
 }
 
@@ -255,6 +278,8 @@ gls.right[9] = {
       return ' ▊'
     end,
     highlight = { colors.orange, colors.bg },
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
   },
 }
 
