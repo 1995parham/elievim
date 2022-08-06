@@ -33,6 +33,7 @@ plugin({
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
+    'simrat39/rust-tools.nvim',
   },
   after = {
     'nvim-lspconfig',
