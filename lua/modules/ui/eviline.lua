@@ -20,6 +20,7 @@ local colors = {
   grey = '#c0c0c0',
   blue = '#0087d7',
   red = '#ec5f67',
+  violet = '#ee82ee',
 }
 local condition = require('galaxyline.condition')
 local gls = galaxyline.section
@@ -38,7 +39,6 @@ gls.left[2] = {
   ViMode = {
     provider = function()
       -- auto change color according the vim mode
-      -- there are some guards againest newly added mode.
       local mode_color = {
         ['!'] = colors.red,
         [''] = colors.blue,
@@ -61,9 +61,7 @@ gls.left[2] = {
         v = colors.blue,
         V = colors.blue,
       }
-      if mode_color[vim.fn.mode()] then
-        vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
-      end
+      vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' .. colors.bg)
       local mode_name = {
         n = 'NORMAL',
         i = 'INSERT',
