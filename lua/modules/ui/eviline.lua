@@ -151,6 +151,14 @@ gls.left[11] = {
   },
 }
 
+gls.left[12] = {
+  FilePath = {
+    condition = condition.buffer_not_empty,
+    highlight = { colors.fg, colors.bg, 'italic' },
+    provider = 'FilePath',
+  },
+}
+
 gls.mid[1] = {
   ShowLspClient = {
     condition = function()
