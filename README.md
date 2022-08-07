@@ -7,11 +7,11 @@
 ```text
 ├── init.lua
 ├── 📂 lua
-│   ├── 📂 core                    heart of elievim provide api
+│   ├── 📂 core                    heart of elievim which provides api
 │   │   ├── init.lua
 │   │   ├── keymap.lua             keymap api
 │   │   ├── options.lua            vim options
-│   │   └── pack.lua               hack packer
+│   │   └── pack.lua               hack packer to load from multiple folders
 │   ├── 📂 keymap
 │   │   ├── config.lua
 │   │   └── init.lua
@@ -30,46 +30,51 @@
 │           ├── config.lua
 │           ├── eviline.lua
 │           └── plugins.lua
-└── snippets                       snippets
+└── 📂 snippets                   snippets
     ├── lua.json
     └── package.json
 
 ```
 
-## How to install plugins
+## How to register plugins?
 
-API is `require('core.pack').register_plugin`.
-So pass plugin as param into this function. Usage
-like in `modules/your-folder-name/plugins.lua`
+API is `require('core.pack').register_plugin`. So pass plugin as param into this
+function.
 
 ```lua
 local plugin = require('core.pack').register_plugin
 local conf = require('modules.ui.config')
 
-plugin {'glepnir/zephyr-nvim', config = conf.zephyr}
+plugin {'1995parham/naz.vim', config = conf.naz}
 
 plugin {'plugin github repo name'}
 ```
 
-what is `config` . This is a keyword of [packer.nvim](https://github.com/wbthomason/packer.nvim),
+## what is `config`?
+
+This is a keyword of [packer.nvim](https://github.com/wbthomason/packer.nvim),
 you need to check the doc of packer to know how to use packer.
 If a plugin has many configs you can create other file in
 `modules/your-folder-name/config.lua` avoid
-making the
-plugins.lua file too long. Recommend lazyload plugins. Check the usage in `modules`,
+making the `plugins.lua` file too long.
+
+Recommend lazyload plugins. Check the usage in `modules`,
 it will improve your neovim
 start speed. `lazyload` is not magic, it just generate your config into some `autocmds`,
 you can check the
-`packer_compiled.lua` to check it. I don't like the default path config in
+`packer_compiled.lua` to check it.
+
+I don't like the default path config in
 packer it use `plugins` folder  So i set
 compiled file path to `~/.local/share/nvim/site/lua`, you can find compiled
 file in this path. Use `:h autocmd`
 to know more about.
+
 When you edit the config and open neovim and it does not take effect. Please try
 `PackerCompile` to generate a new compile file with your new change.
+You also may encounter errors in this process.
 
 ```lua
-
 -- modules/completion/plugins.lua
 plugin {'neovim/nvim-lspconfig',
  -- used filetype to lazyload lsp
