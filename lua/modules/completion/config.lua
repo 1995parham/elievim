@@ -127,12 +127,13 @@ function config.null_ls()
     -- you can reuse a shared lspconfig on_attach callback here
     on_attach = _lsp.on_attach,
     sources = _sources,
-    diagnostics_format = '[#{c}] #{m} (#{s})',
+    diagnostics_format = ' [#{c}] #{m} (#{s})',
   })
 end
 
 function config.cmp()
   local cmp = require('cmp')
+  local lspkind = require('lspkind')
 
   cmp.setup({
     snippet = {
@@ -152,6 +153,15 @@ function config.cmp()
             fallback()
           end
         end,
+      }),
+    },
+    formatting = {
+      format = lspkind.cmp_format({
+        -- show only symbol annotations
+        mode = 'symbol_text',
+        -- prevent the popup from showing more than provided characters
+        -- (e.g 50 will not show more than 50 characters)
+        maxwidth = 50,
       }),
     },
     window = {},

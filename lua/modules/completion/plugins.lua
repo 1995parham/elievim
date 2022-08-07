@@ -57,13 +57,8 @@ plugin({
     { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
     { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
+    { 'onsails/lspkind.nvim' },
   },
   after = 'nvim-lspconfig',
   config = conf.cmp,
 })
-
--- plugin({
---  'glepnir/lspsaga.nvim',
---  branch = 'main',
---  config = conf.lspsaga,
--- })
