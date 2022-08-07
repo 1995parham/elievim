@@ -34,8 +34,7 @@ nmap({
 })
 
 tmap({
-  -- FTerm
-  { '<Leader>ot', cmd('FTermToggle'), opts(silent) },
-  { '<Leader>od', cmd('LDToggle'), opts(silent) },
-  { '<Leader>oi', cmd('IPToggle'), opts(silent) },
+  '<ESC>',
+  '<C-\\><C-n>',
+  { silent = true },
 })
