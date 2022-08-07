@@ -1,11 +1,20 @@
 local lsp = {}
 
 if not lsp.augroup then
-  lsp.augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+  lsp.augroup = {}
+  lsp.augroup[1] = vim.api.nvim_create_augroup('LspFormatting', {})
+  lsp.augroup[2] = vim.api.nvim_create_augroup('LspDiagnostic', {})
 end
 
+lsp.diagnostic_icons = {
+  [vim.diagnostic.severity.ERROR] = '',
+  [vim.diagnostic.severity.HINT] = '',
+  [vim.diagnostic.severity.INFO] = '',
+  [vim.diagnostic.severity.WARN] = '',
+}
+
 function lsp.formatting(bufnr)
-  vim.notify('lsp_formatter is called', 'debug', { title = 'lsp' })
+  vim.notify('lsp_formatter is called', vim.log.levels.DEBUG)
 
   vim.lsp.buf.format({
     filter = function(client)
@@ -16,10 +25,29 @@ function lsp.formatting(bufnr)
 end
 
 function lsp.on_attach(client, bufnr)
-  vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), 'debug', { title = 'lsp' })
+  vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG)
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  vim.api.nvim_clear_autocmds({ group = lsp.augroup[2], buffer = bufnr })
+  vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = bufnr,
+    group = lsp.augroup[2],
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { 'BufLeave', 'InsertEnter', 'FocusLost', 'CursorMoved' },
+        border = 'rounded',
+        source = 'always',
+        prefix = function(diagnostic, i, total)
+          return string.format('%s %d/%d ', lsp.diagnostic_icons[diagnostic.severity], i, total)
+        end,
+        scope = 'line',
+      }
+      vim.diagnostic.open_float(nil, opts)
+    end,
+  })
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -41,10 +69,10 @@ function lsp.on_attach(client, bufnr)
   vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, bufopts)
 
   if client.supports_method('textDocument/formatting') then
-    vim.notify(string.format('lsp client %s has formatting capability', client.name), 'debug', { title = 'lsp' })
-    vim.api.nvim_clear_autocmds({ group = lsp.augroup, buffer = bufnr })
+    vim.notify(string.format('lsp client %s has formatting capability', client.name), vim.log.levels.DEBUG)
+    vim.api.nvim_clear_autocmds({ group = lsp.augroup[1], buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
-      group = lsp.augroup,
+      group = lsp.augroup[1],
       buffer = bufnr,
       callback = function()
         lsp.formatting(bufnr)

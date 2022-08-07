@@ -5,7 +5,20 @@
 local config = {}
 
 -- config server in this function
-function config.nvim_lsp() end
+function config.nvim_lsp()
+  vim.diagnostic.config({
+    underline = false,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+  })
+
+  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+end
 
 config.mason = {}
 
@@ -127,7 +140,7 @@ function config.null_ls()
     -- you can reuse a shared lspconfig on_attach callback here
     on_attach = _lsp.on_attach,
     sources = _sources,
-    diagnostics_format = ' [#{c}] #{m} (#{s})',
+    diagnostics_format = '[#{c}] #{m} (#{s})',
   })
 end
 
