@@ -5,7 +5,7 @@ if not lsp.augroup then
 end
 
 function lsp.formatting(bufnr)
-  vim.notify('lsp_formatter is called', 'info', { title = 'lsp' })
+  vim.notify('lsp_formatter is called', 'debug', { title = 'lsp' })
 
   vim.lsp.buf.format({
     filter = function(client)
@@ -16,7 +16,7 @@ function lsp.formatting(bufnr)
 end
 
 function lsp.on_attach(client, bufnr)
-  vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), 'info', { title = 'lsp' })
+  vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), 'debug', { title = 'lsp' })
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -41,7 +41,7 @@ function lsp.on_attach(client, bufnr)
   vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, bufopts)
 
   if client.supports_method('textDocument/formatting') then
-    vim.notify(string.format('lsp client %s has formatting capability', client.name), 'info', { title = 'lsp' })
+    vim.notify(string.format('lsp client %s has formatting capability', client.name), 'debug', { title = 'lsp' })
     vim.api.nvim_clear_autocmds({ group = lsp.augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = lsp.augroup,
