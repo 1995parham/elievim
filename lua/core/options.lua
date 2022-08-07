@@ -4,6 +4,7 @@
 local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
 
 vim.opt.termguicolors = true
+-- enable mouse support in normal and visual mode.
 vim.opt.mouse = 'nv'
 vim.opt.errorbells = true
 vim.opt.visualbell = true
@@ -27,6 +28,9 @@ vim.opt.backupdir = cache_dir .. 'backup/'
 vim.opt.viewdir = cache_dir .. 'view/'
 vim.opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
 vim.opt.history = 2000
+-- if you exit Vim and later start it again, you would normally lose a lot of
+-- information.  the ShaDa file can be used to remember that information, which
+-- enables you to continue where you left off.
 vim.opt.shada = "!,'300,<50,@100,s10,h"
 vim.opt.backupskip = '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim'
 vim.opt.smarttab = true
@@ -43,6 +47,9 @@ vim.opt.infercase = true
 vim.opt.incsearch = true
 vim.opt.wrapscan = true
 vim.opt.complete = '.,w,b,k'
+-- When nonempty, shows the effects of |:substitute|, |:smagic|,
+-- :snomagic| and user commands with the |:command-preview| flag as you
+-- type.
 vim.opt.inccommand = 'nosplit'
 vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.grepprg = 'rg --hidden --vimgrep --smart-case --'
