@@ -127,6 +127,7 @@ function config.null_ls()
     -- you can reuse a shared lspconfig on_attach callback here
     on_attach = _lsp.on_attach,
     sources = _sources,
+    diagnostics_format = '[#{c}] #{m} (#{s})',
   })
 end
 
