@@ -1,5 +1,9 @@
 local lsp = {}
 
+if not lsp.augroup then
+  lsp.augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+end
+
 function lsp.formatting(bufnr)
   vim.notify('lsp_formatter is called', 'info', { title = 'lsp' })
 
@@ -12,8 +16,6 @@ function lsp.formatting(bufnr)
 end
 
 function lsp.on_attach(client, bufnr)
-  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-
   vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), 'info', { title = 'lsp' })
 
   -- Enable completion triggered by <c-x><c-o>
@@ -40,9 +42,9 @@ function lsp.on_attach(client, bufnr)
 
   if client.supports_method('textDocument/formatting') then
     vim.notify(string.format('lsp client %s has formatting capability', client.name), 'info', { title = 'lsp' })
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_clear_autocmds({ group = lsp.augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
-      group = augroup,
+      group = lsp.augroup,
       buffer = bufnr,
       callback = function()
         lsp.formatting(bufnr)
