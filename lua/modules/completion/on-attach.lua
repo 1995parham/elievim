@@ -31,7 +31,7 @@ function lsp.on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.api.nvim_clear_autocmds({ group = lsp.augroup[2], buffer = bufnr })
-  vim.api.nvim_create_autocmd('CursorHold', {
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     buffer = bufnr,
     group = lsp.augroup[2],
     callback = function()
