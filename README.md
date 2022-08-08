@@ -181,3 +181,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 10
 # linux
 xset r rate 210 40
 ```
+
+## Links
+- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_confiurations.md
+- 
