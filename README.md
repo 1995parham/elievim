@@ -187,3 +187,4 @@ xset r rate 210 40
 - https://github.com/neovim/nvim-lspconfig/wiki
 - https://github.com/williamboman/mason.nvim/tree/main/lua/mason-registry
 - https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/MAIN.md
+- https://neovim.io/doc/user/
