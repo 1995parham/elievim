@@ -184,4 +184,4 @@ xset r rate 210 40
 
 ## Links
 - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_confiurations.md
-- 
+- https://github.com/neovim/nvim-lspconfig/wiki
