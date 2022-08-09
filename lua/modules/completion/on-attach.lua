@@ -13,12 +13,18 @@ lsp.diagnostic_icons = {
   [vim.diagnostic.severity.WARN] = '',
 }
 
+lsp.valid_formatters = {
+  ['null-ls'] = true,
+  ['dockerls'] = true,
+  ['jdtls'] = true,
+}
+
 function lsp.formatting(bufnr)
   vim.notify('lsp_formatter is called', vim.log.levels.DEBUG)
 
   vim.lsp.buf.format({
     filter = function(client)
-      return client.name == 'null-ls'
+      return lsp.valid_formatters[client.name] == true
     end,
     bufnr = bufnr,
   })
