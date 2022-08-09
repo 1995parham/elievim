@@ -36,6 +36,9 @@ function lsp.on_attach(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  -- the following code shows the diagnostic messages when hovering them
+  -- but it has many performan issues so I eventually fallback to the old ways.
+  --[[
   vim.api.nvim_clear_autocmds({ group = lsp.augroup[2], buffer = bufnr })
   vim.api.nvim_create_autocmd({ 'CursorHold' }, {
     buffer = bufnr,
@@ -54,6 +57,7 @@ function lsp.on_attach(client, bufnr)
       vim.diagnostic.open_float(nil, opts)
     end,
   })
+  ]]
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions

@@ -8,7 +8,7 @@ local config = {}
 function config.nvim_lsp()
   vim.diagnostic.config({
     underline = false,
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     update_in_insert = true,
   })
