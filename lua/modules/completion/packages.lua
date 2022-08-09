@@ -68,6 +68,7 @@ packages.etc = {
   'misspell',
   'staticcheck',
   'vint',
+  'ltex-ls',
 }
 
 function packages.all()
