@@ -85,6 +85,9 @@ function config.mason.lspconfig()
     ['rust_analyzer'] = function()
       require('rust-tools').setup({})
     end,
+    ['ltex'] = function()
+      require('lspconfig').sumneko_lua.setup(_lsp.ltex_ls())
+    end,
   })
 end
 

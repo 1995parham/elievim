@@ -123,4 +123,30 @@ function lsp.sumneko_lua()
   }
 end
 
+function lsp.ltex_ls()
+  return {
+    -- cmd = { sumneko_binary_path, '-E', sumneko_root_path .. '/main.lua' },
+    on_attach = lsp.on_attach,
+    settings = {
+      ltex = {
+        dictionary = {
+          ['en-US'] = {
+            'neovim',
+            'nvim',
+            'ackerman',
+            'emqx',
+            'emq',
+            'soteria',
+            'confisus',
+            'mia',
+            'aut',
+            'i1820',
+            'herald',
+          },
+        },
+      },
+    },
+  }
+end
+
 return lsp
