@@ -35,55 +35,12 @@ function config.mason.setup()
 end
 
 function config.mason.installer()
+  local packages = require('modules.completion.packages')
+
   require('mason-tool-installer').setup({
     -- a list of all tools you want to ensure are installed upon
     -- start; they should be the names Mason uses for each tool
-    ensure_installed = {
-      -- golang
-      'gopls',
-      'golangci-lint-langserver',
-      'json-to-struct',
-      'gofumpt',
-      'gotests',
-      'gomodifytags',
-      -- shell
-      'bash-language-server',
-      'shfmt',
-      'shellcheck',
-      'shellcheck',
-      -- lua
-      'lua-language-server',
-      'stylua',
-      'luacheck',
-      -- vim
-      'vim-language-server',
-      -- sql
-      'sql-formatter',
-      -- json
-      'jq',
-      -- python
-      'mypy',
-      'pyright',
-      'pylint',
-      'flake8',
-      'black',
-      -- toml
-      'taplo',
-      -- docker
-      'dockerfile-language-server',
-      -- markdown
-      'markdownlint',
-      -- jinja
-      'djlint',
-      -- rust
-      'rust-analyzer',
-      -- etc
-      'editorconfig-checker',
-      'impl',
-      'misspell',
-      'staticcheck',
-      'vint',
-    },
+    ensure_installed = packages.all(),
 
     -- if set to true this will check each tool for updates. If updates
     -- are available the tool will be updated. This setting does not
