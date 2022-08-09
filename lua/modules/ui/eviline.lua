@@ -162,15 +162,40 @@ gls.left[12] = {
 gls.mid[1] = {
   ShowLspClient = {
     condition = function()
-      local tbl = { ['dashboard'] = true, [''] = true }
-      if tbl[vim.bo.filetype] then
+      local file_types_without_lsp = {
+        ['dashboard'] = true,
+        [''] = true,
+      }
+
+      if file_types_without_lsp[vim.bo.filetype] then
         return false
       end
       return true
     end,
     highlight = { colors.yellow, colors.bg, 'bold' },
     icon = ' LSP:',
-    provider = 'GetLspClient',
+    provider = function(msg)
+      msg = msg or 'No Active Lsp'
+      local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+      local clients = vim.lsp.get_active_clients()
+      if next(clients) == nil then
+        return msg
+      end
+
+      msg = ''
+      for _, client in ipairs(clients) do
+        local filetypes = client.config.filetypes
+        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+          if client.name == 'null-ls' then
+            msg = string.format('%s ﳠ', msg)
+          else
+            msg = string.format('%s %s', msg, client.name)
+          end
+        end
+      end
+
+      return msg
+    end,
   },
 }
 
