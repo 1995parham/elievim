@@ -50,7 +50,7 @@ plugin {'1995parham/naz.vim', config = conf.naz}
 plugin {'plugin github repo name'}
 ```
 
-## what is `config`?
+## What is `config`?
 
 This is a keyword of [packer.nvim](https://github.com/wbthomason/packer.nvim),
 you need to check the doc of packer to know how to use packer.
@@ -58,7 +58,7 @@ If a plugin has many configs you can create other file in
 `modules/your-folder-name/config.lua` avoid
 making the `plugins.lua` file too long.
 
-Recommend lazyload plugins. Check the usage in `modules`,
+Recommend lazy-load plugins. Check the usage in `modules`,
 it will improve your neovim
 start speed. `lazyload` is not magic, it just generate your config into some `autocmds`,
 you can check the
@@ -145,7 +145,7 @@ nmap {
 return a string `<cmd>PackerUpdate<CR>` as rhs. lhs is
 `<leader>pu>`, `opts(noremap,silent,'Packer update')` generate options table
 `{noremap = true,silent = true, desc = 'Packer Update' }`.
-for some vim mode remap. not need use `cmd` function. oh maybe you will be
+For some vim mode remap. not need use `cmd` function. oh maybe you will be
 confused what is `<cmd>` check `:h <cmd>` you will get answer
 
 ```lua
@@ -153,13 +153,13 @@ confused what is `<cmd>` check `:h <cmd>` you will get answer
 {"<C-h>",'<C-w>h',opts(noremap)}
 ```
 
-also you can pass a table not include sub table to `map` like
+Also, you can pass a table not include sub table to `map` like
 
 ```lua
 nmap {'key','rhs',opts(noremap,silent)}
 ```
 
-use `:h vim.keymap.set` to know more about.
+Use `:h vim.keymap.set` to know more about.
 
 ## LSP Tools Requirements
 
