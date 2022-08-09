@@ -148,4 +148,22 @@ function lsp.ltex_ls()
   }
 end
 
+function lsp.gols()
+  local util = require('lspconfig/util')
+
+  return {
+    on_attach = lsp.on_attach,
+    cmd = { 'gopls', 'serve' },
+    filetypes = { 'go', 'gomod' },
+    root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+    settings = {
+      gopls = {
+        -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+        -- analyses = {},
+        staticcheck = true,
+      },
+    },
+  }
+end
+
 return lsp

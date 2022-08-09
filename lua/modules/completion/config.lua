@@ -88,6 +88,9 @@ function config.mason.lspconfig()
     ['ltex'] = function()
       require('lspconfig').ltex.setup(_lsp.ltex_ls())
     end,
+    ['gopls'] = function()
+      require('lspconfig').gopls.setup(_lsp.gols())
+    end,
   })
 end
 
