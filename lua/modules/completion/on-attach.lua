@@ -164,6 +164,8 @@ function lsp.gols()
     cmd = { 'gopls', 'serve' },
     filetypes = { 'go', 'gomod' },
     root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
+    flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
+    completeUnimported = true,
     settings = {
       gopls = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
