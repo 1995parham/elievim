@@ -51,6 +51,14 @@ plugin({
 })
 
 plugin({
+  'j-hui/fidget.nvim',
+  requires = {
+    'neovim/nvim-lspconfig',
+  },
+  config = conf.progress,
+})
+
+plugin({
   'hrsh7th/nvim-cmp',
   requires = {
     { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-lspconfig' },

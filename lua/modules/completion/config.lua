@@ -174,4 +174,8 @@ function config.lua_snip()
   })
 end
 
+function config.progress()
+  require('fidget').setup({})
+end
+
 return config
