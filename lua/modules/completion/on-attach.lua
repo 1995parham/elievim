@@ -17,7 +17,6 @@ lsp.valid_formatters = {
   ['null-ls'] = true,
   ['dockerls'] = true,
   ['jdtls'] = true,
-  ['rust_analyzer'] = true,
 }
 
 function lsp.formatting(bufnr)
