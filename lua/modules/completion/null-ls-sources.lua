@@ -18,7 +18,18 @@ return {
 
   -- null_ls.builtins.diagnostics.jsonlint,
   null_ls.builtins.diagnostics.luacheck,
-  null_ls.builtins.diagnostics.pylint,
+  null_ls.builtins.diagnostics.mypy.with({
+    method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+    condition = function()
+      return vim.fn.executable('mypy') == 1
+    end,
+  }),
+  null_ls.builtins.diagnostics.pylint.with({
+    method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+    condition = function()
+      return vim.fn.executable('pylint') == 1
+    end,
+  }),
   -- null_ls.builtins.diagnostics.pyproject_flake8,
   null_ls.builtins.diagnostics.flake8,
   null_ls.builtins.diagnostics.djlint,
