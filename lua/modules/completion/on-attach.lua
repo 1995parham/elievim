@@ -60,23 +60,32 @@ function lsp.on_attach(client, bufnr)
   ]]
 
   -- Mappings.
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
+
+    local bufopts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+
+    vim.keymap.set('n', keys, func, bufopts)
+  end
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<Leader>wl', function()
+  nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]declaration')
+  nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
+  nmap('<Leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
+  nmap('<Leader>wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
+  nmap('<Leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, bufopts)
+  end, '[w]orkspace [l]ist Folders')
+  nmap('<Leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('<Leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+  nmap('<Leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
+  nmap('gr', require('telescope.builtin').lsp_references, 'References')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   if client.supports_method('textDocument/formatting') then
     -- vim.notify(string.format('lsp client %s has formatting capability', client.name), vim.log.levels.DEBUG)
