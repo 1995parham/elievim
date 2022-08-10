@@ -34,6 +34,8 @@ nmap({
   { '<C-w>p', cmd('tabprevious'), opts(noremap) },
   -- window create
   { '<C-w>c', cmd('tabnew'), opts(noremap) },
+  { '<leader>sg', require('telescope.builtin').live_grep, opts('[s]earch by [g]rep') },
+  { '<leader>sf', require('telescope.builtin').find_files, opts('[s]earch [f]iles') },
 })
 
 -- insert mode
