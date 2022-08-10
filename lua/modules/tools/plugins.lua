@@ -7,7 +7,6 @@ local conf = require('modules.tools.config')
 
 plugin({
   'nvim-telescope/telescope.nvim',
-  cmd = 'Telescope',
   config = conf.telescope,
   requires = {
     'nvim-lua/popup.nvim',
