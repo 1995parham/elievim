@@ -168,6 +168,10 @@ function lsp.gols()
       gopls = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
         -- analyses = {},
+        hints = {
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
         staticcheck = true,
       },
     },
