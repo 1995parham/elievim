@@ -35,9 +35,12 @@ packages.json = {
 }
 
 packages.python = {
-  'mypy',
+  -- install packages like mypy or pylint locally instead of
+  -- globally so they can search virtualenv.
+
+  -- 'mypy',
   'pyright',
-  'pylint',
+  -- 'pylint',
   'flake8',
   'black',
 }
