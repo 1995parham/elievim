@@ -16,7 +16,7 @@ return {
   null_ls.builtins.formatting.shfmt,
   null_ls.builtins.formatting.rustfmt,
 
-  null_ls.builtins.diagnostics.jsonlint,
+  -- null_ls.builtins.diagnostics.jsonlint,
   null_ls.builtins.diagnostics.luacheck,
   null_ls.builtins.diagnostics.pylint,
   -- null_ls.builtins.diagnostics.pyproject_flake8,
