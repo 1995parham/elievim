@@ -140,6 +140,7 @@ function lsp.ltex_ls()
   return {
     on_attach = lsp.on_attach,
     settings = {
+      filetypes = { 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb' },
       ltex = {
         dictionary = {
           ['en-US'] = {
