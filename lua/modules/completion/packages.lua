@@ -65,6 +65,10 @@ packages.rust = {
   'rust-analyzer',
 }
 
+packages.java = {
+  'groovy-language-server',
+}
+
 packages.etc = {
   'editorconfig-checker',
   'impl',
