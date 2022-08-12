@@ -34,6 +34,10 @@ packages.json = {
   'jq',
 }
 
+packages.ansible = {
+  'ansible-language-server',
+}
+
 packages.python = {
   -- install packages like mypy or pylint locally instead of
   -- globally so they can search virtualenv.
