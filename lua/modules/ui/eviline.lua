@@ -159,6 +159,14 @@ gls.left[12] = {
   },
 }
 
+gls.left[13] = {
+  FileTypeName = {
+    condition = condition.buffer_not_empty,
+    highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
+    provider = 'FileTypeName',
+  },
+}
+
 gls.mid[1] = {
   ShowLspClient = {
     condition = function()
