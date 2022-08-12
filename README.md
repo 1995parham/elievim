@@ -36,6 +36,16 @@
 
 ```
 
+## How to Install?
+
+```bash
+rm -Rf ~/.config/nvim
+rm -Rf ~/.local/share/nvim
+rm -Rf ~/.cache/nvim
+
+git clone https://github.com/1995parham/elievim
+```
+
 ## How to register plugins?
 
 API is `require('core.pack').register_plugin`. So pass plugin as param into this
