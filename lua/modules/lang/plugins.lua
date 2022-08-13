@@ -17,3 +17,7 @@ plugin({
   'nvim-treesitter/nvim-treesitter-textobjects',
   after = 'nvim-treesitter',
 })
+
+plugin({
+  'towolf/vim-helm',
+})
