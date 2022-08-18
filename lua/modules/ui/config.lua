@@ -6,7 +6,7 @@
 local config = {}
 
 function config.naz()
-  require('colorbuddy').colorscheme('naz')
+  require('naz')
 end
 
 function config.galaxyline()

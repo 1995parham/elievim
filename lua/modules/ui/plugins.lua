@@ -9,7 +9,6 @@ plugin({
   '1995parham/naz.vim',
   branch = 'main',
   config = conf.naz,
-  requires = { 'tjdevries/colorbuddy.nvim' },
 })
 
 plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
