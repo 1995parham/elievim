@@ -34,6 +34,7 @@ return {
   null_ls.builtins.diagnostics.flake8,
   null_ls.builtins.diagnostics.djlint,
   null_ls.builtins.diagnostics.actionlint,
+  null_ls.builtins.diagnostics.hadolint,
   -- null_ls.builtins.diagnostics.markdownlint,
   null_ls.builtins.diagnostics.shellcheck,
 }
