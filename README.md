@@ -7,32 +7,33 @@
 ```text
 ├── init.lua
 ├── 📂 lua
-│   ├── 📂 core                    heart of elievim which provides api
-│   │   ├── init.lua
-│   │   ├── keymap.lua             keymap api
-│   │   ├── options.lua            vim options
-│   │   └── pack.lua               hack packer to load from multiple folders
-│   ├── 📂 keymap
-│   │   ├── config.lua
-│   │   └── init.lua
-│   │   └── plugins.lua
-│   └── 📂 modules
-│       ├── completion
-│       │   ├── config.lua
-│       │   └── plugins.lua
-│       ├── lang
-│       │   ├── config.lua
-│       │   └── plugins.lua
-│       ├── tools
-│       │   ├── config.lua
-│       │   └── plugins.lua
-│       └── ui
-│           ├── config.lua
-│           ├── eviline.lua
-│           └── plugins.lua
+│   ├── 📂 core                    heart of elievim which provides api
+│   │   ├── init.lua
+│   │   ├── keymap.lua             keymap api
+│   │   ├── options.lua            vim options
+│   │   └── pack.lua               hack packer to load from multiple folders
+│   ├── 📂 keymap
+│   │   ├── config.lua
+│   │   └── init.lua
+│   │   └── plugins.lua
+│   └── 📂 modules
+│       │
+│       ├── 📂 completion
+│       │   ├── config.lua
+│       │   └── plugins.lua
+│       ├── 📂 lang
+│       │   ├── config.lua
+│       │   └── plugins.lua
+│       ├── 📂 tools
+│       │   ├── config.lua
+│       │   └── plugins.lua
+│       └── 📂 ui
+│           ├── config.lua
+│           ├── eviline.lua
+│           └── plugins.lua
 └── 📂 snippets                   snippets
-    ├── lua.json
-    └── package.json
+    ├── lua.json
+    └── package.json
 
 ```
 
@@ -48,16 +49,16 @@ git clone https://github.com/1995parham/elievim
 
 ## How to register plugins?
 
-API is `require('core.pack').register_plugin`. So pass plugin as param into this
-function.
+API is `require('core.pack').register_plugin`, So pass plugin as parameter into this
+function. Usually this happens in the `plugin.lua` files.
 
 ```lua
 local plugin = require('core.pack').register_plugin
 local conf = require('modules.ui.config')
 
-plugin {'1995parham/naz.vim', config = conf.naz}
+plugin({'1995parham/naz.vim', config = conf.naz})
 
-plugin {'plugin github repo name'}
+plugin({'plugin github repo name'})
 ```
 
 ## What is `config`?
@@ -70,17 +71,16 @@ making the `plugins.lua` file too long.
 
 Recommend lazy-load plugins. Check the usage in `modules`,
 it will improve your neovim
-start speed. `lazyload` is not magic, it just generate your config into some `autocmds`,
-you can check the
-`packer_compiled.lua` to check it.
+start speed. `lazyload` is not magic, it just generates your config into some `autocmds`,
+you can check the `packer_compiled.lua` to check it.
 
 I don't like the default path config in
-packer it use `plugins` folder  So i set
+packer it uses `plugins` folder, So I set
 compiled file path to `~/.local/share/nvim/site/lua`, you can find compiled
 file in this path. Use `:h autocmd`
 to know more about.
 
-When you edit the config and open neovim and it does not take effect. Please try
+When you edit the config then open neovim, and it does not take effect. Please try
 `PackerCompile` to generate a new compile file with your new change.
 You also may encounter errors in this process.
 
