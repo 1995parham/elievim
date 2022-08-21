@@ -106,10 +106,10 @@ plugin {'nvim-telescope/telescope.nvim',
 }
 ```
 
-## How to config keymap
+## How to config keymap?
 
 In cosynvim there are some apis that make it easy to set keymap.
-All apis are defined in `core/keymap.lua`.
+All APIs are defined in `core/keymap.lua`.
 
 ```lua
 -- functions to generate keymap by vim.keymap.set
@@ -133,12 +133,9 @@ keymap.cmd()
 keymap.cu()
 ```
 
-Use these apis to config your keymap in `keymap` folder. In this folder
-`keymap/init.lua` is necessary but if you
-have many vim mode remap you can config them in `keymap/other-file.lua`
-in cosynvim is `config.lua` just an
-example file.
-Then config plugins keymap in `keymap/init.lua`. the example of api usage
+Use these APIs to config your keymap in `keymap` folder. In this folder
+`keymap/init.lua` is necessary but if you have many VIM modes' remap you can config them in `keymap/other-file.lua`
+Then config plugins keymap in `keymap/init.lua`. The example of API usage is as follows:
 
 ```lua
 -- genreate keymap in noremal mode
@@ -150,13 +147,17 @@ nmap {
 }
 ```
 
-`map` foreach every table and generate a new table that can pass to
-`vim.keymap.set`. `cmd('PackerUpdate')` just
-return a string `<cmd>PackerUpdate<CR>` as rhs. lhs is
-`<leader>pu>`, `opts(noremap,silent,'Packer update')` generate options table
-`{noremap = true,silent = true, desc = 'Packer Update' }`.
-For some vim mode remap. not need use `cmd` function. oh maybe you will be
-confused what is `<cmd>` check `:h <cmd>` you will get answer
+`map` foreach every table and generate a new table that can pass to `vim.keymap.set`.
+
+`cmd('PackerUpdate')` just return a string _<cmd>PackerUpdate<CR>_ as RHS.
+LHS is `<leader>pu`, `opts(noremap, silent, 'Packer update')` generate options table as follows:
+
+```lua
+{noremap = true,silent = true, desc = 'Packer Update' }
+```
+
+For some vim mode remap. not need use `cmd` function. Oh! Maybe you will be
+confused what is _<cmd>_ check `:h <cmd>` you will get answer.
 
 ```lua
 -- window jump
@@ -173,7 +174,7 @@ Use `:h vim.keymap.set` to know more about.
 
 ## LSP Tools Requirements
 
-```sh
+```bash
 - luarocks
 - npm / node
 - pip / python
@@ -183,7 +184,7 @@ Use `:h vim.keymap.set` to know more about.
 
 - Improve key repeat
 
-```sh
+```bash
 # mac os need restart
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
