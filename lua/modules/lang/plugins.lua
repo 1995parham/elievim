@@ -21,3 +21,8 @@ plugin({
 plugin({
   'towolf/vim-helm',
 })
+
+plugin({
+  'Fymyte/rasi.vim',
+  ft = 'rasi',
+})
