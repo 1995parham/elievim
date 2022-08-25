@@ -1,95 +1,135 @@
 local packages = {}
 
-packages.go = {
-  'gopls',
-  'golangci-lint-langserver',
-  'json-to-struct',
-  'gofumpt',
-  'gotests',
-  'gomodifytags',
-}
+function packages.go()
+  if vim.fn.executable('go') == 1 then
+    return {
+      'gopls',
+      'golangci-lint-langserver',
+      'json-to-struct',
+      'gofumpt',
+      'gotests',
+      'gomodifytags',
+    }
+  else
+    return {}
+  end
+end
 
-packages.shell = {
-  'bash-language-server',
-  'shfmt',
-  'shellcheck',
-  'shellcheck',
-}
+function packages.shell()
+  return {
+    'bash-language-server',
+    'shfmt',
+    'shellcheck',
+    'shellcheck',
+  }
+end
 
-packages.lua = {
-  'lua-language-server',
-  'stylua',
-  'luacheck',
-}
+function packages.lua()
+  return {
+    'lua-language-server',
+    'stylua',
+    'luacheck',
+  }
+end
 
-packages.vim = {
-  'vim-language-server',
-}
+function packages.vim()
+  return {
+    'vim-language-server',
+  }
+end
 
-packages.sql = {
-  'sql-formatter',
-}
+function packages.sql()
+  return {
+    'sql-formatter',
+  }
+end
 
-packages.json = {
-  'jq',
-}
+function packages.json()
+  return {
+    'jq',
+  }
+end
 
-packages.ansible = {
-  'ansible-language-server',
-}
+function packages.ansible()
+  return {
+    'ansible-language-server',
+  }
+end
 
-packages.python = {
-  -- install packages like mypy or pylint locally instead of
-  -- globally so they can search virtualenv.
+function packages.python()
+  return {
+    -- install packages like mypy or pylint locally instead of
+    -- globally so they can search virtualenv.
 
-  -- 'mypy',
-  'pyright',
-  -- 'pylint',
-  'flake8',
-  'black',
-}
+    -- 'mypy',
+    'pyright',
+    -- 'pylint',
+    'flake8',
+    'black',
+  }
+end
 
-packages.toml = {
-  'taplo',
-}
+function packages.toml()
+  return {
+    'taplo',
+  }
+end
 
-packages.docker = {
-  'dockerfile-language-server',
-}
+function packages.docker()
+  return {
+    'dockerfile-language-server',
+  }
+end
 
-packages.markdown = {
-  'markdownlint',
-}
+function packages.markdown()
+  return {
+    'markdownlint',
+  }
+end
 
-packages.jinja = {
-  'djlint',
-}
+function packages.jinja()
+  return {
+    'djlint',
+  }
+end
 
-packages.rust = {
-  'rust-analyzer',
-}
+function packages.rust()
+  if vim.fn.executable('rustc') == 1 then
+    return {
+      'rust-analyzer',
+    }
+  else
+    return {}
+  end
+end
 
-packages.java = {
-  'groovy-language-server',
-}
+function packages.java()
+  if vim.fn.executable('rustc') == 1 then
+    return {
+      'groovy-language-server',
+    }
+  else
+    return {}
+  end
+end
 
-packages.etc = {
-  'editorconfig-checker',
-  'impl',
-  'misspell',
-  'staticcheck',
-  'vint',
-  'ltex-ls',
-}
+function packages.etc()
+  return {
+    'editorconfig-checker',
+    'impl',
+    'misspell',
+    'staticcheck',
+    'vint',
+    'ltex-ls',
+  }
+end
 
 function packages.all()
   local pkgs = {}
 
   for name, value in pairs(packages) do
     if name ~= 'all' then
-      for _, pkg in ipairs(value) do
-        table.insert(pkgs, pkg)
-      end
+      vim.tbl_extend('error', pkgs, value())
     end
   end
 
