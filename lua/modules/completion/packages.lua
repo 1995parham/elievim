@@ -129,7 +129,9 @@ function packages.all()
 
   for name, value in pairs(packages) do
     if name ~= 'all' then
-      vim.tbl_extend('error', pkgs, value())
+      for _, pkg in ipairs(value()) do
+        table.insert(pkgs, pkg)
+      end
     end
   end
 
