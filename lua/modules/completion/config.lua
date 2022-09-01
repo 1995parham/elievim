@@ -117,19 +117,17 @@ function config.cmp()
         require('luasnip').lsp_expand(args.body)
       end,
     },
+    completion = {
+      autocomplete = false,
+    },
+    view = {
+      entries = 'custom',
+    },
     mapping = {
-      ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-      ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-      ['<CR>'] = cmp.mapping({
-        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-          else
-            fallback()
-          end
-        end,
-      }),
+      ['<down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 's' }),
+      ['<up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 's' }),
+      ['<c-space>'] = cmp.mapping(cmp.mapping.complete({}), { 'i' }),
+      ['<cr>'] = cmp.mapping(cmp.mapping.confirm({ select = true }), { 's', 'i', 'c' }),
     },
     formatting = {
       format = lspkind.cmp_format({
