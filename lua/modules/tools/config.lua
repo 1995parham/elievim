@@ -19,6 +19,9 @@ function config.telescope()
     extensions = {
       file_browser = {
         theme = 'ivy',
+        hidden = true,
+        respect_gitignore = true,
+        quiet = true,
         mappings = {
           ['n'] = {
             ['ma'] = fb_actions.create,
