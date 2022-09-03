@@ -28,7 +28,7 @@ function packages.lua()
   return {
     'lua-language-server',
     'stylua',
-    'luacheck',
+    'selene',
   }
 end
 
@@ -104,7 +104,7 @@ function packages.rust()
 end
 
 function packages.java()
-  if vim.fn.executable('rustc') == 1 then
+  if vim.fn.executable('javac') == 1 then
     return {
       'groovy-language-server',
     }

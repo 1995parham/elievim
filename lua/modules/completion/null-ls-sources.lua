@@ -17,7 +17,7 @@ return {
   null_ls.builtins.formatting.rustfmt,
 
   -- null_ls.builtins.diagnostics.jsonlint,
-  null_ls.builtins.diagnostics.luacheck,
+  null_ls.builtins.diagnostics.selene,
   null_ls.builtins.diagnostics.mypy.with({
     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     condition = function()
