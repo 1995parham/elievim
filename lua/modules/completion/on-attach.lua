@@ -144,6 +144,8 @@ function lsp.ltex_ls()
       ltex = {
         dictionary = {
           ['en-US'] = {
+            'Parham',
+            'Alvani',
             'neovim',
             'nvim',
             'Ackerman',
