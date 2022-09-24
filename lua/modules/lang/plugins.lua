@@ -23,6 +23,10 @@ plugin({
 })
 
 plugin({
+  'pearofducks/ansible-vim',
+})
+
+plugin({
   'Fymyte/rasi.vim',
   ft = 'rasi',
 })
