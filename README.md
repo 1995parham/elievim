@@ -12,10 +12,18 @@
 │   │   ├── keymap.lua             keymap api
 │   │   ├── options.lua            vim options
 │   │   └── pack.lua               hack packer to load from multiple folders
+│   │
 │   ├── 📂 keymap
 │   │   ├── config.lua
 │   │   └── init.lua
 │   │   └── plugins.lua
+│   │
+│   ├── 📂 commands
+│   │   │
+│   │   ├── init.lua
+│   │   └── go.lua
+│   │   └── ansible.lua
+│   │
 │   └── 📂 modules
 │       │
 │       ├── 📂 completion
@@ -147,7 +155,7 @@ nmap {
 }
 ```
 
-`map` foreach every table and generate a new table that can pass to `vim.keymap.set`.
+`map` for each every table and generate a new table that can pass to `vim.keymap.set`.
 
 `cmd('PackerUpdate')` just return a string _<cmd>PackerUpdate<CR>_ as RHS.
 LHS is `<leader>pu`, `opts(noremap, silent, 'Packer update')` generate options table as follows:
@@ -173,6 +181,8 @@ nmap {'key','rhs',opts(noremap,silent)}
 Use `:h vim.keymap.set` to know more about.
 
 ## LSP Tools Requirements
+
+For having Language Servers you, at least required following commands:
 
 ```bash
 - luarocks
