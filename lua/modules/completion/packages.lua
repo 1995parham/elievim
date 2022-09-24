@@ -121,6 +121,7 @@ function packages.etc()
     'staticcheck',
     'vint',
     'ltex-ls',
+    'prettier',
   }
 end
 
