@@ -63,7 +63,7 @@ function config.mason.installer()
 end
 
 function config.mason.lspconfig()
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
   local _lsp = require('modules.completion.on-attach')
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
