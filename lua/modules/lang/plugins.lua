@@ -27,6 +27,10 @@ plugin({
 })
 
 plugin({
+  'lervag/vimtex',
+})
+
+plugin({
   'Fymyte/rasi.vim',
   ft = 'rasi',
 })
