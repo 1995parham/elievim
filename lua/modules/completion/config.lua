@@ -163,6 +163,9 @@ function config.lua_snip()
       },
     },
   })
+
+  ls.filetype_extend('yaml', { 'kubernetes' })
+
   require('luasnip.loaders.from_lua').lazy_load({
     paths = vim.fn.stdpath('config') .. '/snippets',
   })
