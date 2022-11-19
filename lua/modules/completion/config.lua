@@ -165,6 +165,7 @@ function config.lua_snip()
   })
 
   ls.filetype_extend('yaml', { 'kubernetes' })
+  ls.filetype_extend('python', { 'django' })
 
   require('luasnip.loaders.from_lua').lazy_load({
     paths = vim.fn.stdpath('config') .. '/snippets',
