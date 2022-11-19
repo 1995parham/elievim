@@ -7,7 +7,7 @@ local insert = ls.insert_node
 local func = ls.function_node
 local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
-local fmta = ls.extras.fmta
+local fmta = require('luasnip.extras.fmt').fmta
 
 ls.add_snippets(nil, {
   go = {
