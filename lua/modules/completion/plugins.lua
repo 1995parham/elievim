@@ -42,7 +42,8 @@ plugin({
   config = conf.mason.lspconfig,
 })
 
-plugin({ 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.lua_snip })
+plugin({ 'L3MON4D3/LuaSnip', config = conf.lua_snip })
+plugin({ 'rafamadriz/friendly-snippets', after = 'LuaSnip' })
 
 plugin({
   'jose-elias-alvarez/null-ls.nvim',
