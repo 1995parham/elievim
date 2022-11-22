@@ -45,7 +45,13 @@
 
 ```
 
+## Nomenclature
+
+_Ellie_ is a pet form of _Elahe_ comming from [Elahe Dastan](https://github.com/elahe-dastan/).
+
 ## How to Install?
+
+You need to remove your old configuration and then install `elievim`.
 
 ```bash
 rm -Rf ~/.config/nvim
@@ -210,3 +216,14 @@ xset r rate 210 40
 - <https://github.com/williamboman/mason.nvim/tree/main/lua/mason-registry>
 - <https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/MAIN.md>
 - <https://neovim.io/doc/user/>
+
+## Languages
+
+I am using `python` and `go` as my primary language so here I documented some useful
+features of this configuration in those languages.
+
+### Golang
+
+`FillStruct` is one of my favorite features. In this configuration you can use `spc + c + a`
+to see code actions and one of these actions on structs is filling them
+[ref](https://github.com/ray-x/go.nvim/blob/master/lua/go/reftool.lua).
