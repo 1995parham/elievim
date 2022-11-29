@@ -24,6 +24,15 @@ config.mason = {}
 
 function config.mason.setup()
   require('mason').setup({
+    -- The provider implementations to use for resolving package metadata (latest version, available versions, etc.).
+    -- Accepts multiple entries, where later entries will be used as fallback should prior providers fail.
+    -- Builtin providers are:
+    --   - mason.providers.registry-api (default) - uses the https://api.mason-registry.dev API
+    --   - mason.providers.client                 - uses only client-side tooling to resolve metadata
+    providers = {
+      'mason.providers.client',
+    },
+
     ui = {
       icons = {
         package_installed = '✓',
