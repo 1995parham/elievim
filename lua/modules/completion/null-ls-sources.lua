@@ -16,7 +16,7 @@ return {
   null_ls.builtins.formatting.shfmt,
   null_ls.builtins.formatting.rustfmt,
   null_ls.builtins.formatting.prettier.with({
-    filetypes = { 'html', 'javascript', 'typescript', 'css' },
+    filetypes = { 'html', 'javascript', 'typescript', 'css', 'markdown' },
   }),
 
   -- null_ls.builtins.diagnostics.jsonlint,
