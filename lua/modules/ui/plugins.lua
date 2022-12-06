@@ -13,6 +13,8 @@ plugin({
 
 plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
 
+plugin({ 'tamton-aquib/duck.nvim' })
+
 plugin({
   'glepnir/galaxyline.nvim',
   branch = 'main',
