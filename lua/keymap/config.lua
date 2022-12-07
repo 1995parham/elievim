@@ -40,7 +40,7 @@ nmap({
   {
     '<leader>dd',
     function()
-      require('duck').hatch()
+      require('duck').hatch('🐼')
     end,
     opts('hatch the [d]uck'),
   },
