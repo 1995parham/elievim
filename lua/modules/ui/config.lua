@@ -38,6 +38,13 @@ function config.dashboard()
     '',
     '',
   }
+
+  local f = assert(io.open(home .. '/.config/nvim/static/elahe.txt', 'r'))
+  for line in f:lines() do
+    table.insert(db.custom_header, line)
+  end
+  f:close()
+
   db.custom_center = {
     {
       icon = '  ',
