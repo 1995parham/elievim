@@ -1,3 +1,12 @@
+<h1 align="center">The Way of Life</h1>
+
+<h6 align="center">Your editor, your rules</h6>
+
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/1995parham/elievim/ci.yaml?label=ci&logo=github&style=for-the-badge&branch=main" alt="GitHub Workflow Status">
+  <img alt="GitHub" src="https://img.shields.io/github/license/1995parham/elievim?logo=gnu&style=for-the-badge">
+</p>
+
 # Introduction
 
 > Based on neovim 0.8.0
