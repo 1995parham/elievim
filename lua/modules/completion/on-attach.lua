@@ -146,6 +146,10 @@ function lsp.ltex_ls()
           ['en-US'] = {
             'Parham',
             'Alvani',
+            'Elahe',
+            'Raha',
+            'Dastan',
+            'ADATA',
             'neovim',
             'nvim',
             'Ackerman',
