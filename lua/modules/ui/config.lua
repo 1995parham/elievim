@@ -15,7 +15,6 @@ end
 
 function config.dashboard()
   local home = os.getenv('HOME')
-  local db = require('dashboard')
   local version = vim.version()
   local relationship_start_time = os.time({
     year = 2020,
@@ -26,49 +25,46 @@ function config.dashboard()
     sec = 0,
   })
 
-  db.session_directory = home .. '/.cache/nvim/session'
-  db.custom_header = {
-    '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',
-    '█▀░██▀▄▄▀█▀▄▄▀█░▄▄█▀▄▄▀█░▄▄▀█░▄▄▀█░████░▄▄▀█░▄▀▄░',
-    '██░██▄▀▀░█▄▀▀░█▄▄▀█░▀▀░█░▀▀░█░▀▀▄█░▄▄░█░▀▀░█░█▄█░',
-    '█▀░▀██▀▀▄██▀▀▄█▀▀▄█░████▄██▄█▄█▄▄█▄██▄█▄██▄█▄███▄',
-    '▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀',
-    string.format('neovim %d.%d.%d', version.major, version.minor, version.patch),
-    vim.fn.strftime('%c') .. ' on ' .. vim.fn.hostname(),
-    '',
-    '',
-  }
-
-  local f = assert(io.open(home .. '/.config/nvim/static/elahe.txt', 'r'))
-  for line in f:lines() do
-    table.insert(db.custom_header, line)
-  end
-  f:close()
-
-  db.custom_center = {
-    {
-      icon = '  ',
-      desc = 'Update Plugins                          ',
-      shortcut = 'SPC p u',
-      action = 'PackerUpdate',
+  local db = require('dashboard')
+  db.setup({
+    theme = 'hyper',
+    config = {
+      header = {
+        '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',
+        '█▀░██▀▄▄▀█▀▄▄▀█░▄▄█▀▄▄▀█░▄▄▀█░▄▄▀█░████░▄▄▀█░▄▀▄░',
+        '██░██▄▀▀░█▄▀▀░█▄▄▀█░▀▀░█░▀▀░█░▀▀▄█░▄▄░█░▀▀░█░█▄█░',
+        '█▀░▀██▀▀▄██▀▀▄█▀▀▄█░████▄██▄█▄█▄▄█▄██▄█▄██▄█▄███▄',
+        '▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀',
+        string.format('neovim %d.%d.%d', version.major, version.minor, version.patch),
+        vim.fn.strftime('%c') .. ' on ' .. vim.fn.hostname(),
+        '',
+        '',
+      },
+      center = {
+        {
+          icon = '  ',
+          desc = 'Update Plugins                          ',
+          shortcut = 'SPC p u',
+          action = 'PackerUpdate',
+        },
+        {
+          icon = '  ',
+          desc = 'Find  File                              ',
+          action = 'Telescope find_files find_command=rg,--hidden,--files',
+          shortcut = 'SPC f f',
+        },
+      },
+      packages = { enable = true },
+      project = { limit = 8, action = 'Telescope find_files cwd=' },
+      mru = { limit = 10 },
+      footer = {
+        '',
+        string.format('💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)),
+        string.format('💞 %d days ago', os.difftime(os.time(), relationship_start_time) / (3600 * 24)),
+        '',
+      },
     },
-    {
-      icon = '  ',
-      desc = 'Find  File                              ',
-      action = 'Telescope find_files find_command=rg,--hidden,--files',
-      shortcut = 'SPC f f',
-    },
-  }
-  db.custom_footer = {
-    '',
-    string.format('💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)),
-    string.format('💞 %d days ago', os.difftime(os.time(), relationship_start_time) / (3600 * 24)),
-    '',
-  }
-  if packer_plugins ~= nil then
-    local count = #vim.tbl_keys(packer_plugins)
-    table.insert(db.custom_footer, string.format('🎉 neovim loaded %d plugins', count))
-  end
+  })
 end
 
 function config.nvim_bufferline()
