@@ -14,7 +14,6 @@ function config.galaxyline()
 end
 
 function config.dashboard()
-  local home = os.getenv('HOME')
   local version = vim.version()
   local relationship_start_time = os.time({
     year = 2020,
@@ -40,18 +39,25 @@ function config.dashboard()
         '',
         '',
       },
-      center = {
+      shortcut = {
+        { desc = ' Update', group = '@property', action = 'PackerSync', key = 'u' },
         {
-          icon = '  ',
-          desc = 'Update Plugins                          ',
-          shortcut = 'SPC p u',
-          action = 'PackerUpdate',
+          desc = ' Files',
+          group = 'Label',
+          action = 'Telescope find_files',
+          key = 'f',
         },
         {
-          icon = '  ',
-          desc = 'Find  File                              ',
-          action = 'Telescope find_files find_command=rg,--hidden,--files',
-          shortcut = 'SPC f f',
+          desc = ' dotfiles',
+          group = 'Number',
+          action = 'Telescope find_files cwd=~/dotfiles',
+          key = 'd',
+        },
+        {
+          desc = ' neovim',
+          group = 'Number',
+          action = 'Telescope find_files cwd=~/.config/nvim',
+          key = 'n',
         },
       },
       packages = { enable = true },
