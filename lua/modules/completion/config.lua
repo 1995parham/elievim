@@ -101,8 +101,8 @@ function config.mason.lspconfig()
       })
     end,
 
-    ['sumneko_lua'] = function()
-      require('lspconfig').sumneko_lua.setup(_lsp.sumneko_lua())
+    ['lua_ls'] = function()
+      require('lspconfig').lua_ls.setup(_lsp.lua_ls())
     end,
     ['rust_analyzer'] = function()
       require('rust-tools').setup({})
