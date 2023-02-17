@@ -105,6 +105,9 @@ vim.opt.foldenable = true
 vim.opt.signcolumn = 'yes'
 -- vim.opt.conceallevel = 2
 -- vim.opt.concealcursor = 'niv'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldenable = false
 
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
