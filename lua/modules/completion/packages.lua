@@ -106,7 +106,7 @@ end
 function packages.java()
   if vim.fn.executable('javac') == 1 then
     return {
-      'groovy-language-server',
+      -- 'groovy-language-server',
     }
   else
     return {}
