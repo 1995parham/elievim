@@ -3,6 +3,7 @@
 <h6 align="center">Your editor, your rules</h6>
 
 <p align="center">
+  <img src="https://github.com/elahe-dastan.png" alt="Elahe"><br>
   <img src="https://img.shields.io/github/actions/workflow/status/1995parham/elievim/ci.yml?label=ci&logo=github&style=for-the-badge&branch=main" alt="GitHub Workflow Status">
   <img alt="GitHub" src="https://img.shields.io/github/license/1995parham/elievim?logo=gnu&style=for-the-badge">
 </p>
