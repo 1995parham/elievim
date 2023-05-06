@@ -19,20 +19,20 @@ plugin({
   'glepnir/galaxyline.nvim',
   branch = 'main',
   config = conf.galaxyline,
-  requires = 'kyazdani42/nvim-web-devicons',
+  requires = 'nvim-tree/nvim-web-devicons',
 })
 
 plugin({
-  'kyazdani42/nvim-tree.lua',
+  'nvim-tree/nvim-tree.lua',
   cmd = 'NvimTreeToggle',
   config = conf.nvim_tree,
-  requires = 'kyazdani42/nvim-web-devicons',
+  requires = 'nvim-tree/nvim-web-devicons',
 })
 
 plugin({
   'akinsho/nvim-bufferline.lua',
   config = conf.nvim_bufferline,
-  requires = 'kyazdani42/nvim-web-devicons',
+  requires = 'nvim-tree/nvim-web-devicons',
 })
 
 -- No-nonsense floating terminal plugin for neovim
