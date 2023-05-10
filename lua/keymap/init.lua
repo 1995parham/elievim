@@ -27,6 +27,16 @@ nmap({
   { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
   { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
   { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent) },
+  { '<leader>sf', cmd('Telescope find_files'), opts(noremap, silent, '[s]earch [f]iles') },
+  -- Panda
+  {
+    '<leader>dd',
+    function()
+      require('duck').hatch('🐼')
+    end,
+    opts('hatch the [d]uck'),
+  },
+  { '<leader>dk', require('duck').cook, opts('coo[k] the [d]uck') },
   -- FTerm
   { '<Leader>ot', cmd('FTermToggle'), opts(silent) },
   { '<Leader>od', cmd('LDToggle'), opts(silent) },

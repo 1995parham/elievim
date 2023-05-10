@@ -20,6 +20,13 @@ xmap({ ' ', '', opts(noremap) })
 nmap({
   -- close buffer
   { '<Leader>bk', cmd('bdelete'), opts(noremap, silent) },
+  -- window jump
+  { '<C-w>n', cmd('tabnext'), opts(noremap) },
+  { '<C-w>p', cmd('tabprevious'), opts(noremap) },
+  -- window create
+  { '<C-w>c', cmd('tabnew'), opts(noremap) },
+  -- find usage
+  { '<Leader>fu', vim.lsp.buf.references, opts(noremap, '[f]ind [u]sage') },
   -- save
   -- { '<C-s>', cmd('write'), opts(noremap) },
   -- yank
@@ -29,28 +36,6 @@ nmap({
   -- { '[b', cmd('bp'), opts(noremap) },
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
-  -- window jump
-  { '<C-w>n', cmd('tabnext'), opts(noremap) },
-  { '<C-w>p', cmd('tabprevious'), opts(noremap) },
-  -- window create
-  { '<C-w>c', cmd('tabnew'), opts(noremap) },
-  { '<leader>sg', require('telescope.builtin').live_grep, opts('[s]earch by [g]rep') },
-  { '<leader>sf', require('telescope.builtin').find_files, opts('[s]earch [f]iles') },
-
-  {
-    '<leader>dd',
-    function()
-      require('duck').hatch('🐼')
-    end,
-    opts('hatch the [d]uck'),
-  },
-  {
-    '<leader>dk',
-    function()
-      require('duck').cook()
-    end,
-    opts('coo[k] the [d]uck'),
-  },
 })
 
 -- insert mode
