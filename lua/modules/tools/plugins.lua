@@ -28,7 +28,7 @@ plugin({ 'cohama/agit.vim' })
 plugin({ 'tpope/vim-fugitive' })
 
 -- neovim dev container support
-plugin({ 'https://codeberg.org/esensar/nvim-dev-container' })
+plugin({ 'https://codeberg.org/esensar/nvim-dev-container', config = conf.devcontainer })
 
 -- quickly insert templates into file
 -- plugin({ 'glepnir/template.nvim', config = conf.template })
