@@ -27,5 +27,8 @@ plugin({ 'cohama/agit.vim' })
 -- fugitive.vim: a git wrapper so awesome, it should be illegal
 plugin({ 'tpope/vim-fugitive' })
 
+-- neovim dev container support
+plugin({ 'https://codeberg.org/esensar/nvim-dev-container' })
+
 -- quickly insert templates into file
 -- plugin({ 'glepnir/template.nvim', config = conf.template })
