@@ -15,7 +15,12 @@ plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
 
 plugin({ 'tamton-aquib/duck.nvim' })
 
-plugin({ 'IndianBoy42/tree-sitter-just' })
+plugin({
+  'IndianBoy42/tree-sitter-just',
+  config = function()
+    require('tree-sitter-just').setup({})
+  end,
+})
 
 plugin({
   'glepnir/galaxyline.nvim',
