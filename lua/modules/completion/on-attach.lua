@@ -16,6 +16,7 @@ lsp.diagnostic_icons = {
 lsp.valid_formatters = {
   ['null-ls'] = true,
   ['dockerls'] = true,
+  ['docker_compose_language_service'] = true,
   ['jdtls'] = true,
 }
 
@@ -187,13 +188,20 @@ function lsp.gols()
     root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
     flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
     completeUnimported = true,
+    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     settings = {
       gopls = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
         -- analyses = {},
+        allExperiments = true,
         hints = {
           parameterNames = true,
           rangeVariableTypes = true,
+        },
+        usePlaceholders = true,
+        codelenses = {
+          generate = true,
+          test = true,
         },
         staticcheck = true,
       },
