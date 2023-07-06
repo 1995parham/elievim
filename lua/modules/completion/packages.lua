@@ -122,6 +122,7 @@ function packages.etc()
     'vint',
     'ltex-ls',
     'prettier',
+    'graphql-language-service-cli',
   }
 end
 
