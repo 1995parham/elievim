@@ -19,6 +19,7 @@ plugin({
 })
 
 -- code analysis & navigation plugin
+-- https://github.com/ray-x/navigator.lua/tree/master#default-keymaps
 plugin({
   'ray-x/navigator.lua',
   config = function()
