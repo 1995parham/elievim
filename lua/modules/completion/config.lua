@@ -113,6 +113,9 @@ function config.mason.lspconfig()
     ['gopls'] = function()
       require('lspconfig').gopls.setup(_lsp.gols())
     end,
+    ['graphql'] = function()
+      require('lspconfig').graphql.setup({})
+    end,
   })
 end
 
