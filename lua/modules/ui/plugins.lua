@@ -15,6 +15,8 @@ plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
 
 plugin({ 'tamton-aquib/duck.nvim' })
 
+plugin({ 'IndianBoy42/tree-sitter-just' })
+
 plugin({
   'glepnir/galaxyline.nvim',
   branch = 'main',
