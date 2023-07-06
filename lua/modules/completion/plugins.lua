@@ -19,12 +19,10 @@ plugin({
 })
 
 -- code analysis & navigation plugin
--- https://github.com/ray-x/navigator.lua/tree/master#default-keymaps
 plugin({
   'ray-x/navigator.lua',
-  config = function()
-    require('navigator').setup({})
-  end,
+  config = conf.navigator.setup,
+  after = 'nvim-treesitter',
   requires = {
     { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
     { 'neovim/nvim-lspconfig' },
