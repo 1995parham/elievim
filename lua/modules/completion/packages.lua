@@ -78,6 +78,7 @@ end
 function packages.docker()
   return {
     'dockerfile-language-server',
+    'docker-compose-language-service',
   }
 end
 

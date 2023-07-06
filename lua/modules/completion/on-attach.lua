@@ -100,6 +100,11 @@ function lsp.on_attach(client, bufnr)
   end
 end
 
+-- these are custom configuration for each lsp, please create lsp configuration
+-- here instead of creating them in config.lua.
+-- following link, contains information about supported lsp:
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+
 function lsp.lua_ls()
   -- local sumneko_binary_path = vim.fn.exepath('lua-language-server')
   -- local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
@@ -193,6 +198,15 @@ function lsp.gols()
         staticcheck = true,
       },
     },
+  }
+end
+
+function lsp.docker_compose_language_service()
+  local util = require('lspconfig/util')
+
+  return {
+    on_attach = lsp.on_attach,
+    root_dir = util.root_pattern('docker-compose.yml', 'docker-compose.yaml', '.git'),
   }
 end
 

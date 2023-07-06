@@ -85,6 +85,7 @@ function config.mason.installer()
 end
 
 function config.mason.lspconfig()
+  -- https://github.com/williamboman/mason-lspconfig.nvim#configuration
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   local _lsp = require('modules.completion.on-attach')
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -115,6 +116,12 @@ function config.mason.lspconfig()
     end,
     ['graphql'] = function()
       require('lspconfig').graphql.setup({})
+    end,
+    ['dockerls'] = function()
+      require('lspconfig').dockerls.setup({})
+    end,
+    ['docker_compose_language_service'] = function()
+      require('lspconfig').docker_compose_language_service.setup(_lsp.docker_compose_language_service())
     end,
   })
 end
