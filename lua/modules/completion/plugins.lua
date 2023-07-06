@@ -18,6 +18,18 @@ plugin({
   config = conf.mason.setup,
 })
 
+-- code analysis & navigation plugin
+plugin({
+  'ray-x/navigator.lua',
+  config = function()
+    require('navigator').setup({})
+  end,
+  requires = {
+    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+    { 'neovim/nvim-lspconfig' },
+  },
+})
+
 -- install and upgrade third party tools automatically
 plugin({
   'WhoIsSethDaniel/mason-tool-installer.nvim',

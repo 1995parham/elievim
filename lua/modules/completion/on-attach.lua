@@ -99,6 +99,10 @@ function lsp.on_attach(client, bufnr)
       end,
     })
   end
+
+  -- if client.supports_method('textDocument/codeLens') then
+  -- vim.notify(string.format('lsp client %s has codeLens capability', client.name), vim.log.levels.DEBUG)
+  -- end
 end
 
 -- these are custom configuration for each lsp, please create lsp configuration
