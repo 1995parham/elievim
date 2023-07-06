@@ -181,7 +181,7 @@ gls.mid[1] = {
       return true
     end,
     highlight = { colors.yellow, colors.bg, 'bold' },
-    icon = ' LSP:',
+    icon = '  LSP:',
     provider = function(msg)
       msg = msg or 'No Active Lsp'
       local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -195,7 +195,7 @@ gls.mid[1] = {
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
           if client.name == 'null-ls' then
-            msg = string.format('%s ﳠ', msg)
+            msg = string.format('%s 󰟢', msg)
           else
             msg = string.format('%s %s', msg, client.name)
           end

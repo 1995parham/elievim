@@ -60,7 +60,7 @@ function lsp.on_attach(client, bufnr)
   })
   ]]
 
-  -- Mappings.
+  -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
