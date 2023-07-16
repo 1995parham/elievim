@@ -25,6 +25,9 @@ config.navigator = {}
 function config.navigator.setup()
   require('navigator').setup({
     default_mapping = false,
+    lsp = {
+      display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
+    },
     keymaps = {
       -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
       {
