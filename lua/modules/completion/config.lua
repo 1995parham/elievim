@@ -20,9 +20,7 @@ function config.nvim_lsp()
   end
 end
 
-config.navigator = {}
-
-function config.navigator.setup()
+function config.navigator()
   require('navigator').setup({
     default_mapping = false,
     lsp = {
@@ -210,6 +208,10 @@ function config.cmp()
       { name = 'buffer' },
     }),
   })
+end
+
+function config.go_nvim()
+  require('go').setup()
 end
 
 function config.lua_snip()
