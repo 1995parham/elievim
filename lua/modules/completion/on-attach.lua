@@ -218,7 +218,7 @@ function lsp.docker_compose_language_service()
 
   return {
     on_attach = lsp.on_attach,
-    root_dir = util.root_pattern('docker-compose.yml', 'docker-compose.yaml'),
+    root_dir = util.root_pattern('docker-compose.yml', 'docker-compose.yaml', '.git'),
   }
 end
 
