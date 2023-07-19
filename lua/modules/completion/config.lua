@@ -150,9 +150,9 @@ function config.mason.lspconfig()
     ['dockerls'] = function()
       require('lspconfig').dockerls.setup({})
     end,
-    ['docker_compose_language_service'] = function()
-      require('lspconfig').docker_compose_language_service.setup(_lsp.docker_compose_language_service())
-    end,
+    --['docker_compose_language_service'] = function()
+    --  require('lspconfig').docker_compose_language_service.setup(_lsp.docker_compose_language_service())
+    --end,
   })
 end
 
