@@ -153,7 +153,7 @@ function config.mason.lspconfig()
     ['docker_compose_language_service'] = function()
       require('lspconfig').docker_compose_language_service.setup(_lsp.docker_compose_language_service())
     end,
-    ['helm-ls'] = function()
+    ['helm_ls'] = function()
       require('lspconfig').helm_ls.setup(_lsp.helm_ls())
     end,
   })
