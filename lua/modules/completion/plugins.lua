@@ -25,7 +25,7 @@ plugin({
   config = conf.go_nvim,
   after = 'nvim-treesitter',
   requires = {
-    { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
+    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
     { 'neovim/nvim-lspconfig' },
   },
 })
@@ -36,7 +36,7 @@ plugin({
   config = conf.navigator,
   after = 'nvim-treesitter',
   requires = {
-    { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
+    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
     { 'neovim/nvim-lspconfig' },
   },
 })
@@ -85,9 +85,9 @@ plugin({
 plugin({
   'hrsh7th/nvim-cmp',
   requires = {
-    { 'hrsh7th/cmp-nvim-lsp',     after = 'nvim-lspconfig' },
-    { 'hrsh7th/cmp-path',         after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-buffer',       after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-lspconfig' },
+    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
     { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
     { 'onsails/lspkind.nvim' },
   },
