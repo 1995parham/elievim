@@ -11,12 +11,12 @@ plugin({
   config = conf.naz,
 })
 
-plugin({ 'glepnir/dashboard-nvim', config = conf.dashboard })
+plugin({ 'nvimdev/dashboard-nvim', config = conf.dashboard })
 
 plugin({ 'tamton-aquib/duck.nvim' })
 
 plugin({
-  'glepnir/galaxyline.nvim',
+  'nvimdev/galaxyline.nvim',
   branch = 'main',
   config = conf.galaxyline,
   requires = 'nvim-tree/nvim-web-devicons',
