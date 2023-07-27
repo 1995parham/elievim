@@ -99,10 +99,6 @@ function lsp.on_attach(client, bufnr)
       end,
     })
   end
-
-  -- if client.supports_method('textDocument/codeLens') then
-  -- vim.notify(string.format('lsp client %s has codeLens capability', client.name), vim.log.levels.DEBUG)
-  -- end
 end
 
 -- these are custom configuration for each lsp, please create lsp configuration
@@ -219,6 +215,7 @@ function lsp.docker_compose_language_service()
   return {
     on_attach = lsp.on_attach,
     root_dir = util.root_pattern('docker-compose.yml', 'docker-compose.yaml', '.git'),
+    single_file_support = true,
   }
 end
 
