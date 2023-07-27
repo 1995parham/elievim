@@ -214,8 +214,18 @@ function lsp.docker_compose_language_service()
 
   return {
     on_attach = lsp.on_attach,
-    root_dir = util.root_pattern('docker-compose.yml', 'docker-compose.yaml', '.git'),
-    single_file_support = true,
+    root_dir = function(fname)
+      local helm_root = util.root_pattern('Chart.yaml')
+      -- docker-compose-language-service runs on every yaml file and trying to format and lint
+      -- them. I cannot find a way for preventing it to run so I force it to run on workspace mode
+      -- by disabling the single_file_support and then send nil when we are in the helm directory.
+      if helm_root ~= nil then
+        return nil
+      end
+
+      return util.root_pattern('docker-compose.yml', 'docker-compose.yaml', '.git')(fname)
+    end,
+    single_file_support = false,
   }
 end
 
