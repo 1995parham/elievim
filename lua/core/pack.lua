@@ -41,6 +41,9 @@ function Packer:load_packer()
     compile_path = packer_compiled,
     git = { clone_timeout = 120 },
     disable_commands = true,
+    preview_updates = true,
+    autoremove = false,
+    auto_clean = true,
   })
   packer.reset()
   self:load_plugins()
@@ -59,7 +62,7 @@ function Packer:init_ensure_plugins()
     local cmd = '!git clone https://github.com/wbthomason/packer.nvim ' .. packer_dir
     api.nvim_command(cmd)
     uv.fs_mkdir(data_dir .. 'lua', 511, function()
-      assert('make compile path dir failed')
+      assert(true, 'make compile path dir failed')
     end)
   end
   self:load_packer()
@@ -89,7 +92,7 @@ function plugins.load_compile()
   if vim.fn.filereadable(packer_compiled) == 1 then
     require('packer_compiled')
   else
-    vim.notify('Run PackerSync or PackerCompile', 'info', { title = 'Packer' })
+    vim.notify('Run PackerSync or PackerCompile', vim.Log.levels.INFO, { title = 'Packer' })
   end
 
   local cmds = {
@@ -107,6 +110,7 @@ function plugins.load_compile()
   end
 
   local PackerHooks = vim.api.nvim_create_augroup('PackerHooks', {})
+
   vim.api.nvim_create_autocmd('User', {
     pattern = 'PackerCompileDone',
     callback = function()
