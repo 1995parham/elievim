@@ -222,4 +222,16 @@ function lsp.docker_compose_language_service()
   }
 end
 
+function lsp.helm_ls()
+  local util = require('lspconfig/util')
+
+  return {
+    filetypes = { 'helm' },
+    cmd = { 'helm_ls', 'serve' },
+    root_dir = function(fname)
+      return util.root_pattern('Chart.yaml')(fname)
+    end,
+  }
+end
+
 return lsp
