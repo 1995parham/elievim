@@ -107,6 +107,11 @@ end
 function config.tterm()
   require('toggleterm').setup({
     insert_mappings = true,
+    highlights = {
+      Normal = {
+        guibg = '#1f1f1f',
+      },
+    },
   })
 
   local Terminal = require('toggleterm.terminal').Terminal
