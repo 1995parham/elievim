@@ -35,8 +35,8 @@ plugin({
   requires = 'nvim-tree/nvim-web-devicons',
 })
 
--- No-nonsense floating terminal plugin for neovim
+-- A neovim lua plugin to help easily manage multiple terminal windows.
 plugin({
-  'numToStr/FTerm.nvim',
-  config = conf.fterm,
+  'akinsho/toggleterm.nvim',
+  config = conf.tterm,
 })

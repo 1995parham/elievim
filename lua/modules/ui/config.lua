@@ -104,37 +104,43 @@ function config.nvim_tree()
   })
 end
 
-function config.fterm()
-  local fterm = require('FTerm')
+function config.tterm()
+  require('toggleterm').setup({
+    insert_mappings = true,
+  })
 
-  local lazydocker = fterm:new({
-    ft = 'fterm_lazydocker',
+  local Terminal = require('toggleterm.terminal').Terminal
+
+  local lazydocker = Terminal:new({
+    hidden = true,
+    direction = 'float',
     cmd = 'lazydocker',
-    dimensions = {
-      height = 0.8,
-      width = 0.8,
-      x = 0.5,
-      y = 0.5,
-    },
   })
 
-  local ipython = fterm:new({
-    ft = 'fterm_ipython',
+  local ipython = Terminal:new({
+    hidden = true,
+    direction = 'vertical',
+    dir = 'git_dir',
     cmd = 'ipython',
-    dimensions = {
-      height = 0.8,
-      width = 0.8,
-      x = 0.5,
-      y = 0.5,
-    },
   })
 
-  vim.api.nvim_create_user_command('FTermToggle', fterm.toggle, { bang = true })
-  vim.api.nvim_create_user_command('LDToggle', function()
+  local django_shell_plus = Terminal:new({
+    hidden = true,
+    dir = 'git_dir',
+    direction = 'vertical',
+    cmd = 'python manage.py shell_plus',
+  })
+
+  vim.api.nvim_create_user_command('LazyDockerToogle', function()
     lazydocker:toggle()
   end, { bang = true })
-  vim.api.nvim_create_user_command('IPToggle', function()
+
+  vim.api.nvim_create_user_command('IPythonToggle', function()
     ipython:toggle()
+  end, { bang = true })
+
+  vim.api.nvim_create_user_command('DjangoShellPlusToggle', function()
+    django_shell_plus:toggle()
   end, { bang = true })
 end
 

@@ -37,10 +37,12 @@ nmap({
     opts('hatch the [d]uck'),
   },
   { '<leader>dk', require('duck').cook, opts('coo[k] the [d]uck') },
-  -- FTerm
-  { '<Leader>ot', cmd('FTermToggle'), opts(silent) },
-  { '<Leader>od', cmd('LDToggle'), opts(silent) },
-  { '<Leader>oi', cmd('IPToggle'), opts(silent) },
+  -- toggleterm
+  { '<Leader>ot', cmd('ToggleTerm dir=git_dir direction=horizontal'), opts(silent, 'open horizental terminal') },
+  { '<Leader>oo', cmd('ToggleTerm dir=git_dir direction=tab'), opts(silent, 'open terminal in a new tab') },
+  { '<Leader>od', cmd('LazyDockerToogle'), opts(silent, 'open lazydocker') },
+  { '<Leader>oi', cmd('IPythonToggle'), opts(silent, 'open ipython') },
+  { '<Leader>od', cmd('DjangoShellPlus'), opts(silent, 'open django shell_plus') },
 })
 
 tmap({
