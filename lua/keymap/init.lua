@@ -23,11 +23,14 @@ nmap({
   -- nvimtree
   { '<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent) },
   -- Telescope
-  { '<Leader>bb', cmd('Telescope buffers'), opts(noremap, silent) },
+  { '<Leader>bb', cmd('Telescope buffers'), opts(noremap, silent, 'buffer browser') },
   { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
   { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent) },
+  { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent, 'file browser') },
   { '<leader>sf', cmd('Telescope find_files'), opts(noremap, silent, '[s]earch [f]iles') },
+  -- buffers
+  { '<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer') },
+  { '<Leader>bn', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },
   -- Panda
   {
     '<leader>dd',
