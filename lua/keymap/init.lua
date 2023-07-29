@@ -43,9 +43,9 @@ nmap({
   -- toggleterm
   { '<Leader>ot', cmd('ToggleTerm dir=git_dir direction=horizontal'), opts(silent, 'open horizental terminal') },
   { '<Leader>oo', cmd('ToggleTerm dir=git_dir direction=tab'), opts(silent, 'open terminal in a new tab') },
-  { '<Leader>od', cmd('LazyDockerToogle'), opts(silent, 'open lazydocker') },
+  { '<Leader>odo', cmd('LazyDockerToogle'), opts(silent, 'open lazydocker') },
   { '<Leader>oi', cmd('IPythonToggle'), opts(silent, 'open ipython') },
-  { '<Leader>od', cmd('DjangoShellPlus'), opts(silent, 'open django shell_plus') },
+  { '<Leader>odj', cmd('DjangoShellPlus'), opts(silent, 'open django shell_plus') },
 })
 
 tmap({
