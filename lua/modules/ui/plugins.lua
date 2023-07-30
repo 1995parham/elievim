@@ -11,8 +11,6 @@ plugin({
   config = conf.naz,
 })
 
-plugin({ 'nvimdev/dashboard-nvim', config = conf.dashboard })
-
 plugin({ 'tamton-aquib/duck.nvim' })
 
 plugin({
@@ -21,6 +19,8 @@ plugin({
   config = conf.galaxyline,
   requires = 'nvim-tree/nvim-web-devicons',
 })
+
+plugin({ 'nvimdev/dashboard-nvim', config = conf.dashboard })
 
 plugin({
   'nvim-tree/nvim-tree.lua',

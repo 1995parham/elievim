@@ -24,7 +24,7 @@ local colors = {
 }
 local condition = require('galaxyline.condition')
 local gls = galaxyline.section
-galaxyline.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer' }
+galaxyline.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer', 'dashboard' }
 
 gls.left[1] = {
   RainbowRed = {
@@ -163,7 +163,23 @@ gls.left[13] = {
   FileTypeName = {
     condition = condition.buffer_not_empty,
     highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
     provider = 'FileTypeName',
+  },
+}
+
+gls.left[14] = {
+  ToggleTerminal = {
+    condition = function()
+      return vim.bo.filetype == 'toggleterm'
+    end,
+    highlight = { colors.fg, colors.bg, 'italic' },
+    separator = ' ',
+    separator_highlight = { 'NONE', colors.bg },
+    provider = function()
+      return string.format('terminal [%d]', vim.b.toggle_number)
+    end,
   },
 }
 

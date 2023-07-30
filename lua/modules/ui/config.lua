@@ -27,6 +27,9 @@ function config.dashboard()
   local db = require('dashboard')
   db.setup({
     theme = 'hyper',
+    hide = {
+      statusline = false,
+    },
     config = {
       header = {
         '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',
