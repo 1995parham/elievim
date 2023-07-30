@@ -105,6 +105,13 @@ function config.nvim_tree()
 end
 
 function config.tterm()
+  vim.env.GIT_EDITOR = 'nvr -cc split --remote-wait'
+
+  vim.api.nvim_create_autocmd({ 'FileType' }, {
+    pattern = { 'gitcommit', 'gitrebase', 'gitconfig' },
+    command = 'set bufhidden=delete',
+  })
+
   require('toggleterm').setup({
     insert_mappings = true,
     highlights = {
