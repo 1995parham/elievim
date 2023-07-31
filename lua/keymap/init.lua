@@ -13,24 +13,25 @@ local cmd = key.cmd
 -- normal mode key mapping
 nmap({
   -- packer
-  { '<Leader>pu', cmd('PackerUpdate'), opts(noremap, silent) },
-  { '<Leader>pi', cmd('PackerInstall'), opts(noremap, silent) },
-  { '<Leader>pc', cmd('PackerCompile'), opts(noremap, silent) },
+  { '<Leader>pu',  cmd('PackerUpdate'),             opts(noremap, silent) },
+  { '<Leader>pi',  cmd('PackerInstall'),            opts(noremap, silent) },
+  { '<Leader>pc',  cmd('PackerCompile'),            opts(noremap, silent) },
   -- dashboard
-  { '<Leader>n', cmd('DashboardNewFile'), opts(noremap, silent) },
-  { '<Leader>ss', cmd('SessionSave'), opts(noremap, silent) },
-  { '<Leader>sl', cmd('SessionLoad'), opts(noremap, silent) },
+  { '<Leader>n',   cmd('DashboardNewFile'),         opts(noremap, silent) },
+  { '<Leader>ss',  cmd('SessionSave'),              opts(noremap, silent) },
+  { '<Leader>sl',  cmd('SessionLoad'),              opts(noremap, silent) },
   -- nvimtree
-  { '<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent) },
+  { '<Leader>pff', cmd('NvimTreeToggle'),           opts(noremap, silent) },
   -- Telescope
-  { '<Leader>bb', cmd('Telescope buffers'), opts(noremap, silent, 'buffer browser') },
-  { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
-  { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent, 'file browser') },
-  { '<leader>sf', cmd('Telescope find_files'), opts(noremap, silent, '[s]earch [f]iles') },
+  { '<Leader>bb',  cmd('Telescope buffers'),        opts(noremap, silent, 'buffer browser') },
+  { '<Leader>man', cmd('Telescope man_pages'),      opts(noremap, silent) },
+  { '<Leader>fa',  cmd('Telescope live_grep'),      opts(noremap, silent) },
+  { '<Leader>ff',  cmd('Telescope file_browser'),   opts(noremap, silent, 'file browser') },
+  { '<leader>sf',  cmd('Telescope find_files'),     opts(noremap, silent, '[s]earch [f]iles') },
   -- buffers
-  { '<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer') },
-  { '<Leader>bn', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },
+  { '<Leader>bn',  cmd('bnext'),                    opts(noremap, silent, 'next buffer') },
+  { '<Leader>bp',  cmd('bprevious'),                opts(noremap, silent, 'previous buffer') },
+  { '<Leader>qq',  cmd('bufdo bd <bar> Dashboard'), opts(noremap, silent, 'previous buffer') },
   -- Panda
   {
     '<leader>dd',
@@ -39,7 +40,7 @@ nmap({
     end,
     opts('hatch the [d]uck'),
   },
-  { '<Leader>dk', require('duck').cook, opts('coo[k] the [d]uck') },
+  { '<Leader>dk', require('duck').cook,                               opts('coo[k] the [d]uck') },
   -- toggleterm
   { '<Leader>ot', cmd('ToggleTerm dir=git_dir direction=horizontal'), opts(silent, 'open/close horizental terminal') },
   {
@@ -48,8 +49,8 @@ nmap({
     opts(silent, 'open/close terminal in a new tab'),
   },
   { '<Leader>odo', cmd('LazyDockerToogle'), opts(silent, 'open/close lazydocker') },
-  { '<Leader>oi', cmd('IPythonToggle'), opts(silent, 'open/close ipython') },
-  { '<Leader>odj', cmd('DjangoShellPlus'), opts(silent, 'open/close django shell_plus') },
+  { '<Leader>oi',  cmd('IPythonToggle'),    opts(silent, 'open/close ipython') },
+  { '<Leader>odj', cmd('DjangoShellPlus'),  opts(silent, 'open/close django shell_plus') },
 })
 
 -- terminal mode key mapping
