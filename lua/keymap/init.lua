@@ -47,11 +47,6 @@ nmap({
     cmd('exe v:count1 . "ToggleTerm dir=git_dir direction=tab"'),
     opts(silent, 'open/close terminal in a new tab'),
   },
-  {
-    '<M-0>',
-    cmd('ToggleTermToggleAll'),
-    opts(silent, 'toggle all terminals at once'),
-  },
   { '<Leader>odo', cmd('LazyDockerToogle'), opts(silent, 'open/close lazydocker') },
   { '<Leader>oi', cmd('IPythonToggle'), opts(silent, 'open/close ipython') },
   { '<Leader>odj', cmd('DjangoShellPlus'), opts(silent, 'open/close django shell_plus') },
@@ -74,3 +69,15 @@ for i = 1, 9, 1 do
   tmap(keymap)
   nmap(keymap)
 end
+
+nmap({
+  '<M-0>',
+  cmd('ToggleTermToggleAll'),
+  opts(silent, 'toggle all terminals at once'),
+})
+
+tmap({
+  '<M-0>',
+  cmd('ToggleTermToggleAll'),
+  opts(silent, 'toggle all terminals at once'),
+})
