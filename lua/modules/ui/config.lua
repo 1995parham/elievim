@@ -155,6 +155,11 @@ function config.tterm()
     dir = 'git_dir',
     close_on_exit = true,
     cmd = 'git log --pretty=oneline -5',
+    float_opts = {
+      border = 'double',
+      width = 200,
+      height = 20,
+    },
   })
 
   vim.api.nvim_create_user_command('LazyDockerToogle', function()
