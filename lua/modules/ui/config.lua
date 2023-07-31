@@ -129,6 +129,7 @@ function config.tterm()
   local lazydocker = Terminal:new({
     hidden = true,
     direction = 'float',
+    close_on_exit = true,
     cmd = 'lazydocker',
   })
 
@@ -136,6 +137,7 @@ function config.tterm()
     hidden = true,
     direction = 'vertical',
     dir = 'git_dir',
+    close_on_exit = true,
     cmd = 'ipython',
   })
 
@@ -143,7 +145,16 @@ function config.tterm()
     hidden = true,
     dir = 'git_dir',
     direction = 'vertical',
+    close_on_exit = true,
     cmd = 'python manage.py shell_plus',
+  })
+
+  local commit_history = Terminal:new({
+    hidden = true,
+    direction = 'float',
+    dir = 'git_dir',
+    close_on_exit = true,
+    cmd = 'git log --pretty=oneline -5',
   })
 
   vim.api.nvim_create_user_command('LazyDockerToogle', function()
@@ -156,6 +167,10 @@ function config.tterm()
 
   vim.api.nvim_create_user_command('DjangoShellPlusToggle', function()
     django_shell_plus:toggle()
+  end, { bang = true })
+
+  vim.api.nvim_create_user_command('GitHistoryToggle', function()
+    commit_history:toggle()
   end, { bang = true })
 end
 
