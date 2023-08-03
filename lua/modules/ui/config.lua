@@ -53,6 +53,7 @@ function config.dashboard()
     hide = {
       statusline = false,
     },
+    disable_move = true,
     config = {
       header = {
         '▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',
@@ -78,28 +79,36 @@ function config.dashboard()
         '',
         '',
       },
-      disable_move = true,
       center = {
         {
           icon = '',
           icon_hl = '',
           desc = string.format('  %s', cwd),
           desc_hl = '',
-          action = '',
         },
         {
           icon = '󰥔',
           icon_hl = '',
           desc = string.format('  %s', tehran_date),
           desc_hl = '',
-          action = '',
         },
         {
           icon = '',
           icon_hl = '',
           desc = string.format('  %s', username),
           desc_hl = '',
-          action = '',
+        },
+        {
+          icon = '',
+          icon_hl = '',
+          desc = '',
+          desc_hl = '',
+        },
+        {
+          icon = '',
+          icon_hl = '',
+          desc = '',
+          desc_hl = '',
         },
       },
       footer = {
