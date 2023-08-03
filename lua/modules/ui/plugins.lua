@@ -20,7 +20,11 @@ plugin({
   requires = 'nvim-tree/nvim-web-devicons',
 })
 
-plugin({ 'nvimdev/dashboard-nvim', config = conf.dashboard })
+plugin({
+  'nvimdev/dashboard-nvim',
+  config = conf.dashboard,
+  after = 'vim-fugitive',
+})
 
 plugin({
   'nvim-tree/nvim-tree.lua',

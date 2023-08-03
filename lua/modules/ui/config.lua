@@ -26,8 +26,13 @@ function config.dashboard()
 
   local ok, lsputil = pcall(require, 'lspconfig/util')
   local cwd = vim.fn.getcwd()
+  local username = ''
   if ok then
-    cwd = lsputil.root_pattern('.git')(cwd)
+    local root = lsputil.root_pattern('.git')(cwd)
+    if root ~= nil then
+      username = vim.api.nvim_exec2('Git config user.name', { output = true }).output
+      cwd = root
+    end
   end
 
   cwd = cwd:gsub(os.getenv('HOME') or '', ' ')
@@ -84,6 +89,13 @@ function config.dashboard()
           icon = '󰥔',
           icon_hl = '',
           desc = string.format('  %s', tehran_date),
+          desc_hl = '',
+          action = '',
+        },
+        {
+          icon = '',
+          icon_hl = '',
+          desc = string.format('  %s', username),
           desc_hl = '',
           action = '',
         },
