@@ -86,33 +86,33 @@ function config.dashboard()
       center = {
         {
           icon = '',
-          icon_hl = '',
+          icon_hl = 'DashboardCenterIcon',
           desc = string.format('  %s', cwd),
-          desc_hl = '',
+          desc_hl = 'DashboardCenter',
         },
         {
           icon = '󰥔',
-          icon_hl = '',
+          icon_hl = 'DashboardCenterIcon',
           desc = string.format('  %s', tehran_date),
-          desc_hl = '',
+          desc_hl = 'DashboardCenter',
         },
         {
           icon = '',
-          icon_hl = '',
+          icon_hl = 'DashboardCenterIcon',
           desc = string.format('  %s', username),
-          desc_hl = '',
+          desc_hl = 'DashboardCenter',
         },
         {
           icon = '',
-          icon_hl = '',
+          icon_hl = 'DashboardCenterIcon',
           desc = '',
-          desc_hl = '',
+          desc_hl = 'DashboardCenter',
         },
         {
           icon = '',
-          icon_hl = '',
+          icon_hl = 'DashboardCenterIcon',
           desc = '',
-          desc_hl = '',
+          desc_hl = 'DashboardCenter',
         },
       },
       footer = {
