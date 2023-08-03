@@ -30,7 +30,11 @@ function config.dashboard()
   if status then
     local root = lsputil.root_pattern('.git')(cwd)
     if root ~= nil then
-      username = vim.api.nvim_exec2('Git config user.name', { output = true }).output
+      username = string.format(
+        '%s <%s>',
+        vim.api.nvim_exec2('Git config user.name', { output = true }).output,
+        vim.api.nvim_exec2('Git config user.email', { output = true }).output
+      )
       cwd = root
     end
   end
