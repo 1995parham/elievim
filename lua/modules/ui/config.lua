@@ -24,10 +24,10 @@ function config.dashboard()
     sec = 0,
   })
 
-  local ok, lsputil = pcall(require, 'lspconfig/util')
+  local status, lsputil = pcall(require, 'lspconfig/util')
   local cwd = vim.fn.getcwd()
   local username = ''
-  if ok then
+  if status then
     local root = lsputil.root_pattern('.git')(cwd)
     if root ~= nil then
       username = vim.api.nvim_exec2('Git config user.name', { output = true }).output
