@@ -24,9 +24,25 @@ function config.dashboard()
     sec = 0,
   })
 
+  local ok, lsputil = pcall(require, 'lspconfig/util')
+  local cwd = vim.fn.getcwd()
+  if ok then
+    cwd = lsputil.root_pattern('.git')(cwd)
+  end
+
+  cwd = cwd:gsub(os.getenv('HOME') or '', ' ')
+
+  local tehran_date = ''
+  local ok, sysobj = pcall(vim.system, { 'date' }, {
+    env = { TZ = 'Asia/Tehran' },
+  })
+  if ok then
+    tehran_date = sysobj:wait().stdout:gsub('[\n]', '')
+  end
+
   local db = require('dashboard')
   db.setup({
-    theme = 'hyper',
+    theme = 'doom',
     hide = {
       statusline = false,
     },
@@ -55,30 +71,23 @@ function config.dashboard()
         '',
         '',
       },
-      shortcut = {
-        { desc = ' Update', group = '@property', action = 'PackerSync', key = 'u' },
+      disable_move = true,
+      center = {
         {
-          desc = ' Files',
-          group = 'Label',
-          action = 'Telescope find_files',
-          key = 'f',
+          icon = '',
+          icon_hl = '',
+          desc = string.format('  %s', cwd),
+          desc_hl = '',
+          action = '',
         },
         {
-          desc = ' dotfiles',
-          group = 'Number',
-          action = 'Telescope find_files cwd=~/dotfiles',
-          key = 'd',
-        },
-        {
-          desc = ' neovim',
-          group = 'Number',
-          action = 'Telescope find_files cwd=~/.config/nvim',
-          key = 'n',
+          icon = '󰥔',
+          icon_hl = '',
+          desc = string.format('  %s', tehran_date),
+          desc_hl = '',
+          action = '',
         },
       },
-      packages = { enable = true },
-      project = { limit = 8, action = 'Telescope find_files cwd=' },
-      mru = { limit = 10 },
       footer = {
         '',
         string.format('💘 %s', os.date('%H:%M %A %d %B %Y', relationship_start_time)),
