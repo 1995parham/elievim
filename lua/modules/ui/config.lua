@@ -38,7 +38,7 @@ function config.dashboard()
   cwd = cwd:gsub(os.getenv('HOME') or '', ' ')
 
   local tehran_date = ''
-  if vim.system ~= nil then
+  if vim['system'] ~= nil then
     tehran_date = vim
       .system({ 'date' }, {
         env = { TZ = 'Asia/Tehran' },
