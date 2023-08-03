@@ -26,8 +26,8 @@ function config.dashboard()
 
   local cwd = vim.fn.getcwd()
   local username = ''
-  local ok, lsputil = pcall(require, 'lspconfig/util')
-  if ok then
+  local status, lsputil = pcall(require, 'lspconfig/util')
+  if status then
     local root = lsputil.root_pattern('.git')(cwd)
     if root ~= nil then
       username = vim.api.nvim_exec2('Git config user.name', { output = true }).output
@@ -38,11 +38,13 @@ function config.dashboard()
   cwd = cwd:gsub(os.getenv('HOME') or '', ' ')
 
   local tehran_date = ''
-  local ok, sysobj = pcall(vim.system, { 'date' }, {
-    env = { TZ = 'Asia/Tehran' },
-  })
-  if ok then
-    tehran_date = sysobj:wait().stdout:gsub('[\n]', '')
+  if vim.system ~= nil then
+    tehran_date = vim
+      .system({ 'date' }, {
+        env = { TZ = 'Asia/Tehran' },
+      })
+      :wait().stdout
+      :gsub('[\n]', '')
   end
 
   local db = require('dashboard')
