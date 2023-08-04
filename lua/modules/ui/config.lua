@@ -44,11 +44,11 @@ function config.dashboard()
   local tehran_date = ''
   if vim['system'] ~= nil then
     tehran_date = vim
-      .system({ 'date' }, {
-        env = { TZ = 'Asia/Tehran' },
-      })
-      :wait().stdout
-      :gsub('[\n]', '')
+        .system({ 'date' }, {
+          env = { TZ = 'Asia/Tehran' },
+        })
+        :wait().stdout
+        :gsub('[\n]', '')
   end
 
   local header = {
@@ -80,7 +80,11 @@ function config.dashboard()
     }, header)
   elseif username ~= '' then
     header = vim.list_extend({
+      '',
+      '',
       string.format('Welcome %s to neovim!', username:match('(%a+)')),
+      '',
+      '',
     }, header)
   end
 
