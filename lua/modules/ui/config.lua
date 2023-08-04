@@ -80,7 +80,7 @@ function config.dashboard()
     }, header)
   elseif username ~= '' then
     header = vim.list_extend({
-      string.format('Welcome %s to neovim!', username:match('(%s+) <(%s+)>')),
+      string.format('Welcome %s to neovim!', username:match('(%a+)')),
     }, header)
   end
 
