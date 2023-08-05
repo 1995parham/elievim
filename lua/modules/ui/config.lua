@@ -44,11 +44,11 @@ function config.dashboard()
   local tehran_date = ''
   if vim['system'] ~= nil then
     tehran_date = vim
-        .system({ 'date' }, {
-          env = { TZ = 'Asia/Tehran' },
-        })
-        :wait().stdout
-        :gsub('[\n]', '')
+      .system({ 'date' }, {
+        env = { TZ = 'Asia/Tehran' },
+      })
+      :wait().stdout
+      :gsub('[\n]', '')
   end
 
   local header = {
@@ -204,7 +204,7 @@ function config.tterm()
     direction = 'float',
     dir = 'git_dir',
     close_on_exit = true,
-    cmd = 'git log --pretty=oneline -5',
+    cmd = 'git log --pretty=oneline -10 --no-merges',
     float_opts = {
       border = 'double',
       width = 200,
