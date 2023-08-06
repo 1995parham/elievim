@@ -35,7 +35,9 @@ return {
     end,
   }),
   -- null_ls.builtins.diagnostics.pyproject_flake8,
-  null_ls.builtins.diagnostics.flake8,
+  null_ls.builtins.diagnostics.flake8.with({
+    args = { '--format', 'default', '--max-line-length', '160', '--stdin-display-name', '$FILENAME', '-' },
+  }),
   null_ls.builtins.diagnostics.djlint,
   null_ls.builtins.diagnostics.actionlint,
   null_ls.builtins.diagnostics.hadolint,
