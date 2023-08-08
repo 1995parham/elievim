@@ -44,11 +44,11 @@ function config.dashboard()
   local tehran_date = ''
   if vim['system'] ~= nil then
     tehran_date = vim
-        .system({ 'date' }, {
-          env = { TZ = 'Asia/Tehran' },
-        })
-        :wait().stdout
-        :gsub('[\n]', '')
+      .system({ 'date' }, {
+        env = { TZ = 'Asia/Tehran' },
+      })
+      :wait().stdout
+      :gsub('[\n]', '')
   end
 
   local header = {
