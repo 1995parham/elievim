@@ -31,7 +31,7 @@ nmap({
   -- buffers
   { '<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer') },
   { '<Leader>bp', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },
-  { '<Leader>qq', cmd('.+,$bwipeout! <bar> Dashboard'), opts(noremap, silent, 'back to dashboard') },
+  { '<Leader>qq', cmd('tabnew <bar> .+,$bd! <bar> Dashboard'), opts(noremap, silent, 'back to dashboard') },
   -- Panda
   {
     '<leader>dd',
