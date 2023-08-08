@@ -44,11 +44,11 @@ function config.dashboard()
   local tehran_date = ''
   if vim['system'] ~= nil then
     tehran_date = vim
-      .system({ 'date' }, {
-        env = { TZ = 'Asia/Tehran' },
-      })
-      :wait().stdout
-      :gsub('[\n]', '')
+        .system({ 'date' }, {
+          env = { TZ = 'Asia/Tehran' },
+        })
+        :wait().stdout
+        :gsub('[\n]', '')
   end
 
   local header = {
@@ -175,6 +175,7 @@ function config.tterm()
   })
 
   local Terminal = require('toggleterm.terminal').Terminal
+  local terms = require('toggleterm.terminal')
 
   local lazydocker = Terminal:new({
     hidden = true,
@@ -214,19 +215,27 @@ function config.tterm()
 
   vim.api.nvim_create_user_command('LazyDockerToogle', function()
     lazydocker:toggle()
-  end, { bang = true })
+  end, {})
 
   vim.api.nvim_create_user_command('IPythonToggle', function()
     ipython:toggle()
-  end, { bang = true })
+  end, {})
 
   vim.api.nvim_create_user_command('DjangoShellPlusToggle', function()
     django_shell_plus:toggle()
-  end, { bang = true })
+  end, {})
 
   vim.api.nvim_create_user_command('GitHistoryToggle', function()
     commit_history:toggle()
-  end, { bang = true })
+  end, {})
+
+  vim.api.nvim_create_user_command('ToggleTermShutdownAll', function()
+    local terminals = terms.get_all()
+
+    for _, term in pairs(terminals) do
+      term:shutdown()
+    end
+  end, { bang = false, bar = true })
 end
 
 return config
