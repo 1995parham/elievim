@@ -143,35 +143,27 @@ function lsp.lua_ls()
 end
 
 function lsp.ltex_ls()
+  local dictionaries_files = {
+    ['en-US'] = vim.fn.getenv('NVIM_HOME') .. 'spell/en_dictionary.txt',
+  }
+
+  local dict = {}
+  for _, file in ipairs(dictionaries_files) do
+    local f = io.open(file, 'r')
+    if f ~= nil then
+      for l in f:lines() do
+        table.insert(dict, l)
+      end
+    end
+  end
+
   return {
     on_attach = lsp.on_attach,
     filetypes = { 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb' },
     settings = {
       ltex = {
         dictionary = {
-          ['en-US'] = {
-            'Parham',
-            'Alvani',
-            'Elahe',
-            'Raha',
-            'Dastan',
-            'ADATA',
-            'neovim',
-            'nvim',
-            'Ackerman',
-            'EMQx',
-            'EMQ',
-            'Soteria',
-            'Confisus',
-            'MiA',
-            'AUT',
-            'I1820',
-            'Herald',
-            'Rasti',
-            'Bakhshi',
-            'LoRa',
-            'LoRaWAN',
-          },
+          ['en-US'] = dict,
         },
       },
     },
