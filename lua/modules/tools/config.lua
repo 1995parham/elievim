@@ -116,4 +116,13 @@ function config.template()
   temp.email = 'parham.alvani@gmail.com'
 end
 
+function config.obsidian()
+  require('obsidian').setup({
+    dir = '~/org',
+    mappings = {
+      ['fo'] = require('obsidian.mapping').gf_passthrough(),
+    },
+  })
+end
+
 return config

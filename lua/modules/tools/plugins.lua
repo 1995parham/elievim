@@ -32,3 +32,15 @@ plugin({ 'https://codeberg.org/esensar/nvim-dev-container', config = conf.devcon
 
 -- quickly insert templates into file
 -- plugin({ 'glepnir/template.nvim', config = conf.template })
+
+-- a neovim plugin for writing and navigating an Obsidian vault, written in Lua.
+-- this plugin is not meant to replace Obsidian, but to complement it.
+-- My personal workflow involves writing Obsidian notes in Neovim using this plugin,
+-- while viewing and reading them using the Obsidian app.
+plugin({
+  'epwalsh/obsidian.nvim',
+  requires = {
+    'nvim-lua/plenary.nvim',
+  },
+  config = conf.obsidian,
+})

@@ -8,6 +8,7 @@ function config.nvim_treesitter()
     ignore_install = { 'phpdoc', 'latex', 'fortran' },
     highlight = {
       enable = true,
+      additional_vim_regex_highlighting = { 'markdown' },
     },
     textobjects = {
       select = {
