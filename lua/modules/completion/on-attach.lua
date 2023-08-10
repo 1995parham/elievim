@@ -144,16 +144,13 @@ end
 
 function lsp.ltex_ls()
   local dictionaries_files = {
-    ['en-US'] = vim.fn.getenv('NVIM_HOME') .. 'spell/en_dictionary.txt',
+    os.getenv('HOME') .. '/.config/nvim/spell/en_dictionary.txt',
   }
 
   local dict = {}
   for _, file in ipairs(dictionaries_files) do
-    local f = io.open(file, 'r')
-    if f ~= nil then
-      for l in f:lines() do
-        table.insert(dict, l)
-      end
+    for l in io.lines(file) do
+      table.insert(dict, l)
     end
   end
 
