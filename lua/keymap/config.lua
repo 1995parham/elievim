@@ -37,7 +37,7 @@ nmap({
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
   { '<leader>of', cmd('ObsidianFollowLink'), opts(noremap, '[o]bsidian: [f]ollow links') },
-  { '<leader>oo', cmd('ObsidianOpen'), opts(noremap, '[o]bsidian: [o]pen') },
+  { '<leader>op', cmd('ObsidianOpen'), opts(noremap, '[o]bsidian: o[p]en') },
 })
 
 -- insert mode
