@@ -119,9 +119,7 @@ end
 function config.obsidian()
   require('obsidian').setup({
     dir = '~/org',
-    mappings = {
-      ['fo'] = require('obsidian.mapping').gf_passthrough(),
-    },
+    mappings = {},
   })
 end
 

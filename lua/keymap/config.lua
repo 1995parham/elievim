@@ -36,6 +36,7 @@ nmap({
   -- { '[b', cmd('bp'), opts(noremap) },
   -- remove trailing white space
   { '<Leader>t', cmd('TrimTrailingWhitespace'), opts(noremap) },
+  { 'fo', require('obsidian.mapping').gf_passthrough, opts(noremap, '[f]ollow links in obsidian') },
 })
 
 -- insert mode
