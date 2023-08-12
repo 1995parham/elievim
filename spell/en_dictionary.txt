@@ -20,3 +20,5 @@ Bakhshi
 LoRa
 LoRaWAN
 DTO
+InfluxData
+GORM
