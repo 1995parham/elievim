@@ -41,7 +41,6 @@ function Packer:load_packer()
     compile_path = packer_compiled,
     git = { clone_timeout = 120 },
     disable_commands = true,
-    preview_updates = true,
     autoremove = false,
     auto_clean = true,
   })
