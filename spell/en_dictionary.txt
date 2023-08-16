@@ -25,3 +25,5 @@ GORM
 Heliograph
 ABaaS
 Petropower
+Baly
+Snapp
