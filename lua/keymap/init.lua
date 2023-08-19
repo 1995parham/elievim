@@ -33,7 +33,7 @@ nmap({
   { '<Leader>bp', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },
   {
     '<Leader>qq',
-    cmd('.+,$bwipeout! <bar> .+,$bd! <bar> ToggleTermShutdownAll <bar> Dashboard'),
+    cmd('%bwipeout! <bar> %bd! <bar> Dashboard'),
     opts(noremap, silent, 'back to dashboard'),
   },
   -- Panda
