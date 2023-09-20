@@ -15,7 +15,7 @@ function config.nvim_lsp()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
-  if vim.fn.has('nvim-0.10') then
+  if vim.fn.has('nvim-0.10') == 1 then
     local float = require('modules.completion.float')
     local methods = vim.lsp.protocol.Methods
 
