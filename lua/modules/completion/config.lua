@@ -1,7 +1,3 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
 local config = {}
 
 -- config server in this function
@@ -19,11 +15,13 @@ function config.nvim_lsp()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
-  local float = require('modules.completion.float')
-  local methods = vim.lsp.protocol.Methods
+  if vim.fn.has('nvim-0.10') then
+    local float = require('modules.completion.float')
+    local methods = vim.lsp.protocol.Methods
 
-  vim.lsp.handlers[methods.textDocument_hover] = float.enhanced_float_handler(vim.lsp.handlers.hover)
-  vim.lsp.handlers[methods.textDocument_signatureHelp] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
+    vim.lsp.handlers[methods.textDocument_hover] = float.enhanced_float_handler(vim.lsp.handlers.hover)
+    vim.lsp.handlers[methods.textDocument_signatureHelp] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
+  end
 end
 
 function config.navigator()
