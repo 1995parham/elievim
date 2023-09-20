@@ -18,6 +18,12 @@ function config.nvim_lsp()
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+
+  local float = require('modules.completion.float')
+  local methods = vim.lsp.protocol.Methods
+
+  vim.lsp.handlers[methods.textDocument_hover] = float.enhanced_float_handler(vim.lsp.handlers.hover)
+  vim.lsp.handlers[methods.textDocument_signatureHelp] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
 end
 
 function config.navigator()
@@ -25,6 +31,9 @@ function config.navigator()
     default_mapping = false,
     lsp = {
       display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
+      hover = {
+        enable = true,
+      },
     },
     keymaps = {
       -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
