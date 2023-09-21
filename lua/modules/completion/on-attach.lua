@@ -37,28 +37,13 @@ function lsp.on_attach(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- the following code shows the diagnostic messages when hovering them
-  -- but it has many performan issues so I eventually fallback to the old ways.
-  --[[
-  vim.api.nvim_clear_autocmds({ group = lsp.augroup[2], buffer = bufnr })
-  vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-    buffer = bufnr,
-    group = lsp.augroup[2],
-    callback = function()
-      local opts = {
-        focusable = false,
-        close_events = { 'BufLeave', 'InsertEnter', 'FocusLost', 'CursorMoved' },
-        border = 'rounded',
-        source = 'always',
-        prefix = function(diagnostic, i, total)
-          return string.format('%s %d/%d ', lsp.diagnostic_icons[diagnostic.severity], i, total)
-        end,
-        scope = 'line',
-      }
-      vim.diagnostic.open_float(nil, opts)
-    end,
-  })
-  ]]
+  -- https://neovim.io/doc/user/lsp.html#lsp-handlers
+  if vim.fn.has('nvim-0.10') == 1 then
+    local float = require('modules.completion.float')
+
+    vim.lsp.handlers['textDocument/hover'] = float.enhanced_float_handler(vim.lsp.handlers.hover)
+    vim.lsp.handlers['textDocument/signatureHelp'] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
+  end
 
   -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)
@@ -87,6 +72,9 @@ function lsp.on_attach(client, bufnr)
   nmap('gr', require('telescope.builtin').lsp_references, 'References')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>uh', function()
+    vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
+  end, 'Toggle Inlay Hint')
 
   if client.supports_method('textDocument/formatting') then
     -- vim.notify(string.format('lsp client %s has formatting capability', client.name), vim.log.levels.DEBUG)
@@ -132,6 +120,9 @@ function lsp.lua_ls()
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file('', true),
+        },
+        hint = {
+          enable = true,
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {

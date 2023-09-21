@@ -2,25 +2,37 @@ local config = {}
 
 -- config server in this function
 function config.nvim_lsp()
+  local _lsp = require('modules.completion.on-attach')
+
+  -- Diagnostic configuration.
   vim.diagnostic.config({
-    underline = false,
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
+    virtual_text = {
+      -- Show severity icons as prefixes.
+      prefix = function(diagnostic)
+        return _lsp.diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]] .. ' '
+      end,
+      -- Show only the first line of each diagnostic.
+      format = function(diagnostic)
+        return vim.split(diagnostic.message, '\n')[1]
+      end,
+    },
+    float = {
+      border = 'rounded',
+      source = 'if_many',
+      -- Show severity icons as prefixes.
+      prefix = function(diag)
+        local level = vim.diagnostic.severity[diag.severity]
+        local prefix = string.format(' %s ', _lsp.diagnostic_icons[level])
+        return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
+      end,
+    },
+    -- Disable signs in the gutter.
+    signs = false,
   })
 
-  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-  for type, icon in pairs(signs) do
+  for type, icon in pairs(_lsp.diagnostic_icons) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
-
-  if vim.fn.has('nvim-0.10') == 1 then
-    local float = require('modules.completion.float')
-    local methods = vim.lsp.protocol.Methods
-
-    vim.lsp.handlers[methods.textDocument_hover] = float.enhanced_float_handler(vim.lsp.handlers.hover)
-    vim.lsp.handlers[methods.textDocument_signatureHelp] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
   end
 end
 
