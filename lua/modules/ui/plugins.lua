@@ -22,8 +22,10 @@ plugin({
 
 plugin({
   'nvimdev/dashboard-nvim',
+  event = 'VimEnter',
   config = conf.dashboard,
   after = 'vim-fugitive',
+  requires = { 'nvim-tree/nvim-web-devicons' },
 })
 
 plugin({
