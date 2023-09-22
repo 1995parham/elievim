@@ -39,6 +39,12 @@ plugin({ 'https://codeberg.org/esensar/nvim-dev-container', config = conf.devcon
 -- while viewing and reading them using the Obsidian app.
 plugin({
   'epwalsh/obsidian.nvim',
+  event = {
+    -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+    'BufReadPre ~/org/**.md',
+    'BufNewFile ~/org/**.md',
+  },
   requires = {
     'nvim-lua/plenary.nvim',
   },
