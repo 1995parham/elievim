@@ -171,6 +171,9 @@ function config.tterm()
       Normal = {
         guibg = '#1f1f1f',
       },
+      NormalFloat = {
+        guibg = '#1f1f1f',
+      },
     },
   })
 
@@ -181,6 +184,12 @@ function config.tterm()
     hidden = true,
     direction = 'float',
     close_on_exit = true,
+    Normal = {
+      guibg = '#1f1f1f',
+    },
+    NormalFloat = {
+      guibg = '#1f1f1f',
+    },
     cmd = 'lazydocker',
   })
 
@@ -189,6 +198,12 @@ function config.tterm()
     direction = 'vertical',
     dir = 'git_dir',
     close_on_exit = true,
+    Normal = {
+      guibg = '#1f1f1f',
+    },
+    NormalFloat = {
+      guibg = '#1f1f1f',
+    },
     cmd = 'ipython',
   })
 
@@ -197,6 +212,12 @@ function config.tterm()
     dir = 'git_dir',
     direction = 'vertical',
     close_on_exit = true,
+    Normal = {
+      guibg = '#1f1f1f',
+    },
+    NormalFloat = {
+      guibg = '#1f1f1f',
+    },
     cmd = 'python manage.py shell_plus',
   })
 
@@ -206,6 +227,12 @@ function config.tterm()
     dir = 'git_dir',
     close_on_exit = true,
     cmd = 'git log --pretty=oneline -10 --no-merges',
+    Normal = {
+      guibg = '#1f1f1f',
+    },
+    NormalFloat = {
+      guibg = '#1f1f1f',
+    },
     float_opts = {
       border = 'double',
       width = 200,
