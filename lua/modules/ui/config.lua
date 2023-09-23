@@ -174,6 +174,12 @@ function config.tterm()
       NormalFloat = {
         guibg = '#1f1f1f',
       },
+      winbar = {
+        enabled = true,
+        name_formatter = function(term) --  term: Terminal
+          return term.name
+        end,
+      },
     },
   })
 
