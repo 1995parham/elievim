@@ -171,6 +171,9 @@ function config.tterm()
       Normal = {
         guibg = '#1f1f1f',
       },
+      Insert = {
+        guibg = '#1f1f1f',
+      },
       NormalFloat = {
         guibg = '#1f1f1f',
       },
