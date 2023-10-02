@@ -101,13 +101,13 @@ vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.number = true
 vim.opt.colorcolumn = '120'
-vim.opt.foldenable = true
 vim.opt.signcolumn = 'yes'
 -- vim.opt.conceallevel = 2
 -- vim.opt.concealcursor = 'niv'
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
