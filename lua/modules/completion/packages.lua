@@ -124,6 +124,7 @@ function packages.etc()
     'ltex-ls',
     'prettier',
     'graphql-language-service-cli',
+    'cspell',
   }
 end
 

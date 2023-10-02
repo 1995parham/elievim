@@ -69,7 +69,7 @@ plugin({ 'L3MON4D3/LuaSnip', config = conf.lua_snip })
 plugin({ 'rafamadriz/friendly-snippets' })
 
 plugin({
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   config = conf.null_ls,
   requires = { 'nvim-lua/plenary.nvim' },
 })
