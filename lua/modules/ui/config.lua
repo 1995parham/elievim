@@ -1,16 +1,7 @@
--- author: glepnr https://github.com/glepnir
---
--- date: 2022-07-02
--- License: MIT
-
 local config = {}
 
 function config.naz()
   require('naz')
-end
-
-function config.galaxyline()
-  require('modules.ui.eviline')
 end
 
 function config.dashboard()
@@ -139,13 +130,141 @@ function config.dashboard()
   })
 end
 
-function config.nvim_bufferline()
-  require('bufferline').setup({
+function config.lualine()
+  local ft_without_filename = {
+    'toggleterm',
+    '',
+  }
+
+  local ft_without_lsp = {
+    'dashboard',
+    'toggleterm',
+    '',
+  }
+
+  local lsp_info = function()
+    local clients = vim.lsp.get_clients()
+    if next(clients) == nil then
+      return 'no lsp'
+    end
+
+    local msg = ''
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, vim.bo.filetype) ~= -1 then
+        if client.name == 'null-ls' then
+          msg = string.format('%s 󰟢', msg)
+        else
+          msg = string.format('%s %s', msg, client.name)
+        end
+      end
+    end
+
+    return msg
+  end
+
+  require('lualine').setup({
     options = {
-      modified_icon = '✥',
-      buffer_close_icon = '',
-      always_show_bufferline = false,
+      icons_enabled = true,
+      theme = 'onedark',
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+      disabled_filetypes = {
+        statusline = {},
+        winbar = {},
+      },
+      ignore_focus = {},
+      always_divide_middle = true,
+      globalstatus = false,
+      refresh = {
+        statusline = 1000,
+        tabline = 1000,
+        winbar = 1000,
+      },
     },
+    sections = {
+      lualine_a = {
+        { 'mode' },
+        {
+          function()
+            return string.format('[%d]', vim.b.toggle_number)
+          end,
+          cond = function()
+            return vim.bo.filetype == 'toggleterm'
+          end,
+        },
+      },
+      lualine_b = {
+        'branch',
+        'diff',
+        'diagnostics',
+        {
+          lsp_info,
+          cond = function()
+            return not vim.tbl_contains(ft_without_lsp, vim.bo.filetype)
+          end,
+        },
+      },
+      lualine_c = {
+        {
+          'filename',
+          cond = function()
+            return not vim.tbl_contains(ft_without_filename, vim.bo.filetype)
+          end,
+        },
+      },
+      lualine_x = { 'encoding', 'fileformat', 'filetype' },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { 'filename' },
+      lualine_x = { 'location' },
+      lualine_y = {},
+      lualine_z = {},
+    },
+    tabline = {
+      lualine_a = {
+        {
+          'buffers',
+          show_filename_only = true, -- Shows shortened relative path when set to false.
+          hide_filename_extension = false, -- Hide filename extension when set to true.
+          show_modified_status = true, -- Shows indicator when the buffer is modified.
+
+          mode = 4,
+          -- 0: Shows buffer name
+          -- 1: Shows buffer index
+          -- 2: Shows buffer name + buffer index
+          -- 3: Shows buffer number
+          -- 4: Shows buffer name + buffer number
+
+          max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+          -- it can also be a function that returns
+          -- the value of `max_length` dynamically.
+          filetype_names = {
+            TelescopePrompt = 'Telescope',
+            dashboard = 'Dashboard',
+            packer = 'Packer',
+            fzf = 'FZF',
+            alpha = 'Alpha',
+          }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+
+          -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+          use_mode_colors = false,
+
+          symbols = {
+            modified = ' ●', -- Text to show when the buffer is modified
+            alternate_file = '#', -- Text to show to identify the alternate file
+            directory = '', -- Text to show when the buffer is a directory
+          },
+        },
+      },
+    },
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {},
   })
 end
 

@@ -1,7 +1,3 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
 local plugin = require('core.pack').register_plugin
 local conf = require('modules.ui.config')
 
@@ -12,13 +8,6 @@ plugin({
 })
 
 plugin({ 'tamton-aquib/duck.nvim' })
-
-plugin({
-  'nvimdev/galaxyline.nvim',
-  branch = 'main',
-  config = conf.galaxyline,
-  requires = 'nvim-tree/nvim-web-devicons',
-})
 
 plugin({
   'nvimdev/dashboard-nvim',
@@ -36,11 +25,10 @@ plugin({
 })
 
 plugin({
-  'akinsho/nvim-bufferline.lua',
-  config = conf.nvim_bufferline,
-  requires = 'nvim-tree/nvim-web-devicons',
+  'nvim-lualine/lualine.nvim',
+  requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+  config = conf.lualine(),
 })
-
 -- A neovim lua plugin to help easily manage multiple terminal windows.
 plugin({
   'akinsho/toggleterm.nvim',
