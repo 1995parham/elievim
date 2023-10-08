@@ -84,6 +84,7 @@ function config.dashboard()
     theme = 'doom',
     hide = {
       statusline = false,
+      tabline = false,
     },
     disable_move = true,
     config = {
@@ -171,6 +172,7 @@ function config.lualine()
       section_separators = { left = '', right = '' },
       disabled_filetypes = {
         statusline = {},
+        tabline = {},
         winbar = {},
       },
       ignore_focus = {},
