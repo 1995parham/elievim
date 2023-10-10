@@ -29,8 +29,20 @@ plugin({
   requires = { 'nvim-tree/nvim-web-devicons', opt = true },
   config = conf.lualine,
 })
+
 -- A neovim lua plugin to help easily manage multiple terminal windows.
 plugin({
   'akinsho/toggleterm.nvim',
   config = conf.tterm,
+})
+
+-- 💥 Highly experimental plugin that completely replaces the UI for messages,
+-- cmdline and the popupmenu.
+plugin({
+  'folke/noice.nvim',
+  config = conf.noice,
+  requires = {
+    { 'MunifTanjim/nui.nvim' },
+    { 'rcarriga/nvim-notify', opt = true },
+  },
 })

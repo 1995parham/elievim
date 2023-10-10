@@ -42,7 +42,7 @@ function config.navigator()
     lsp = {
       display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
       hover = {
-        enable = true,
+        enable = false,
       },
     },
     keymaps = {
@@ -262,10 +262,6 @@ function config.lua_snip()
   require('luasnip.loaders.from_vscode').lazy_load({
     paths = vim.fn.stdpath('config') .. '/snippets',
   })
-end
-
-function config.progress()
-  require('fidget').setup({})
 end
 
 return config
