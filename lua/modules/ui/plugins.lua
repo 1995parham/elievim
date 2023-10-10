@@ -36,6 +36,11 @@ plugin({
   config = conf.tterm,
 })
 
+--  UI Component Library for Neovim.
+plugin({
+  'MunifTanjim/nui.nvim',
+})
+
 -- 💥 Highly experimental plugin that completely replaces the UI for messages,
 -- cmdline and the popupmenu.
 plugin({
