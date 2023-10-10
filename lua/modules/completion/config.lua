@@ -39,6 +39,7 @@ end
 function config.navigator()
   require('navigator').setup({
     default_mapping = false,
+    border = 'single',
     lsp = {
       display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
       hover = {
