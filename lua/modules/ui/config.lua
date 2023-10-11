@@ -289,15 +289,6 @@ function config.tterm()
   require('toggleterm').setup({
     insert_mappings = true,
     highlights = {
-      Normal = {
-        guibg = '#1f1f1f',
-      },
-      Insert = {
-        guibg = '#1f1f1f',
-      },
-      NormalFloat = {
-        guibg = '#1f1f1f',
-      },
       winbar = {
         enabled = true,
         name_formatter = function(term) --  term: Terminal
@@ -399,10 +390,21 @@ function config.noice()
   require('noice').setup({
     cmdline = {
       enabled = false,
-      view = 'cmdline_popup',
+      view = 'cmdline',
     },
     messages = {
       enabled = false,
+    },
+    views = {
+      hover = {
+        border = {
+          style = 'double',
+        },
+        win_options = {
+          winblend = 10,
+          winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
+        },
+      },
     },
     lsp = {
       progress = {
@@ -422,6 +424,12 @@ function config.noice()
       },
       hover = {
         enabled = true,
+      },
+      message = {
+        -- Messages shown by lsp servers
+        enabled = true,
+        view = 'notify',
+        opts = {},
       },
       -- defaults for hover and signature help
       documentation = {
