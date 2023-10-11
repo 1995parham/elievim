@@ -30,6 +30,17 @@ plugin({
   },
 })
 
+-- code analysis & navigation plugin
+plugin({
+  'ray-x/navigator.lua',
+  config = conf.navigator,
+  after = 'nvim-treesitter',
+  requires = {
+    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+    { 'neovim/nvim-lspconfig' },
+  },
+})
+
 -- install and upgrade third party tools automatically
 plugin({
   'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -61,6 +72,14 @@ plugin({
   'nvimtools/none-ls.nvim',
   config = conf.null_ls,
   requires = { 'nvim-lua/plenary.nvim' },
+})
+
+plugin({
+  'j-hui/fidget.nvim',
+  requires = {
+    'neovim/nvim-lspconfig',
+  },
+  config = conf.progress,
 })
 
 plugin({

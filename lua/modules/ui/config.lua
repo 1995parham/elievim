@@ -289,6 +289,15 @@ function config.tterm()
   require('toggleterm').setup({
     insert_mappings = true,
     highlights = {
+      Normal = {
+        guibg = '#1f1f1f',
+      },
+      Insert = {
+        guibg = '#1f1f1f',
+      },
+      NormalFloat = {
+        guibg = '#1f1f1f',
+      },
       winbar = {
         enabled = true,
         name_formatter = function(term) --  term: Terminal
@@ -384,89 +393,6 @@ function config.tterm()
       term:shutdown()
     end
   end, { bang = false, bar = true })
-end
-
-function config.noice()
-  require('noice').setup({
-    cmdline = {
-      enabled = false,
-      view = 'cmdline',
-    },
-    messages = {
-      enabled = false,
-    },
-    views = {
-      hover = {
-        border = {
-          style = 'double',
-        },
-        win_options = {
-          winblend = 10,
-          winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
-        },
-      },
-    },
-    lsp = {
-      progress = {
-        enabled = true,
-        -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-        -- See the section on formatting for more details on how to customize.
-        format = 'lsp_progress',
-        format_done = 'lsp_progress_done',
-        throttle = 1000 / 30, -- frequency to update lsp progress message
-        view = 'notify',
-      },
-      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-      override = {
-        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-        ['vim.lsp.util.stylize_markdown'] = true,
-        ['cmp.entry.get_documentation'] = true,
-      },
-      hover = {
-        enabled = true,
-      },
-      message = {
-        -- Messages shown by lsp servers
-        enabled = true,
-        view = 'notify',
-        opts = {},
-      },
-      -- defaults for hover and signature help
-      documentation = {
-        view = 'hover',
-        ---@type NoiceViewOptions
-        opts = {
-          lang = 'markdown',
-          replace = true,
-          render = 'plain',
-          format = { '{message}' },
-          win_options = { concealcursor = 'n', conceallevel = 3 },
-        },
-      },
-    },
-    markdown = {
-      hover = {
-        ['|(%S-)|'] = vim.cmd.help, -- vim help links
-        ['%[.-%]%((%S-)%)'] = require('noice.util').open, -- markdown links
-      },
-      highlights = {
-        ['|%S-|'] = '@text.reference',
-        ['@%S+'] = '@parameter',
-        ['^%s*(Parameters:)'] = '@text.title',
-        ['^%s*(Return:)'] = '@text.title',
-        ['^%s*(See also:)'] = '@text.title',
-        ['{%S-}'] = '@parameter',
-      },
-    },
-    -- you can enable a preset for easier configuration
-    presets = {
-      bottom_search = true, -- use a classic bottom cmdline for search
-      command_palette = true, -- position the cmdline and popupmenu together
-      long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false, -- add a border to hover docs and signature help
-    },
-  })
 end
 
 return config
