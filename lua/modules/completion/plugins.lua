@@ -66,6 +66,7 @@ plugin({
 })
 
 plugin({ 'L3MON4D3/LuaSnip', config = conf.lua_snip })
+
 plugin({ 'rafamadriz/friendly-snippets' })
 
 plugin({
