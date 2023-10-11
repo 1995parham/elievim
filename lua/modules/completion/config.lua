@@ -36,40 +36,6 @@ function config.nvim_lsp()
   end
 end
 
-function config.navigator()
-  require('navigator').setup({
-    default_mapping = false,
-    border = 'single',
-    lsp = {
-      display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
-      hover = {
-        enable = false,
-      },
-    },
-    keymaps = {
-      -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
-      {
-        key = 'gp',
-        mode = 'n',
-        func = require('navigator.definition').definition_preview,
-        desc = 'LSP: definition [P]review',
-      },
-      {
-        key = '<Space>ca',
-        mode = 'v',
-        func = require('navigator.codeAction').range_code_action,
-        desc = 'LSP: Range [C]ode [A]ction',
-      },
-      {
-        key = '<Space>la',
-        mode = 'n',
-        func = require('navigator.codelens').run_action,
-        desc = 'LSP: Run Code [L]ens [A]ction',
-      },
-    },
-  })
-end
-
 config.mason = {}
 
 function config.mason.setup()
