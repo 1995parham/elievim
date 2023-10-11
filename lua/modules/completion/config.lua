@@ -222,7 +222,18 @@ function config.cmp()
         maxwidth = 50,
       }),
     },
-    window = {},
+    window = {
+      completion = {
+        side_padding = 0,
+        winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:PmenuSel',
+        scrollbar = true,
+        border = 'rounded',
+      },
+      documentation = {
+        border = 'rounded',
+        winhighlight = 'Normal:CmpDoc',
+      },
+    },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },

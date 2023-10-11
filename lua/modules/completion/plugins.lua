@@ -76,6 +76,7 @@ plugin({
 
 plugin({
   'j-hui/fidget.nvim',
+  tag = 'legacy',
   requires = {
     'neovim/nvim-lspconfig',
   },
