@@ -109,6 +109,7 @@ vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
 vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.shell = 'bash'
+vim.env.SHELL = '/bin/bash'
 
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
