@@ -3,6 +3,7 @@ Alvani
 Elahe
 Raha
 Dastan
+Mahtab
 ADATA
 neovim
 nvim
@@ -36,3 +37,18 @@ SPIN2
 SPINII
 LINC
 LeetCode
+DLink
+Baseus
+DELSEY
+MoreFine
+UGreen
+Shandinz
+Negareh
+ROG
+GaN
+JCPAL
+Thinkpad
+Energea
+AMD
+Ryzen
+Velenjak
