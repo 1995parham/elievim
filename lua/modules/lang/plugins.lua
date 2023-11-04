@@ -41,3 +41,7 @@ plugin({
   'Fymyte/rasi.vim',
   ft = 'rasi',
 })
+
+plugin({
+  'fladson/vim-kitty',
+})
