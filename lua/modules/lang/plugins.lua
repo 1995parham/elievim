@@ -18,14 +18,6 @@ plugin({
 })
 
 plugin({
-  'IndianBoy42/tree-sitter-just',
-  after = 'nvim-treesitter',
-  config = function()
-    require('tree-sitter-just').setup({})
-  end,
-})
-
-plugin({
   'towolf/vim-helm',
 })
 
