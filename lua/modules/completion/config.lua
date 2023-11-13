@@ -243,10 +243,6 @@ function config.cmp()
   })
 end
 
-function config.go_nvim()
-  require('go').setup()
-end
-
 function config.lua_snip()
   local ls = require('luasnip')
   local types = require('luasnip.util.types')

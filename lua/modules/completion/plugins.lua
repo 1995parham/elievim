@@ -18,18 +18,6 @@ plugin({
   config = conf.mason.setup,
 })
 
--- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
--- and various Go tools to enhance the development experience.
-plugin({
-  'ray-x/go.nvim',
-  config = conf.go_nvim,
-  after = 'nvim-treesitter',
-  requires = {
-    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-    { 'neovim/nvim-lspconfig' },
-  },
-})
-
 -- code analysis & navigation plugin
 plugin({
   'ray-x/navigator.lua',
