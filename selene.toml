@@ -1,1 +1,3 @@
 std = "lua52+vim"
+[lints]
+mixed_table = "allow"
