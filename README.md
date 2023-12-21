@@ -10,8 +10,6 @@
 
 # Introduction
 
-> Based on neovim 0.8.0
-
 ## Structure
 
 ```text
@@ -47,7 +45,6 @@
 │       │   └── plugins.lua
 │       └── 📂 ui
 │           ├── config.lua
-│           ├── eviline.lua
 │           └── plugins.lua
 └── 📂 snippets                   snippets
     ├── lua.json
@@ -57,11 +54,11 @@
 
 ## Nomenclature
 
-_Ellie_ is a pet form of _Elahe_ comming from [Elahe Dastan](https://github.com/elahe-dastan/).
+_Ellie_ is a pet form of _Elahe_ coming from [Elahe Dastan](https://github.com/elahe-dastan/).
 
 ## How to Install?
 
-You need to remove your old configuration and then install `elievim`.
+You need to remove your old configuration and then install `elievim` using:
 
 ```bash
 rm -Rf ~/.config/nvim
@@ -95,7 +92,7 @@ making the `plugins.lua` file too long.
 
 Recommend lazy-load plugins. Check the usage in `modules`,
 it will improve your neovim
-start speed. `lazyload` is not magic, it just generates your config into some `autocmds`,
+start speed. `lazy load` is not magic, it just generates your config into some `autocmds`,
 you can check the `packer_compiled.lua` to check it.
 
 I don't like the default path config in
@@ -111,7 +108,7 @@ You also may encounter errors in this process.
 ```lua
 -- modules/completion/plugins.lua
 plugin {'neovim/nvim-lspconfig',
- -- used filetype to lazyload lsp
+ -- used filetype to lazy load lsp
  -- config your language filetype in here
   ft = { 'lua','rust','c','cpp'},
   config = conf.nvim_lsp,
@@ -119,7 +116,7 @@ plugin {'neovim/nvim-lspconfig',
 
 -- modules/tools/plugins.lua
 plugin {'nvim-telescope/telescope.nvim',
-  -- use command to lazyload.
+  -- use command to lazy load.
   cmd = 'Telescope',
   config = conf.telescope,
   requires = {
@@ -130,9 +127,9 @@ plugin {'nvim-telescope/telescope.nvim',
 }
 ```
 
-## How to config keymap?
+## How to config key mapping?
 
-In cosynvim there are some apis that make it easy to set keymap.
+In elievim there are some APIs that make it easy to set key mapping.
 All APIs are defined in `core/keymap.lua`.
 
 ```lua
@@ -236,5 +233,5 @@ features of this configuration in those languages.
 ### Golang
 
 `FillStruct` is one of my favorite features. In this configuration you can use `spc + c + a`
-to see code actions and one of these actions on structs is filling them
+to see code actions and one of these actions on structures is filling them
 [ref](https://github.com/ray-x/go.nvim/blob/master/lua/go/reftool.lua).

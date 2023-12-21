@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "xset",
+    "Struct",
+    "Elahe",
+    "keymap",
+    "elievim",
+    "Dastan",
+    "nvim",
+    "parham",
+    "neovim",
+    "autocmd",
+    "lspconfig",
+    "autocmds"
+  ],
+  "flagWords": []
+}
