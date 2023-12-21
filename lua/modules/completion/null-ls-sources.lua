@@ -2,11 +2,11 @@
 local null_ls = require('null-ls')
 
 -- cspell is installed in the lang/plugins.
-local cspell = require('cspell')
+-- local cspell = require('cspell')
 
 return {
   null_ls.builtins.code_actions.shellcheck,
-  cspell.code_actions,
+  -- cspell.code_actions,
 
   null_ls.builtins.formatting.stylua,
   null_ls.builtins.formatting.sql_formatter,
@@ -25,7 +25,7 @@ return {
   }),
 
   null_ls.builtins.diagnostics.selene,
-  cspell.diagnostics,
+  -- cspell.diagnostics,
   null_ls.builtins.diagnostics.mypy.with({
     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     condition = function()
