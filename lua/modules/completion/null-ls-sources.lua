@@ -24,7 +24,6 @@ return {
     filetypes = { 'html', 'javascript', 'typescript', 'css', 'markdown', 'vue', 'graphql' },
   }),
 
-  -- null_ls.builtins.diagnostics.jsonlint,
   null_ls.builtins.diagnostics.selene,
   cspell.diagnostics,
   null_ls.builtins.diagnostics.mypy.with({
@@ -39,7 +38,6 @@ return {
       return vim.fn.executable('pylint') == 1
     end,
   }),
-  -- null_ls.builtins.diagnostics.pyproject_flake8,
   null_ls.builtins.diagnostics.flake8.with({
     args = { '--format', 'default', '--max-line-length', '160', '--stdin-display-name', '$FILENAME', '-' },
   }),
@@ -48,6 +46,5 @@ return {
   null_ls.builtins.diagnostics.hadolint,
   -- null_ls.builtins.diagnostics.markdownlint,
   null_ls.builtins.diagnostics.shellcheck,
-  -- null_ls.builtins.diagnostics.cspell,
   null_ls.builtins.formatting.just,
 }
