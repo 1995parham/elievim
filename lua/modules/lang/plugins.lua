@@ -30,6 +30,10 @@ plugin({
 })
 
 plugin({
+  'davidmh/cspell.nvim',
+})
+
+plugin({
   'towolf/vim-helm',
 })
 
