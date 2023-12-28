@@ -1,1 +1,32 @@
-{"flagWords":[],"words":["xset","Struct","Elahe","keymap","elievim","Dastan","nvim","parham","neovim","autocmd","lspconfig","autocmds","djlint","hadolint","shellcheck","markdownlint","rustfmt","shfmt","taplo","gofumpt","builtins","mypy","pylint"],"version":"0.2","language":"en"}
+{
+  "flagWords": [],
+  "words": [
+    "xset",
+    "Struct",
+    "Elahe",
+    "keymap",
+    "elievim",
+    "Dastan",
+    "nvim",
+    "parham",
+    "neovim",
+    "autocmd",
+    "lspconfig",
+    "autocmds",
+    "djlint",
+    "hadolint",
+    "shellcheck",
+    "markdownlint",
+    "rustfmt",
+    "shfmt",
+    "taplo",
+    "gofumpt",
+    "builtins",
+    "mypy",
+    "pylint",
+    "Steampipe",
+    "Kaytu",
+  ],
+  "version": "0.2",
+  "language": "en"
+}
