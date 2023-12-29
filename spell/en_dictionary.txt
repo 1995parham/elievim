@@ -53,3 +53,5 @@ AMD
 Ryzen
 Velenjak
 EMQX
+Kaytu
+Steampipe
