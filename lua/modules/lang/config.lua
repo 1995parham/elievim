@@ -29,14 +29,9 @@ function config.nvim_treesitter()
       url = 'https://github.com/IndianBoy42/tree-sitter-just',
       files = { 'src/parser.c', 'src/scanner.cc' },
       branch = 'main',
-      use_makefile = true, -- this may be necessary on MacOS (try if you see compiler errors)
     },
     maintainers = { '@IndianBoy42' },
   }
-
-  if vim.loop.os_uname().sysname == 'Darwin' then
-    require('nvim-treesitter.install').compilers = { 'gcc-11' }
-  end
 end
 
 function config.go_nvim()
