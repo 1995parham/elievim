@@ -55,3 +55,7 @@ Velenjak
 EMQX
 Kaytu
 Steampipe
+Farabord
+Irancell
+Dadeha
+Zi-Tel
