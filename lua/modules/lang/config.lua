@@ -35,7 +35,7 @@ function config.nvim_treesitter()
 end
 
 function config.go_nvim()
-  -- require('go').setup()
+  require('go').setup()
 end
 
 return config
