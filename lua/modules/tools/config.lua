@@ -119,6 +119,9 @@ end
 function config.obsidian()
   require('obsidian').setup({
     dir = '~/org',
+    ui = {
+      enable = false,
+    },
     mappings = {},
   })
 end
