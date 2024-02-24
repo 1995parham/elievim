@@ -1,3 +1,6 @@
+-- packages that are installed automatically using mason.
+-- each function groups tools related with a specific language,
+-- and they all called using all method to list them together.
 local packages = {}
 
 function packages.go()
@@ -46,6 +49,7 @@ end
 function packages.json()
   return {
     'jq',
+    'json-lsp',
   }
 end
 
@@ -64,6 +68,7 @@ function packages.python()
 
     'pyright',
     'black',
+    'isort',
   }
 end
 
@@ -89,6 +94,12 @@ end
 function packages.jinja()
   return {
     'djlint',
+  }
+end
+
+function packages.graphql()
+  return {
+    'graphql-language-service-cli',
   }
 end
 
@@ -121,18 +132,16 @@ function packages.etc()
     'vint',
     'ltex-ls',
     'prettier',
-    'graphql-language-service-cli',
     'cspell',
-    'json-lsp',
   }
 end
 
 function packages.all()
   local pkgs = {}
 
-  for name, value in pairs(packages) do
+  for name, packages_gen in pairs(packages) do
     if name ~= 'all' then
-      for _, pkg in ipairs(value()) do
+      for _, pkg in ipairs(packages_gen()) do
         table.insert(pkgs, pkg)
       end
     end

@@ -1,17 +1,20 @@
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 local null_ls = require('null-ls')
 
--- cspell is installed in the lang/plugins.
--- local cspell = require('cspell')
-
 return {
-  -- cspell.code_actions,
-
+  -- An opinionated code formatter for Lua.
   null_ls.builtins.formatting.stylua,
+  -- A whitespace formatter for different query languages
   null_ls.builtins.formatting.sql_formatter,
+  -- Enforce a stricter format than gofmt, while being backwards compatible.
+  -- That is, gofumpt is happy with a subset of the formats that gofmt is happy with.
   null_ls.builtins.formatting.gofumpt,
+  -- Markdown style and syntax checker.
   null_ls.builtins.formatting.markdownlint,
+  -- The uncompromising Python code formatter
   null_ls.builtins.formatting.black,
+  -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
+  null_ls.builtins.formatting.isort,
   null_ls.builtins.formatting.djlint,
   -- null_ls.builtins.formatting.taplo,
   null_ls.builtins.formatting.shfmt,
