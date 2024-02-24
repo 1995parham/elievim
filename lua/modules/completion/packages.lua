@@ -20,7 +20,6 @@ function packages.shell()
     'bash-language-server',
     'shfmt',
     'shellcheck',
-    'shellcheck',
   }
 end
 
@@ -60,11 +59,10 @@ function packages.python()
   return {
     -- install packages like mypy or pylint locally instead of
     -- globally so they can search virtualenv.
-
     -- 'mypy',
-    'pyright',
     -- 'pylint',
-    'flake8',
+
+    'pyright',
     'black',
   }
 end
@@ -125,6 +123,7 @@ function packages.etc()
     'prettier',
     'graphql-language-service-cli',
     'cspell',
+    'json-lsp',
   }
 end
 
