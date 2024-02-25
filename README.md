@@ -10,6 +10,12 @@
 
 # Introduction
 
+Neovim is a modern and powerful text editor that is fully compatible with Vim and supports Lua plugins,
+LSP client, and remote plugins. It is a project that seeks to aggressively refactor Vim in order to simplify maintenance,
+enable advanced UIs, and maximize extensibility.
+You can learn more about Neovim from its [official website](https://neovim.io/),
+its [GitHub repository](https://github.com/neovim/neovim), or its [releases page](https://github.com/neovim/neovim/releases).
+
 ## Structure
 
 ```text
@@ -159,7 +165,7 @@ Use these APIs to config your keymap in `keymap` folder. In this folder
 Then config plugins keymap in `keymap/init.lua`. The example of API usage is as follows:
 
 ```lua
--- genreate keymap in noremal mode
+-- genreate keymap in normal mode
 nmap {
   -- packer
   {'<Leader>pu',cmd('PackerUpdate'),opts(noremap,silent,'Packer update')},
@@ -168,17 +174,17 @@ nmap {
 }
 ```
 
-`map` for each every table and generate a new table that can pass to `vim.keymap.set`.
+`map` for each table, generate a new table that can pass to `vim.keymap.set` as follows:
 
-`cmd('PackerUpdate')` just return a string _<cmd>PackerUpdate<CR>_ as RHS.
-LHS is `<leader>pu`, `opts(noremap, silent, 'Packer update')` generate options table as follows:
+> `cmd('PackerUpdate')` just return a string `<cmd>PackerUpdate<CR>` as RHS.
+> LHS is `<leader>pu` and `opts(noremap, silent, 'Packer update')` generate options table as follows:
 
 ```lua
 {noremap = true,silent = true, desc = 'Packer Update' }
 ```
 
-For some vim mode remap. not need use `cmd` function. Oh! Maybe you will be
-confused what is _<cmd>_ check `:h <cmd>` you will get answer.
+For some vim mode remap and Do not need use `cmd` function because
+you want to have another keymap not a command as RHS.
 
 ```lua
 -- window jump
@@ -195,13 +201,32 @@ Use `:h vim.keymap.set` to know more about.
 
 ## LSP Tools Requirements
 
-For having Language Servers you, at least required following commands:
+For having Language Servers, at least required following commands:
 
 ```bash
 - luarocks
 - npm / node
 - pip / python
 ```
+
+### Configuration
+
+Language servers are configured in `lua/modules/completion/config.lua` based on
+[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
+
+You need to install them using [`mason.nvim`](https://github.com/williamboman/mason.nvim) and if they
+are not defined in [`mason-lspconfig.nvim`](https://github.com/williamboman/mason-lspconfig.nvim) or you want to configure them
+manually, then you need to configure them in `lua/modules/completion/config.lua` like follows:
+
+```lua
+['taplo'] = function()
+  require('lspconfig').taplo.setup({})
+end,
+```
+
+If you use this approach, make sure you don't also manually set up servers
+directly via `lspconfig` as this will cause servers to be set up more than
+once.
 
 ## Tips
 
