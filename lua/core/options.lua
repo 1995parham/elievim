@@ -116,6 +116,8 @@ vim.g.neovide_scale_factor = 1.0
 vim.g.neovide_transparency = 0.95
 
 if vim.loop.os_uname().sysname == 'Darwin' then
+  vim.g.neovide_scale_factor = 1.2
+  vim.g.neovide_fullscreen = true
   vim.g.clipboard = {
     name = 'macOS-clipboard',
     copy = {
