@@ -111,6 +111,8 @@ vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.shell = 'bash'
 vim.env.SHELL = '/bin/bash'
 
+vim.o.guifont = 'Jetbrains Mono Thin:h10'
+
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
     name = 'macOS-clipboard',
