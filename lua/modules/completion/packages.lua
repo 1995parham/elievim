@@ -26,6 +26,16 @@ function packages.shell()
   }
 end
 
+function packages.c()
+  if vim.fn.executable('gcc') == 1 then
+    return {
+      'clangd',
+    }
+  else
+    return {}
+  end
+end
+
 function packages.lua()
   return {
     'lua-language-server',
