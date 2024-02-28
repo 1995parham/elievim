@@ -111,9 +111,14 @@ vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.shell = 'bash'
 vim.env.SHELL = '/bin/bash'
 
-vim.o.guifont = 'Jetbrains_Mono:h9'
+vim.opt.guifont = 'Jetbrains_Mono:h9'
 vim.g.neovide_scale_factor = 1.0
 vim.g.neovide_transparency = 0.95
+
+if vim.g.neovide then
+  vim.opt.title = true
+  vim.opt.titlestring = '%{fnamemodify(getcwd(), ":~:s?~/Documents/Git? ?")}'
+end
 
 if vim.loop.os_uname().sysname == 'Darwin' then
   vim.g.neovide_scale_factor = 1.2
