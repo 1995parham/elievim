@@ -111,7 +111,7 @@ vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.shell = 'bash'
 vim.env.SHELL = '/bin/bash'
 
-vim.opt.guifont = 'Jetbrains_Mono:h9'
+vim.opt.guifont = 'JetbrainsMono_NF:h9'
 vim.g.neovide_scale_factor = 1.0
 vim.g.neovide_transparency = 0.95
 
