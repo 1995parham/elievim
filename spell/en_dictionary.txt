@@ -60,3 +60,4 @@ Irancell
 Dadeha
 Zi-Tel
 Speedify
+Pydantic
