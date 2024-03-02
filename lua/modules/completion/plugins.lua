@@ -55,8 +55,16 @@ plugin({
 
 plugin({ 'L3MON4D3/LuaSnip', config = conf.lua_snip })
 
+-- Set of preconfigured snippets for different languages.
+-- https://github.com/rafamadriz/friendly-snippets/wiki
 plugin({ 'rafamadriz/friendly-snippets' })
 
+-- Provides external LTeX file handling
+-- (off-spec lsp) and other functions.
+plugin({ 'barreiroleo/ltex_extra.nvim' })
+
+-- null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics,
+-- code actions, and more via Lua.
 plugin({
   'nvimtools/none-ls.nvim',
   config = conf.null_ls,

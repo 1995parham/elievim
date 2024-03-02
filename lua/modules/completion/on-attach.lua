@@ -148,27 +148,15 @@ function lsp.lua_ls()
 end
 
 function lsp.ltex_ls()
-  local dictionaries_files = {
-    os.getenv('HOME') .. '/.config/nvim/spell/en_dictionary.txt',
-  }
-
-  local dict = {}
-  for _, file in ipairs(dictionaries_files) do
-    for l in io.lines(file) do
-      table.insert(dict, l)
-    end
-  end
-
   return {
-    on_attach = lsp.on_attach,
+    on_attach = function(client, bufnr)
+      require('ltex_extra').setup({
+        path = os.getenv('HOME') .. '/.config/nvim/spell/',
+      })
+      lsp.on_attach(client, bufnr)
+    end,
     filetypes = { 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb' },
-    settings = {
-      ltex = {
-        dictionary = {
-          ['en-US'] = dict,
-        },
-      },
-    },
+    settings = {},
   }
 end
 
