@@ -6,3 +6,7 @@ iterables
 Sanic
 FastAPI
 Pydantic
+asyncio
+async
+Asyncio
+coroutine
