@@ -3,3 +3,6 @@ itertools
 Combinatoric
 Iterables
 iterables
+Sanic
+FastAPI
+Pydantic
