@@ -20,3 +20,4 @@ xcolor
 Latexmk
 XeTeX
 TeXLive
+PubSub
