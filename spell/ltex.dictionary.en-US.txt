@@ -21,3 +21,4 @@ Latexmk
 XeTeX
 TeXLive
 PubSub
+cloudevents
