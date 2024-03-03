@@ -11,3 +11,12 @@ async
 Asyncio
 coroutine
 Coroutines
+CTAN
+moderncv
+tocloft
+fancyhdr
+XePersian
+xcolor
+Latexmk
+XeTeX
+TeXLive
