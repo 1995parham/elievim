@@ -32,3 +32,4 @@ runbooks
 EMQX
 NATS
 Kyverno
+Snapp
