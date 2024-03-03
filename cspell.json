@@ -24,8 +24,7 @@
     "builtins",
     "mypy",
     "pylint",
-    "Steampipe",
-    "Kaytu",
+    "Steampipe"
   ],
   "version": "0.2",
   "language": "en"
