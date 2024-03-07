@@ -33,3 +33,8 @@ EMQX
 NATS
 Kyverno
 Snapp
+pytest
+CLIs
+dataclass
+viewsets
+djangorestframework-dataclasses
