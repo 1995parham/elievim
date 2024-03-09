@@ -41,3 +41,4 @@ djangorestframework-dataclasses
 DavMail
 CalDAV
 CardDAV
+SOGo
