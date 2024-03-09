@@ -38,3 +38,6 @@ CLIs
 dataclass
 viewsets
 djangorestframework-dataclasses
+DavMail
+CalDAV
+CardDAV
