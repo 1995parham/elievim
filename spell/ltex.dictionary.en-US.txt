@@ -42,3 +42,4 @@ DavMail
 CalDAV
 CardDAV
 SOGo
+Offerland
