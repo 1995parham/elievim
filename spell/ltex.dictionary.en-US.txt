@@ -47,3 +47,7 @@ Parham
 Elahe
 Alvani
 Starlark
+Alacritty
+Syncthing
+neovim
+ArchLinux
