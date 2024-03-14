@@ -51,3 +51,5 @@ Alacritty
 Syncthing
 neovim
 ArchLinux
+ClickHouse
+Flink
