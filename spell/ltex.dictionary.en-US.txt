@@ -120,3 +120,8 @@ Pydantic
 WebEngage
 GitOps
 Jsonnet
+NetworkPolicy
+DaemonSets
+RBAC
+OpenCost
+showback
