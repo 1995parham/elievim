@@ -125,3 +125,4 @@ DaemonSets
 RBAC
 OpenCost
 showback
+Scaleway
