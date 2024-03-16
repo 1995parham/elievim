@@ -126,3 +126,5 @@ RBAC
 OpenCost
 showback
 Scaleway
+DBvear
+Metabase
