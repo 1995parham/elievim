@@ -128,3 +128,5 @@ showback
 Scaleway
 DBvear
 Metabase
+ONNX
+NPUs
