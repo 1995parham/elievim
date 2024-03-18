@@ -10,7 +10,7 @@ return {
   -- That is, gofumpt is happy with a subset of the formats that gofmt is happy with.
   null_ls.builtins.formatting.gofumpt,
   -- Markdown style and syntax checker.
-  null_ls.builtins.formatting.markdownlint,
+  -- null_ls.builtins.formatting.markdownlint,
   -- The uncompromising Python code formatter
   null_ls.builtins.formatting.black,
   -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
