@@ -21,6 +21,7 @@ return {
   -- null_ls.builtins.formatting.rustfmt,
   null_ls.builtins.formatting.prettier.with({
     filetypes = { 'html', 'javascript', 'typescript', 'css', 'markdown', 'vue', 'graphql' },
+    prefer_local = 'node_modules/.bin',
   }),
 
   null_ls.builtins.diagnostics.selene,
