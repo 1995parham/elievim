@@ -136,3 +136,7 @@ entrypoint
 Huma
 OpenAPI
 Redpanda
+queryable
+WAL
+Timeplus
+NativeLog
