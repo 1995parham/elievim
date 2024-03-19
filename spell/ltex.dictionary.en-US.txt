@@ -133,3 +133,5 @@ NPUs
 OpenTelemetry
 AMQP
 entrypoint
+Huma
+OpenAPI
