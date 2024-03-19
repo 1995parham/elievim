@@ -130,3 +130,6 @@ DBvear
 Metabase
 ONNX
 NPUs
+OpenTelemetry
+AMQP
+entrypoint
