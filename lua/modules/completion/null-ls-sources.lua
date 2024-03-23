@@ -12,7 +12,21 @@ return {
   -- Markdown style and syntax checker.
   -- null_ls.builtins.formatting.markdownlint,
   -- The uncompromising Python code formatter
-  null_ls.builtins.formatting.black,
+  null_ls.builtins.formatting.black.with({
+    extra_args = function(params)
+      local config = vim.fs.find('black.toml', {
+        upward = false,
+        path = params.root,
+      })
+      if #config > 0 then
+        return {
+          '--config',
+          config[0],
+        }
+      end
+      return {}
+    end,
+  }),
   -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
   null_ls.builtins.formatting.isort,
   null_ls.builtins.formatting.djlint,
