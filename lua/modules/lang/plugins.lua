@@ -3,14 +3,13 @@ local conf = require('modules.lang.config')
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    after = 'telescope.nvim',
+    build = ':TSUpdate',
     config = conf.nvim_treesitter,
   },
 
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
+    dependencies = { 'nvim-treesitter' },
   },
 
   -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
@@ -18,9 +17,8 @@ return {
   {
     'ray-x/go.nvim',
     config = conf.go_nvim,
-    after = 'nvim-treesitter',
     requires = {
-      { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
       { 'neovim/nvim-lspconfig' },
     },
   },
