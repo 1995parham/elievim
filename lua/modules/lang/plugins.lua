@@ -1,52 +1,52 @@
 local conf = require('modules.lang.config')
 
 return {
-{
-  'nvim-treesitter/nvim-treesitter',
-  run = ':TSUpdate',
-  after = 'telescope.nvim',
-  config = conf.nvim_treesitter,
-},
-
-{
-  'nvim-treesitter/nvim-treesitter-textobjects',
-  after = 'nvim-treesitter',
-},
-
--- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
--- and various Go tools to enhance the development experience.
-{
-  'ray-x/go.nvim',
-  config = conf.go_nvim,
-  after = 'nvim-treesitter',
-  requires = {
-    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-    { 'neovim/nvim-lspconfig' },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    after = 'telescope.nvim',
+    config = conf.nvim_treesitter,
   },
-},
 
-{
-  'davidmh/cspell.nvim',
-},
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  },
 
-{
-  'towolf/vim-helm',
-},
+  -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
+  -- and various Go tools to enhance the development experience.
+  {
+    'ray-x/go.nvim',
+    config = conf.go_nvim,
+    after = 'nvim-treesitter',
+    requires = {
+      { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+      { 'neovim/nvim-lspconfig' },
+    },
+  },
 
-{
-  'pearofducks/ansible-vim',
-},
+  {
+    'davidmh/cspell.nvim',
+  },
 
-{
-  'lervag/vimtex',
-},
+  {
+    'towolf/vim-helm',
+  },
 
-{
-  'Fymyte/rasi.vim',
-  ft = 'rasi',
-},
+  {
+    'pearofducks/ansible-vim',
+  },
 
-{
-  'fladson/vim-kitty',
-},
+  {
+    'lervag/vimtex',
+  },
+
+  {
+    'Fymyte/rasi.vim',
+    ft = 'rasi',
+  },
+
+  {
+    'fladson/vim-kitty',
+  },
 }
