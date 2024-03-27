@@ -1,10 +1,21 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
 local vim = vim
+local vim_path = vim.fn.stdpath('config')
 local home = os.getenv('HOME')
 local cache_dir = home .. '/.cache/nvim/'
+local modules_dir = vim_path .. '/lua/modules'
+
+local plugins = function()
+  local list = {
+    { import = 'keymap/plugins' },
+  }
+  local modules = vim.split(vim.fn.globpath(modules_dir, '*/plugins.lua'), '\n')
+  for _, f in ipairs(modules) do
+    list[#list + 1] = {
+      import = string.match(f, 'lua/(.+).lua$'),
+    }
+  end
+  return list
+end
 
 -- Create cache dir and subs dir
 local createdir = function()
@@ -29,7 +40,7 @@ end
 
 createdir()
 
---disable_distribution_plugins
+-- disable distribution plugins
 vim.g.loaded_gzip = 1
 vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
@@ -49,10 +60,23 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 
-local pack = require('core.pack')
+-- Use space as leader key
+vim.g.mapleader = ' '
 
-pack.ensure_plugins()
 require('core.options')
-pack.load_compile()
-require('keymap')
+
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.uv.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup(plugins())
 require('commands')
+require('keymap')

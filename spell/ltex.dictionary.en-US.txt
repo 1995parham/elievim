@@ -153,3 +153,4 @@ Snappfood
 Kadane
 MPAC
 Gnowise
+Neovim

@@ -1,36 +1,37 @@
-local plugin = require('core.pack').register_plugin
 local conf = require('modules.ui.config')
 
-plugin({
-  '1995parham/naz.vim',
-  branch = 'main',
-  config = conf.naz,
-})
+return {
+  {
+    '1995parham/naz.vim',
+    branch = 'main',
+    config = conf.naz,
+  },
 
-plugin({ 'tamton-aquib/duck.nvim' })
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = conf.dashboard,
+    dependencies = {
+      'vim-fugitive',
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
 
-plugin({
-  'nvimdev/dashboard-nvim',
-  event = 'VimEnter',
-  config = conf.dashboard,
-  after = 'vim-fugitive',
-  requires = { 'nvim-tree/nvim-web-devicons' },
-})
+  {
+    'nvim-tree/nvim-tree.lua',
+    cmd = 'NvimTreeToggle',
+    config = conf.nvim_tree,
+    dependencies = 'nvim-tree/nvim-web-devicons',
+  },
 
-plugin({
-  'nvim-tree/nvim-tree.lua',
-  cmd = 'NvimTreeToggle',
-  config = conf.nvim_tree,
-  requires = 'nvim-tree/nvim-web-devicons',
-})
-
-plugin({
-  'nvim-lualine/lualine.nvim',
-  requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-  config = conf.lualine,
-})
--- A neovim lua plugin to help easily manage multiple terminal windows.
-plugin({
-  'akinsho/toggleterm.nvim',
-  config = conf.tterm,
-})
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = conf.lualine,
+  },
+  -- A neovim lua plugin to help easily manage multiple terminal windows.
+  {
+    'akinsho/toggleterm.nvim',
+    config = conf.tterm,
+  },
+}

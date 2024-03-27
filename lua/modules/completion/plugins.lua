@@ -1,93 +1,90 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
-local plugin = require('core.pack').register_plugin
 local conf = require('modules.completion.config')
 
-plugin({
-  'neovim/nvim-lspconfig',
-  config = conf.nvim_lsp,
-})
-
--- portable package manager for Neovim that runs everywhere Neovim runs.
--- easily install and manage LSP servers, DAP servers, linters,
--- and formatters.
-plugin({
-  'williamboman/mason.nvim',
-  config = conf.mason.setup,
-})
-
--- code analysis & navigation plugin
-plugin({
-  'ray-x/navigator.lua',
-  config = conf.navigator,
-  after = 'nvim-treesitter',
-  requires = {
-    { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-    { 'neovim/nvim-lspconfig' },
+return {
+  {
+    'neovim/nvim-lspconfig',
+    config = conf.nvim_lsp,
   },
-})
 
--- install and upgrade third party tools automatically
-plugin({
-  'WhoIsSethDaniel/mason-tool-installer.nvim',
-  requires = { 'williamboman/mason.nvim' },
-  config = conf.mason.installer,
-})
-
--- extension to mason.nvim that makes it easier
--- to use lspconfig with mason.nvim
-plugin({
-  'williamboman/mason-lspconfig.nvim',
-  requires = {
+  -- portable package manager for Neovim that runs everywhere Neovim runs.
+  -- easily install and manage LSP servers, DAP servers, linters,
+  -- and formatters.
+  {
     'williamboman/mason.nvim',
-    'neovim/nvim-lspconfig',
-    'hrsh7th/cmp-nvim-lsp',
-    'simrat39/rust-tools.nvim',
+    config = conf.mason.setup,
   },
-  after = {
-    'nvim-lspconfig',
-    'nvim-cmp',
+
+  -- code analysis & navigation plugin
+  {
+    'ray-x/navigator.lua',
+    config = conf.navigator,
+    after = 'nvim-treesitter',
+    dependencies = {
+      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
+      { 'neovim/nvim-lspconfig' },
+    },
   },
-  config = conf.mason.lspconfig,
-})
 
-plugin({ 'L3MON4D3/LuaSnip', config = conf.lua_snip })
-
--- Set of preconfigured snippets for different languages.
--- https://github.com/rafamadriz/friendly-snippets/wiki
-plugin({ 'rafamadriz/friendly-snippets' })
-
--- Provides external LTeX file handling
--- (off-spec lsp) and other functions.
-plugin({ 'barreiroleo/ltex_extra.nvim' })
-
--- null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics,
--- code actions, and more via Lua.
-plugin({
-  'nvimtools/none-ls.nvim',
-  config = conf.null_ls,
-  requires = { 'nvim-lua/plenary.nvim' },
-})
-
-plugin({
-  'j-hui/fidget.nvim',
-  requires = {
-    'neovim/nvim-lspconfig',
+  -- install and upgrade third party tools automatically
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = { 'williamboman/mason.nvim' },
+    config = conf.mason.installer,
   },
-  config = conf.progress,
-})
 
-plugin({
-  'hrsh7th/nvim-cmp',
-  requires = {
-    { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-lspconfig' },
-    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-    { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
-    { 'onsails/lspkind.nvim' },
+  -- extension to mason.nvim that makes it easier
+  -- to use lspconfig with mason.nvim
+  {
+    'williamboman/mason-lspconfig.nvim',
+    dependencies = {
+      'williamboman/mason.nvim',
+      'neovim/nvim-lspconfig',
+      'hrsh7th/cmp-nvim-lsp',
+      'simrat39/rust-tools.nvim',
+    },
+    after = {
+      'nvim-lspconfig',
+      'nvim-cmp',
+    },
+    config = conf.mason.lspconfig,
   },
-  after = 'nvim-lspconfig',
-  config = conf.cmp,
-})
+
+  { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
+
+  -- Set of preconfigured snippets for different languages.
+  -- https://github.com/rafamadriz/friendly-snippets/wiki
+  { 'rafamadriz/friendly-snippets' },
+
+  -- Provides external LTeX file handling
+  -- (off-spec lsp) and other functions.
+  { 'barreiroleo/ltex_extra.nvim' },
+
+  -- null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics,
+  -- code actions, and more via Lua.
+  {
+    'nvimtools/none-ls.nvim',
+    config = conf.null_ls,
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+
+  {
+    'j-hui/fidget.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+    },
+    config = conf.progress,
+  },
+
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'nvim-lspconfig' } },
+      { 'hrsh7th/cmp-path', dependencies = { 'nvim-cmp' } },
+      { 'hrsh7th/cmp-buffer', dependencies = { 'nvim-cmp' } },
+      { 'saadparwaiz1/cmp_luasnip', dependencies = { 'LuaSnip' } },
+      { 'onsails/lspkind.nvim' },
+    },
+    after = 'nvim-lspconfig',
+    config = conf.cmp,
+  },
+}
