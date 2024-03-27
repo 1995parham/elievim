@@ -24,8 +24,7 @@ its [GitHub repository](https://github.com/neovim/neovim), or its [releases page
 │   ├── 📂 core                    heart of elievim which provides api
 │   │   ├── init.lua
 │   │   ├── keymap.lua             keymap api
-│   │   ├── options.lua            vim options
-│   │   └── pack.lua               hack packer to load from multiple folders
+│   │   └── options.lua            vim options
 │   │
 │   ├── 📂 keymap
 │   │   ├── config.lua
@@ -76,25 +75,23 @@ git clone https://github.com/1995parham/elievim
 
 ## How to register plugins?
 
-API is `require('core.pack').register_plugin`, So pass plugin as parameter into this
-function. Usually this happens in the `plugin.lua` files.
+When you have a new module in the `modules` folder, you can register plugins as follows in the `plugins.lua`:
 
 ```lua
-local plugin = require('core.pack').register_plugin
 local conf = require('modules.ui.config')
 
-plugin({'1995parham/naz.vim', config = conf.naz})
-
-plugin({'plugin github repo name'})
+return {
+    {'1995parham/naz.vim', config = conf.naz},
+    {'plugin github repo name'},
+}
 ```
 
 ## What is `config`?
 
-This is a keyword of [packer.nvim](https://github.com/wbthomason/packer.nvim),
-you need to check the doc of packer to know how to use packer.
+This is a keyword of [lazy.nvim](https://github.com/folke/lazy.nvim),
+and you need to check its document.
 If a plugin has many configs you can create other file in
-`modules/your-folder-name/config.lua` avoid
-making the `plugins.lua` file too long.
+`modules/your-folder-name/config.lua` and avoid making the `plugins.lua` file too long.
 
 Recommend lazy-load plugins. Check the usage in `modules`,
 it will improve your neovim
