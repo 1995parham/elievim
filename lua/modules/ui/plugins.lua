@@ -26,7 +26,7 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
   },
   -- A neovim lua plugin to help easily manage multiple terminal windows.
