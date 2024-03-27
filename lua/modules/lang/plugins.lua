@@ -30,11 +30,6 @@ plugin({
 })
 
 plugin({
-  'IndianBoy42/tree-sitter-just',
-  after = 'nvim-treesitter',
-})
-
-plugin({
   'davidmh/cspell.nvim',
 })
 
