@@ -18,7 +18,6 @@ return {
   {
     'ray-x/navigator.lua',
     config = conf.navigator,
-    after = 'nvim-treesitter',
     dependencies = {
       { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
       { 'neovim/nvim-lspconfig' },
@@ -41,10 +40,6 @@ return {
       'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
       'simrat39/rust-tools.nvim',
-    },
-    after = {
-      'nvim-lspconfig',
-      'nvim-cmp',
     },
     config = conf.mason.lspconfig,
   },
@@ -84,7 +79,6 @@ return {
       { 'saadparwaiz1/cmp_luasnip', dependencies = { 'LuaSnip' } },
       { 'onsails/lspkind.nvim' },
     },
-    after = 'nvim-lspconfig',
     config = conf.cmp,
   },
 }

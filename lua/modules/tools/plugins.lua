@@ -41,7 +41,7 @@ return {
       'BufReadPre ~/org/**.md',
       'BufNewFile ~/org/**.md',
     },
-    requires = {
+    dependencies = {
       'nvim-lua/plenary.nvim',
     },
     config = conf.obsidian,
