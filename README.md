@@ -93,40 +93,27 @@ and you need to check its document.
 If a plugin has many configs you can create other file in
 `modules/your-folder-name/config.lua` and avoid making the `plugins.lua` file too long.
 
-Recommend lazy-load plugins. Check the usage in `modules`,
-it will improve your neovim
-start speed. `lazy load` is not magic, it just generates your config into some `autocmds`,
-you can check the `packer_compiled.lua` to check it.
-
-I don't like the default path config in
-packer it uses `plugins` folder, So I set
-compiled file path to `~/.local/share/nvim/site/lua`, you can find compiled
-file in this path. Use `:h autocmd`
-to know more about.
-
-When you edit the config then open neovim, and it does not take effect. Please try
-`PackerCompile` to generate a new compile file with your new change.
-You also may encounter errors in this process.
-
 ```lua
--- modules/completion/plugins.lua
-plugin {'neovim/nvim-lspconfig',
- -- used filetype to lazy load lsp
- -- config your language filetype in here
-  ft = { 'lua','rust','c','cpp'},
-  config = conf.nvim_lsp,
-}
+return {
+    -- modules/completion/plugins.lua
+    {'neovim/nvim-lspconfig',
+    -- used filetype to lazy load lsp
+    -- config your language filetype in here
+    ft = { 'lua','rust','c','cpp'},
+    config = conf.nvim_lsp,
+    },
 
--- modules/tools/plugins.lua
-plugin {'nvim-telescope/telescope.nvim',
-  -- use command to lazy load.
-  cmd = 'Telescope',
-  config = conf.telescope,
-  requires = {
-    {'nvim-lua/popup.nvim', opt = true},
-    {'nvim-lua/plenary.nvim',opt = true},
-    {'nvim-telescope/telescope-fzy-native.nvim',opt = true},
-  }
+    -- modules/tools/plugins.lua
+    {'nvim-telescope/telescope.nvim',
+    -- use command to lazy load.
+    cmd = 'Telescope',
+    config = conf.telescope,
+    dependencies = {
+        {'nvim-lua/popup.nvim', opt = true},
+        {'nvim-lua/plenary.nvim',opt = true},
+        {'nvim-telescope/telescope-fzy-native.nvim',opt = true},
+    }
+    },
 }
 ```
 
