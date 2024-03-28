@@ -96,23 +96,25 @@ If a plugin has many configs you can create other file in
 ```lua
 return {
     -- modules/completion/plugins.lua
-    {'neovim/nvim-lspconfig',
-    -- used filetype to lazy load lsp
-    -- config your language filetype in here
-    ft = { 'lua','rust','c','cpp'},
-    config = conf.nvim_lsp,
+    {
+      'neovim/nvim-lspconfig',
+      -- used filetype to lazy load lsp
+      -- config your language filetype in here
+      ft = { 'lua','rust','c','cpp'},
+      config = conf.nvim_lsp,
     },
 
     -- modules/tools/plugins.lua
-    {'nvim-telescope/telescope.nvim',
-    -- use command to lazy load.
-    cmd = 'Telescope',
-    config = conf.telescope,
-    dependencies = {
-        {'nvim-lua/popup.nvim', opt = true},
-        {'nvim-lua/plenary.nvim',opt = true},
-        {'nvim-telescope/telescope-fzy-native.nvim',opt = true},
-    }
+    {
+      'nvim-telescope/telescope.nvim',
+      -- use command to lazy load.
+      cmd = 'Telescope',
+      config = conf.telescope,
+      dependencies = {
+        { 'nvim-lua/popup.nvim' },
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope-fzy-native.nvim' },
+      }
     },
 }
 ```
