@@ -1,5 +1,6 @@
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 local null_ls = require('null-ls')
+local cspell = require('cspell')
 
 return {
   -- An opinionated code formatter for Lua.
@@ -39,7 +40,8 @@ return {
   }),
 
   null_ls.builtins.diagnostics.selene,
-  -- cspell.diagnostics,
+  cspell.diagnostics,
+  cspell.code_actions,
   null_ls.builtins.diagnostics.mypy.with({
     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
     condition = function()
