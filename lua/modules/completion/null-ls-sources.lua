@@ -40,7 +40,11 @@ return {
   }),
 
   null_ls.builtins.diagnostics.selene,
-  cspell.diagnostics,
+  cspell.diagnostics.with({
+    diagnostics_postprocess = function(diagnostic)
+      diagnostic.severity = vim.diagnostic.severity['HINT']
+    end,
+  }),
   cspell.code_actions,
   null_ls.builtins.diagnostics.mypy.with({
     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
