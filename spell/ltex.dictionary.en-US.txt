@@ -163,3 +163,5 @@ Nieuw-West
 Zuidoost
 Westpoort
 Slidev
+stadsdelen
+Wallen
