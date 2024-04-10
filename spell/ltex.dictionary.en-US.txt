@@ -165,3 +165,6 @@ Westpoort
 Slidev
 stadsdelen
 Wallen
+Grachtengordel
+Nieuwmarkt
+Jordaan
