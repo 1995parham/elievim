@@ -172,3 +172,7 @@ SciKit
 MultiFlow
 WhyLabs
 Kolmogorov-Smirnov
+ISRC
+Uniq
+CALTO
+CHAMARIPA
