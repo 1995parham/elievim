@@ -146,14 +146,14 @@ keymap.cmd()
 keymap.cu()
 ```
 
-Use these APIs to config your keymap in `keymap` folder. In this folder
+Use these APIs to config your key mapping in `keymap` folder. In this folder
 `keymap/init.lua` is necessary but if you have many VIM modes' remap you can config them in `keymap/other-file.lua`
-Then config plugins keymap in `keymap/init.lua`. The example of API usage is as follows:
+Then config plugins key mapping in `keymap/init.lua`. The example of API usage is as follows:
 
 ```lua
 -- genreate keymap in normal mode
 nmap {
-  -- packer
+  -- packer which is replaced by lazy.nvim
   {'<Leader>pu',cmd('PackerUpdate'),opts(noremap,silent,'Packer update')},
   {'<Leader>pi',cmd('PackerInstall'),opts(noremap,silent)},
   {'<Leader>pc',cmd('PackerCompile'),opts(noremap,silent)},
@@ -170,7 +170,7 @@ nmap {
 ```
 
 For some vim mode remap and Do not need use `cmd` function because
-you want to have another keymap not a command as RHS.
+you want to have another key mapping not a command as RHS.
 
 ```lua
 -- window jump
@@ -187,7 +187,7 @@ Use `:h vim.keymap.set` to know more about.
 
 ## LSP Tools Requirements
 
-For having Language Servers, at least required following commands:
+To utilize Language Servers, you'll typically need the following commands:
 
 ```bash
 - luarocks
@@ -200,9 +200,12 @@ For having Language Servers, at least required following commands:
 Language servers are configured in `lua/modules/completion/config.lua` based on
 [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
 
-You need to install them using [`mason.nvim`](https://github.com/williamboman/mason.nvim) and if they
-are not defined in [`mason-lspconfig.nvim`](https://github.com/williamboman/mason-lspconfig.nvim) or you want to configure them
-manually, then you need to configure them in `lua/modules/completion/config.lua` like follows:
+- Install Language Servers: Use [`mason.nvim`](https://github.com/williamboman/mason.nvim) to install
+  the language servers you need.
+- Automatic Configuration (Recommended): Most language servers will be automatically configured
+  by [`mason-lspconfig.nvim`](https://github.com/williamboman/mason-lspconfig.nvim).
+- Manual Configuration (Optional): If a server isn't automatically configured, or you prefer manual setup,
+  add configurations to `lua/modules/completion/config.lua`.
 
 ```lua
 ['taplo'] = function()
@@ -216,14 +219,14 @@ once.
 
 ## Tips
 
-- Improve key repeat
+### Improve key repeat
 
 ```bash
-# mac os need restart
+# macOS (needs a restart)
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
-# linux
+# Linux (X11)
 xset r rate 210 40
 ```
 
@@ -238,11 +241,24 @@ xset r rate 210 40
 
 ## Languages
 
-I am using `python` and `go` as my primary language so here I documented some useful
-features of this configuration in those languages.
+This document outlines useful features of my development configuration
+specifically designed for Python and Go projects.
+
+### General
+
+- Need to **comment out** a section of code while in virtual mode? This configuration offers a handy shortcut!
+  Simply use the key combination `gc` while your selection is active.
+  This will efficiently comment out all the lines within your chosen block.
 
 ### Golang
 
-`FillStruct` is one of my favorite features. In this configuration you can use `spc + c + a`
-to see code actions and one of these actions on structures is filling them
-[ref](https://github.com/ray-x/go.nvim/blob/master/lua/go/reftool.lua).
+- I love the `FillStruct` feature included in this configuration!
+  Here's how it works:
+
+  1. Place your cursor inside a struct definition.
+  2. Trigger the code actions menu using `spc + c + a` (or your preferred shortcut).
+  3. Look for the Fill Struct action and select it.
+
+  Voilà! Your struct will be populated with empty fields, ready for you to customize.
+  The implementation details for this feature can be found in the `reftool.lua` file of the go.nvim plugin:
+  <https://github.com/ray-x/go.nvim/blob/master/lua/go/reftool.lua>.
