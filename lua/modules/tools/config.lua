@@ -126,4 +126,8 @@ function config.obsidian()
   })
 end
 
+function config.overseer()
+  require('overseer').setup()
+end
+
 return config

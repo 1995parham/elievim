@@ -46,4 +46,10 @@ return {
     },
     config = conf.obsidian,
   },
+
+  -- A task runner and job management plugin for Neovim
+  {
+    'stevearc/overseer.nvim',
+    config = conf.overseer,
+  },
 }
