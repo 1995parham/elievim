@@ -187,3 +187,5 @@ Seldon
 Cafebazaar
 LlamaIndex
 Rasa
+LangChain
+Productionization
