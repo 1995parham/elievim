@@ -191,3 +191,6 @@ LangChain
 Productionization
 LLM-based
 LLM-powered
+Snappcloud
+Asiatech
+Afranet
