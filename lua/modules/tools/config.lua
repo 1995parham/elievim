@@ -131,7 +131,14 @@ function config.overseer()
 end
 
 function config.hardtime()
-  require('hardtime').setup()
+  require('hardtime').setup({
+    disabled_keys = {
+      ['<Up>'] = {},
+      ['<Down>'] = {},
+      ['<Left>'] = {},
+      ['<Right>'] = {},
+    },
+  })
 end
 
 return config
