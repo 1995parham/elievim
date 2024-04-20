@@ -130,4 +130,8 @@ function config.overseer()
   require('overseer').setup()
 end
 
+function config.hardtime()
+  require('hardtime').setup()
+end
+
 return config

@@ -52,4 +52,12 @@ return {
     'stevearc/overseer.nvim',
     config = conf.overseer,
   },
+
+  -- A Neovim plugin helping you establish good command workflow and quit bad habit
+  {
+    'm4xshen/hardtime.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = {},
+    config = conf.hardtime,
+  },
 }
