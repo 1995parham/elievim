@@ -195,3 +195,4 @@ Snappcloud
 Asiatech
 Afranet
 featurizers
+HyperLogLog
