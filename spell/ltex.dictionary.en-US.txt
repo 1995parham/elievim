@@ -197,3 +197,5 @@ Afranet
 featurizers
 HyperLogLog
 SLOs
+SLIs
+Toxiproxy
