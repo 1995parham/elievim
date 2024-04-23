@@ -199,3 +199,4 @@ HyperLogLog
 SLOs
 SLIs
 Toxiproxy
+booleans
