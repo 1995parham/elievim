@@ -250,6 +250,19 @@ specifically designed for Python and Go projects.
   Simply use the key combination `gc` while your selection is active.
   This will efficiently comment out all the lines within your chosen block.
 
+- I am using [`oversser.nvim`](https://github.com/stevearc/overseer.nvim) to run commands in the background,
+  these commands includes `npm run dev`, `npm start`, `just start`, etc.
+
+- This configuration leverages the power of [`oversser.nvim`](https://github.com/stevearc/overseer.nvim) to seamlessly
+  run background commands directly within Neovim. This eliminates the need to switch windows or terminals,
+  keeping you focused on your coding flow.
+  Overseer allows you to execute common development commands like `npm run dev`, `npm start`, and `just start`
+  in the background. This means you can initiate development servers, linters, or other long-running processes
+  without interrupting your work in Neovim.
+  Activate Overseer with a simple keyboard shortcut: `spc + r + r`.
+  This brings up the Overseer interface where you can choose the command you want to run in the background.
+  Overseer takes care of the execution, freeing you to focus on your code.
+
 ### Golang
 
 - I love the `FillStruct` feature included in this configuration!
