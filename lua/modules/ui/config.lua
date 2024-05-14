@@ -35,11 +35,11 @@ function config.dashboard()
   local tehran_date = ''
   if vim['system'] ~= nil then
     tehran_date = vim
-        .system({ 'date' }, {
-          env = { TZ = 'Asia/Tehran' },
-        })
-        :wait().stdout
-        :gsub('[\n]', '')
+      .system({ 'date' }, {
+        env = { TZ = 'Asia/Tehran' },
+      })
+      :wait().stdout
+      :gsub('[\n]', '')
   end
 
   local header = {
@@ -246,9 +246,9 @@ function config.lualine()
       lualine_a = {
         {
           'buffers',
-          show_filename_only = true,       -- Shows shortened relative path when set to false.
+          show_filename_only = true, -- Shows shortened relative path when set to false.
           hide_filename_extension = false, -- Hide filename extension when set to true.
-          show_modified_status = true,     -- Shows indicator when the buffer is modified.
+          show_modified_status = true, -- Shows indicator when the buffer is modified.
 
           mode = 4,
           -- 0: Shows buffer name
