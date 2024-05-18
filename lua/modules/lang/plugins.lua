@@ -7,10 +7,10 @@ return {
     config = conf.nvim_treesitter,
   },
 
-  -- {
-  --   'nvim-treesitter/nvim-treesitter-textobjects',
-  --   dependencies = { 'nvim-treesitter' },
-  -- },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = { 'nvim-treesitter' },
+  },
 
   -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
   -- and various Go tools to enhance the development experience.
@@ -18,7 +18,7 @@ return {
     'ray-x/go.nvim',
     config = conf.go_nvim,
     requires = {
-      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
+      { 'ray-x/guihua.lua',     build = 'cd lua/fzy && make' },
       { 'neovim/nvim-lspconfig' },
     },
   },
