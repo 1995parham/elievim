@@ -208,3 +208,5 @@ MicroTik
 SingleFile
 Zier
 proxying
+pseudo-RRs
+DNAME
