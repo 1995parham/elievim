@@ -7,7 +7,8 @@ function packages.go()
   if vim.fn.executable('go') == 1 then
     return {
       'gopls',
-      'golangci-lint-langserver',
+      -- ignore due to https://github.com/nametake/golangci-lint-langserver/issues/41
+      -- 'golangci-lint-langserver',
       'json-to-struct',
       'gofumpt',
       'gotests',
