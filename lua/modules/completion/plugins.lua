@@ -19,7 +19,7 @@ return {
     'ray-x/navigator.lua',
     config = conf.navigator,
     dependencies = {
-      { 'ray-x/guihua.lua',     build = 'cd lua/fzy && make' },
+      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
       { 'neovim/nvim-lspconfig' },
     },
   },
@@ -44,7 +44,7 @@ return {
     config = conf.mason.lspconfig,
   },
 
-  { 'L3MON4D3/LuaSnip',            config = conf.lua_snip },
+  { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
 
   -- Set of preconfigured snippets for different languages.
   -- https://github.com/rafamadriz/friendly-snippets/wiki
@@ -63,13 +63,6 @@ return {
   },
 
   {
-    'nvimtools/none-ls.nvim',
-    dependencies = {
-      'nvimtools/none-ls-extras.nvim',
-    },
-  },
-
-  {
     'j-hui/fidget.nvim',
     dependencies = {
       'neovim/nvim-lspconfig',
@@ -80,9 +73,9 @@ return {
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp',     dependencies = { 'nvim-lspconfig' } },
-      { 'hrsh7th/cmp-path',         dependencies = { 'nvim-cmp' } },
-      { 'hrsh7th/cmp-buffer',       dependencies = { 'nvim-cmp' } },
+      { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'nvim-lspconfig' } },
+      { 'hrsh7th/cmp-path', dependencies = { 'nvim-cmp' } },
+      { 'hrsh7th/cmp-buffer', dependencies = { 'nvim-cmp' } },
       { 'saadparwaiz1/cmp_luasnip', dependencies = { 'LuaSnip' } },
       { 'onsails/lspkind.nvim' },
     },

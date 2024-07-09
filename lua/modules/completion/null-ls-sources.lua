@@ -31,7 +31,6 @@ return {
   -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
   null_ls.builtins.formatting.isort,
   null_ls.builtins.formatting.djlint,
-  require('none-ls.formatting.ruff'),
   -- null_ls.builtins.formatting.taplo,
   null_ls.builtins.formatting.shfmt,
   -- null_ls.builtins.formatting.rustfmt,
@@ -41,7 +40,6 @@ return {
   }),
 
   null_ls.builtins.diagnostics.selene,
-  require('none-ls.diagnostics.ruff'),
   -- cspell.diagnostics.with({
   --  diagnostics_postprocess = function(diagnostic)
   --    diagnostic.severity = vim.diagnostic.severity['HINT']
