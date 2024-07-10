@@ -191,6 +191,29 @@ function lsp.gols()
   }
 end
 
+function lsp.ruff()
+  return {
+    on_attach = function(client, bufnr)
+      if client.name == 'ruff' then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+      end
+      lsp.on_attach(client, bufnr)
+    end,
+    cmd_env = { RUFF_TRACE = 'messages' },
+    settings = {
+      codeAction = {
+        disableRuleComment = {
+          enable = false,
+        },
+        fixViolation = {
+          enable = false,
+        },
+      },
+    },
+  }
+end
+
 function lsp.docker_compose_language_service()
   local util = require('lspconfig/util')
 
