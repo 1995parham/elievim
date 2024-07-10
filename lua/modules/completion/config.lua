@@ -34,6 +34,10 @@ function config.nvim_lsp()
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+
+  -- ruff is installed using ruff command line and there is no need
+  -- for mason
+  require('lspconfig').ruff.setup(_lsp.ruff())
 end
 
 function config.navigator()
