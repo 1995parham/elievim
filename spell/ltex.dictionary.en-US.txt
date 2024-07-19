@@ -213,3 +213,6 @@ DNAME
 Viewsets
 Enum
 enums
+Mesos
+daemonsets
+statefulsets
