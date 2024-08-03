@@ -216,3 +216,4 @@ enums
 Mesos
 daemonsets
 statefulsets
+Shecan
