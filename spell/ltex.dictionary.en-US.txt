@@ -218,3 +218,4 @@ daemonsets
 statefulsets
 Shecan
 LightGBM
+ArgoCD
