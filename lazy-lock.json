@@ -46,6 +46,6 @@
   "vim-helm": { "branch": "master", "commit": "ae1ebc160d2b9b90108477ab10df7a4fc501e358" },
   "vim-kitty": { "branch": "main", "commit": "9cc594a634308aa3bfaf3da5b5e741da1c0144c1" },
   "vim-wakatime": { "branch": "master", "commit": "53bba6bb8342de9cbdafc82142a9b5e82008d858" },
-  "vimtex": { "branch": "master", "commit": "9b3e5c8dbf77b8da705f12c4069df592552fe829" },
+  "vimtex": { "branch": "master", "commit": "93448dd2617c1407f66b08610db520ecb8a28073" },
   "which-key.nvim": { "branch": "main", "commit": "6c1584eb76b55629702716995cca4ae2798a9cca" }
 }
