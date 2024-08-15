@@ -220,3 +220,12 @@ Shecan
 LightGBM
 ArgoCD
 Kustomize
+FlorisBoard
+DAVx
+goodtime
+PersianCalendar
+Xodo
+RetroMusicPlayer
+PicsArt
+MyKet
+Xperia
