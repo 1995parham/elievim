@@ -229,3 +229,6 @@ RetroMusicPlayer
 PicsArt
 MyKet
 Xperia
+Peygir
+Libratone
+Zipp
