@@ -232,3 +232,4 @@ Xperia
 Peygir
 Libratone
 Zipp
+Jalali
