@@ -233,3 +233,4 @@ Peygir
 Libratone
 Zipp
 Jalali
+Streamlit
