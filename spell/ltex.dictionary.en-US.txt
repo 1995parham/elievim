@@ -235,3 +235,4 @@ Zipp
 Jalali
 Streamlit
 cgroup
+Strimzi
