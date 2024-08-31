@@ -236,3 +236,4 @@ Jalali
 Streamlit
 cgroup
 Strimzi
+tipExample
