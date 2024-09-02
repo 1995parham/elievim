@@ -238,3 +238,4 @@ cgroup
 Strimzi
 tipExample
 tolerations
+Tolerations
