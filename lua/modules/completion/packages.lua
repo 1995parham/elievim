@@ -8,7 +8,8 @@ function packages.go()
     return {
       'gopls',
       -- fixed to v0.0.8 due to https://github.com/nametake/golangci-lint-langserver/issues/41
-      { 'golangci-lint-langserver', version = 'v0.0.8' },
+      -- we remove gosum from go.
+      'golangci-lint-langserver',
       'json-to-struct',
       'gofumpt',
       'gotests',
