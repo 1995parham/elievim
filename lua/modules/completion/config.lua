@@ -188,6 +188,9 @@ function config.mason.lspconfig()
     ['helm_ls'] = function()
       require('lspconfig').helm_ls.setup(_lsp.helm_ls())
     end,
+    ['phpactor'] = function()
+      require('lspconfig').phpactor.setup(_lsp.phpactor())
+    end,
   })
 end
 

@@ -214,6 +214,17 @@ function lsp.ruff()
   }
 end
 
+function lsp.phpactor()
+  return {
+    on_attach = lsp.on_attach,
+    init_options = {
+      ['language_server_phpstan.enabled'] = false,
+      ['language_server_psalm.enabled'] = false,
+      ['core.min_memory_limit'] = -1,
+    },
+  }
+end
+
 function lsp.docker_compose_language_service()
   local util = require('lspconfig/util')
 
