@@ -81,8 +81,8 @@ function config.telescope()
       prompt_prefix = '> ',
       layout_strategy = 'bottom_pane',
       sorting_strategy = 'ascending',
-      -- file_previewer = require('telescope.previewers').vim_buffer_cat.new,
-      -- grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+      file_previewer = require('telescope.previewers').cat.new,
+      grep_previewer = require('telescope.previewers').cat.new,
       -- qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     },
     extensions = {
