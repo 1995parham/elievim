@@ -243,3 +243,4 @@ KUTTL
 Fx
 Ollama
 Knative
+KServe
