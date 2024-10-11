@@ -36,19 +36,23 @@ ls.add_snippets(nil, {
       text([[// UnixDate = "Mon Jan _2 15:04:05 MST 2006"]]),
     }),
 
-    snip({
-      trig = 'koanf',
-      namr = 'Koanf libraries',
-      desr = 'Write down koanf libraries for loading env, struct and toml file',
-    }, {
-      text(
-        [["github.com/knadh/koanf"]],
-        [["github.com/knadh/koanf/parsers/toml"]],
-        [["github.com/knadh/koanf/providers/env"]],
-        [["github.com/knadh/koanf/providers/file"]],
-        [["github.com/knadh/koanf/providers/structs"]]
-      ),
-    }),
+    snip(
+      {
+        trig = 'koanf',
+        namr = 'Koanf libraries',
+        desr = 'Write down koanf libraries for loading env, struct and toml file',
+      },
+      fmta(
+        [[
+"github.com/knadh/koanf"
+"github.com/knadh/koanf/parsers/toml"
+"github.com/knadh/koanf/providers/env"
+"github.com/knadh/koanf/providers/file"
+"github.com/knadh/koanf/providers/structs"
+        ]],
+        {}
+      )
+    ),
 
     snip(
       {
