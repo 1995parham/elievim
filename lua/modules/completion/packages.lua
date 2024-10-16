@@ -77,9 +77,10 @@ function packages.python()
     -- globally so they can search virtualenv.
     -- 'mypy',
     -- 'pylint',
+    -- 'isort',
+    -- 'black',
 
     'pyright',
-    'isort',
   }
 end
 
