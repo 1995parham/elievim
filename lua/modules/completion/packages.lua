@@ -79,7 +79,6 @@ function packages.python()
     -- 'pylint',
 
     'pyright',
-    'black',
     'isort',
   }
 end
