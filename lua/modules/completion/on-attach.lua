@@ -200,17 +200,7 @@ function lsp.ruff()
       end
       lsp.on_attach(client, bufnr)
     end,
-    cmd_env = { RUFF_TRACE = 'messages' },
-    settings = {
-      codeAction = {
-        disableRuleComment = {
-          enable = false,
-        },
-        fixViolation = {
-          enable = false,
-        },
-      },
-    },
+    settings = {},
   }
 end
 
