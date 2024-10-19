@@ -48,6 +48,7 @@ function config.navigator()
       hover = {
         enable = true,
       },
+      disable_lsp = 'all',
     },
     keymaps = {
       -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
@@ -159,8 +160,6 @@ function config.mason.lspconfig()
       })
     end,
 
-    -- ruff already setup using lspconfig
-    ['ruff'] = function() end,
     ['lua_ls'] = function()
       require('lspconfig').lua_ls.setup(_lsp.lua_ls())
     end,

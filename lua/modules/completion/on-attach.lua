@@ -200,7 +200,12 @@ function lsp.ruff()
       end
       lsp.on_attach(client, bufnr)
     end,
-    settings = {},
+    trace = 'messages',
+    init_options = {
+      settings = {
+        logLevel = 'info',
+      },
+    },
   }
 end
 
