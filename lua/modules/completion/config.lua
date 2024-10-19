@@ -37,7 +37,9 @@ function config.nvim_lsp()
 
   -- ruff is installed using ruff command line and there is no need
   -- for mason
-  require('lspconfig').ruff.setup(_lsp.ruff())
+  if vim.fn.executable('ruff') == 1 then
+    require('lspconfig').ruff.setup(_lsp.ruff())
+  end
 end
 
 function config.navigator()
