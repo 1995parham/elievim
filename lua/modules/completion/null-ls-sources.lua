@@ -14,6 +14,9 @@ return {
   -- null_ls.builtins.formatting.markdownlint,
   -- The uncompromising Python code formatter
   null_ls.builtins.formatting.black.with({
+    condition = function()
+      return vim.fn.executable('black') == 1
+    end,
     extra_args = function(params)
       local config = vim.fs.find('black.toml', {
         upward = false,
@@ -29,7 +32,11 @@ return {
     end,
   }),
   -- Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
-  null_ls.builtins.formatting.isort,
+  null_ls.builtins.formatting.isort.with({
+    condition = function()
+      return vim.fn.executable('isort') == 1
+    end,
+  }),
   null_ls.builtins.formatting.djlint,
   -- null_ls.builtins.formatting.taplo,
   null_ls.builtins.formatting.shfmt,
