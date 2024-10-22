@@ -175,17 +175,22 @@ function lsp.gols()
       gopls = {
         -- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
         -- analyses = {},
-        allExperiments = true,
         hints = {
           parameterNames = true,
           rangeVariableTypes = true,
         },
+        gofumpt = true,
         usePlaceholders = true,
+        staticcheck = true,
+        hoverKind = 'FullDocumentation',
         codelenses = {
           generate = true,
           test = true,
+          upgrade_dependency = true,
+          tidy = true,
+          regenerate_cgo = true,
+          vendor = false,
         },
-        staticcheck = true,
       },
     },
   }
