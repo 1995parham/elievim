@@ -18,7 +18,7 @@
   "lspkind.nvim": { "branch": "master", "commit": "59c3f419af48a2ffb2320cea85e44e5a95f71664" },
   "ltex_extra.nvim": { "branch": "master", "commit": "24acd044ce7a26b3cdb537cbd094de37c3e1ac45" },
   "lualine.nvim": { "branch": "master", "commit": "b431d228b7bbcdaea818bdc3e25b8cdbe861f056" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "87638e71c83100980f932714ea62ea82a972c95b" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "7446f47b3dfb7df801f31a6f6783c2ad119a6935" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "c5e07b8ff54187716334d585db34282e46fa2932" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "navigator.lua": { "branch": "master", "commit": "cf4ee8578046d8e9b20c4e29cf5f92eec5bfb3e6" },
