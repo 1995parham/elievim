@@ -244,3 +244,5 @@ Fx
 Ollama
 Knative
 KServe
+Smapp
+ArgoWorkflow
