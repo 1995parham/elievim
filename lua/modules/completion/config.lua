@@ -50,7 +50,7 @@ function config.navigator()
       hover = {
         enable = true,
       },
-      disable_lsp = { 'ruff' },
+      disable_lsp = { 'pyright' },
     },
     keymaps = {
       -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
