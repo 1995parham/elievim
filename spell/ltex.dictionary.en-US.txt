@@ -246,3 +246,4 @@ Knative
 KServe
 Smapp
 ArgoWorkflow
+QUIC
