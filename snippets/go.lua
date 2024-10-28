@@ -38,43 +38,35 @@ ls.add_snippets(nil, {
 
     snip(
       {
-        trig = 'koanf',
-        namr = 'Koanf libraries',
-        desr = 'Write down koanf libraries for loading env, struct and toml file',
+        trig = 'config_with_koanf',
+        namr = 'Provide configuration using Koanf',
+        desr = 'Write down the code for loading configuration using koanf from default, TOML file and env',
       },
       fmta(
         [[
-"github.com/knadh/koanf"
-"github.com/knadh/koanf/parsers/toml"
-"github.com/knadh/koanf/providers/env"
-"github.com/knadh/koanf/providers/file"
-"github.com/knadh/koanf/providers/structs"
-        ]],
-        {}
-      )
-    ),
+package config
 
-    snip(
-      {
-        trig = 'koanf_load',
-        namr = 'Koanf libraries',
-        desr = 'Write down koanf libraries for loading env, struct and toml file',
-      },
-      fmta(
-        [[
-const (
-	delimeter = "."
-	seprator  = "__"
+import (
+	"encoding/json"
+	"log"
+	"strings"
 
-	// prefix indicates environment variables prefix.
-	prefix = "<>_"
-
-	upTemplate     = "================ Loaded Configuration ================"
-	bottomTemplate = "======================================================"
+	"github.com/knadh/koanf/parsers/toml"
+	"github.com/knadh/koanf/providers/env"
+	"github.com/knadh/koanf/providers/file"
+	"github.com/knadh/koanf/providers/structs"
+	"github.com/knadh/koanf/v2"
+	"github.com/tidwall/pretty"
 )
 
-// New reads configuration with koanf.
-func New() *Config {
+// prefix indicates environment variables prefix.
+const prefix = "<>_"
+
+// Config holds all configurations.
+type Config struct {
+}
+
+func Provide() Config {
 	k := koanf.New(".")
 
 	// load default configuration from default function
@@ -87,29 +79,39 @@ func New() *Config {
 		log.Printf("error loading config.toml: %s", err)
 	}
 
-	LoadEnv(k)
+	// load environment variables
+	if err := k.Load(
+		// replace __ with . in environment variables so you can reference field a in struct b
+		// as a__b.
+		env.Provider(prefix, ".", func(source string) string {
+			base := strings.ToLower(strings.TrimPrefix(source, prefix))
+
+			return strings.ReplaceAll(base, "__", ".")
+		}),
+		nil,
+	); err != nil {
+		log.Printf("error loading environment variables: %s", err)
+	}
 
 	var instance Config
 	if err := k.Unmarshal("", &instance); err != nil {
 		log.Fatalf("error unmarshalling config: %s", err)
 	}
 
-	log.Printf("%s\n%v\n%s\n", upTemplate, spew.Sdump(instance), bottomTemplate)
-
-	return &instance
-}
-
-func LoadEnv(k *koanf.Koanf) {
-	callback := func(source string) string {
-		base := strings.ToLower(strings.TrimPrefix(source, prefix))
-
-		return strings.ReplaceAll(base, seprator, delimeter)
+	indent, err := json.MarshalIndent(instance, "", "\t")
+	if err != nil {
+		panic(err)
 	}
 
-	// load environment variables
-	if err := k.Load(env.Provider(prefix, delimeter, callback), nil); err != nil {
-		log.Printf("error loading environment variables: %s", err)
-	}
+	indent = pretty.Color(indent, nil)
+
+	log.Printf(`
+================ Loaded Configuration ================
+%s
+======================================================
+	`, string(indent))
+
+	return instance
 }
     ]],
         { insert(1) }
