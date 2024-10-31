@@ -32,7 +32,7 @@ nmap({
     cmd('%bwipeout! <bar> %bd! <bar> Dashboard'),
     opts(noremap, silent, 'back to dashboard'),
   },
-  -- Panda
+  -- do want to have a Panda in your neovim?
   {
     '<leader>dd',
     function()
@@ -41,7 +41,7 @@ nmap({
     opts('hatch the [d]uck'),
   },
   { '<Leader>dk', require('duck').cook, opts('coo[k] the [d]uck') },
-  -- toggleterm
+  -- toggleterm with its friends
   { '<Leader>ot', cmd('ToggleTerm dir=git_dir direction=horizontal'), opts(silent, 'open/close horizental terminal') },
   {
     '<Leader>oo',
