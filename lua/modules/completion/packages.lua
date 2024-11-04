@@ -65,11 +65,11 @@ function packages.json()
   }
 end
 
-function packages.ansible()
-  return {
-    'ansible-language-server',
-  }
-end
+-- function packages.ansible()
+--   return {
+--     'ansible-language-server',
+--   }
+-- end
 
 function packages.python()
   return {
