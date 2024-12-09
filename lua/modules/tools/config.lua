@@ -132,12 +132,7 @@ end
 
 function config.hardtime()
   require('hardtime').setup({
-    disabled_keys = {
-      ['<Up>'] = {},
-      ['<Down>'] = {},
-      ['<Left>'] = {},
-      ['<Right>'] = {},
-    },
+    disabled_keys = {},
   })
 end
 
