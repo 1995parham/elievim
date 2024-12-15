@@ -72,6 +72,28 @@ function config.navigator()
         func = require('navigator.codelens').run_action,
         desc = 'LSP: Run Code [L]ens [A]ction',
       },
+      {
+        key = ']r',
+        func = require('navigator.treesitter').goto_next_usage,
+        desc = 'goto_next_usage',
+      },
+      {
+        key = '[r',
+        func = require('navigator.treesitter').goto_previous_usage,
+        desc = 'goto_previous_usage',
+      },
+      {
+        key = '<Space>ols',
+        mode = 'n',
+        func = require('navigator.symbols').side_panel,
+        desc = 'LSP: [O]pen LSP [S]ymbols',
+      },
+      {
+        key = '<Space>ots',
+        mode = 'n',
+        func = require('navigator.treesitter').side_panel,
+        desc = 'LSP: [O]pen Treesitter [S]ymbols',
+      },
     },
   })
 end
