@@ -21,11 +21,6 @@ nmap({
   { '<C-w>c', cmd('tabnew'), opts(noremap) },
   -- find usage
   { '<Leader>fu', vim.lsp.buf.references, opts(noremap, '[f]ind [u]sage') },
-  -- obsidian
-  { '<leader>of', cmd('ObsidianFollowLink'), opts(noremap, '[o]bsidian: [f]ollow links') },
-  { '<leader>op', cmd('ObsidianOpen'), opts(noremap, '[o]bsidian: o[p]en') },
-  { '<leader>rr', cmd('OverseerRun'), opts(noremap, '[r]un') },
-  { '<leader>rt', cmd('OverseerToggle'), opts(noremap, '[r]un [t]oggle') },
 })
 
 -- insert mode

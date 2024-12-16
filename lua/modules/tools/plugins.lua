@@ -29,24 +29,6 @@ return {
   -- quickly insert templates into file
   -- plugin({ 'glepnir/template.nvim', config = conf.template })
 
-  -- a neovim plugin for writing and navigating an Obsidian vault, written in Lua.
-  -- this plugin is not meant to replace Obsidian, but to complement it.
-  -- My personal workflow involves writing Obsidian notes in Neovim using this plugin,
-  -- while viewing and reading them using the Obsidian app.
-  {
-    'epwalsh/obsidian.nvim',
-    event = {
-      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      'BufReadPre ~/org/**.md',
-      'BufNewFile ~/org/**.md',
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    config = conf.obsidian,
-  },
-
   -- A task runner and job management plugin for Neovim
   {
     'stevearc/overseer.nvim',

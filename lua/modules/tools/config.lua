@@ -74,8 +74,6 @@ function config.devcontainer()
 end
 
 function config.telescope()
-  local fb_actions = require('telescope').extensions.file_browser.actions
-
   require('telescope').setup({
     defaults = {
       prompt_prefix = '> ',
@@ -83,23 +81,17 @@ function config.telescope()
       sorting_strategy = 'ascending',
       file_previewer = require('telescope.previewers').cat.new,
       grep_previewer = require('telescope.previewers').cat.new,
+      file_ignore_patterns = { '.git/.*', 'lazy-lock.json' },
       -- qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
     },
     extensions = {
       file_browser = {
         theme = 'ivy',
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
         hidden = true,
         respect_gitignore = true,
         quiet = true,
-        mappings = {
-          ['n'] = {
-            ['ma'] = fb_actions.create,
-            ['mm'] = fb_actions.move,
-            ['mr'] = fb_actions.rename,
-            ['my'] = fb_actions.copy,
-            ['mh'] = fb_actions.toggle_hidden,
-          },
-        },
       },
     },
   })
@@ -114,16 +106,6 @@ function config.template()
   temp.temp_dir = '~/.config/nvim/templates'
   temp.author = 'Parham Alvani'
   temp.email = 'parham.alvani@gmail.com'
-end
-
-function config.obsidian()
-  require('obsidian').setup({
-    dir = '~/org',
-    ui = {
-      enable = false,
-    },
-    mappings = {},
-  })
 end
 
 function config.overseer()
