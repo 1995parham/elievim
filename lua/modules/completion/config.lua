@@ -83,13 +83,13 @@ function config.navigator()
         desc = 'goto_previous_usage',
       },
       {
-        key = '<Space>ols',
+        key = '<Space>osl',
         mode = 'n',
         func = require('navigator.symbols').side_panel,
         desc = 'LSP: [O]pen LSP [S]ymbols',
       },
       {
-        key = '<Space>ots',
+        key = '<Space>ost',
         mode = 'n',
         func = require('navigator.treesitter').side_panel,
         desc = 'LSP: [O]pen Treesitter [S]ymbols',
