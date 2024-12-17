@@ -42,7 +42,11 @@ nmap({
   },
   { '<Leader>dk', require('duck').cook, opts('coo[k] the [d]uck') },
   -- toggleterm with its friends
-  { '<Leader>ot', cmd('ToggleTerm dir=git_dir direction=horizontal'), opts(silent, 'open/close horizental terminal') },
+  {
+    '<Leader>ot',
+    cmd('ToggleTerm dir=git_dir direction=horizontal size=35'),
+    opts(silent, 'open/close horizental terminal'),
+  },
   {
     '<Leader>oo',
     cmd('exe v:count1 . "ToggleTerm dir=git_dir direction=tab"'),

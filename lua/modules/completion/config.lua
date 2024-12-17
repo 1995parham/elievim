@@ -61,13 +61,13 @@ function config.navigator()
         desc = 'LSP: definition [P]review',
       },
       {
-        key = '<Space>ca',
+        key = '<Leader>ca',
         mode = 'v',
         func = require('navigator.codeAction').range_code_action,
         desc = 'LSP: Range [C]ode [A]ction',
       },
       {
-        key = '<Space>la',
+        key = '<Leader>la',
         mode = 'n',
         func = require('navigator.codelens').run_action,
         desc = 'LSP: Run Code [L]ens [A]ction',
@@ -83,13 +83,13 @@ function config.navigator()
         desc = 'goto_previous_usage',
       },
       {
-        key = '<Space>osl',
+        key = '<Leader>osl',
         mode = 'n',
         func = require('navigator.symbols').side_panel,
         desc = 'LSP: [O]pen LSP [S]ymbols',
       },
       {
-        key = '<Space>ost',
+        key = '<Leader>ost',
         mode = 'n',
         func = require('navigator.treesitter').side_panel,
         desc = 'LSP: [O]pen Treesitter [S]ymbols',
