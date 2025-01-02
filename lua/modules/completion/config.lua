@@ -45,12 +45,15 @@ end
 function config.navigator()
   require('navigator').setup({
     default_mapping = false,
+    ts_fold = {
+      enable = true,
+    },
     lsp = {
       display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
       hover = {
         enable = true,
       },
-      disable_lsp = {},
+      disable_lsp = '__all__',
     },
     keymaps = {
       -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua

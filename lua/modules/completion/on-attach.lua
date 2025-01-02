@@ -50,14 +50,12 @@ end
 
 function lsp.on_attach(client, bufnr)
   -- vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG)
+  require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
 
-  -- https://neovim.io/doc/user/lsp.html#lsp-handlers
-  if vim.fn.has('nvim-0.10') == 1 then
-    local float = require('modules.completion.float')
+  local float = require('modules.completion.float')
 
-    vim.lsp.handlers['textDocument/hover'] = float.enhanced_float_handler(vim.lsp.handlers.hover)
-    vim.lsp.handlers['textDocument/signatureHelp'] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
-  end
+  vim.lsp.handlers['textDocument/hover'] = float.enhanced_float_handler(vim.lsp.handlers.hover)
+  vim.lsp.handlers['textDocument/signatureHelp'] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
 
   -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)
