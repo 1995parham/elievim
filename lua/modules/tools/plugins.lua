@@ -42,8 +42,4 @@ return {
     opts = {},
     config = conf.hardtime,
   },
-
-  {
-    'easymotion/vim-easymotion',
-  },
 }
