@@ -88,17 +88,18 @@ function lsp.on_attach(client, bufnr)
     vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
   end, 'Toggle Inlay Hint')
 
-  if client.supports_method('textDocument/formatting') then
-    -- vim.notify(string.format('lsp client %s has formatting capability', client.name), vim.log.levels.DEBUG)
-    vim.api.nvim_clear_autocmds({ group = lsp.augroup[1], buffer = bufnr })
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = lsp.augroup[1],
-      buffer = bufnr,
-      callback = function()
-        lsp.formatting(bufnr)
-      end,
-    })
-  end
+  -- the following code block is commented out because navigator is already doing it.
+  -- if client.supports_method('textDocument/formatting') then
+  --   -- vim.notify(string.format('lsp client %s has formatting capability', client.name), vim.log.levels.DEBUG)
+  --   vim.api.nvim_clear_autocmds({ group = lsp.augroup[1], buffer = bufnr })
+  --   vim.api.nvim_create_autocmd('BufWritePre', {
+  --     group = lsp.augroup[1],
+  --     buffer = bufnr,
+  --     callback = function()
+  --       lsp.formatting(bufnr)
+  --     end,
+  --   })
+  -- end
 end
 
 -- these are custom configuration for each lsp, please create lsp configuration

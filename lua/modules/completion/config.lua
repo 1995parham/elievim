@@ -50,6 +50,12 @@ function config.navigator()
     },
     lsp = {
       display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
+      format_on_save = function(bufnr)
+        if string.find(vim.uri_from_bufnr(bufnr), 'nobitex/core') then
+          return false
+        end
+        return true
+      end,
       hover = {
         enable = true,
       },
