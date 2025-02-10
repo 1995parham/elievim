@@ -144,6 +144,7 @@ function packages.etc()
     'vint',
     'ltex-ls',
     'prettier',
+    'prettierd',
     'cspell',
   }
 end
