@@ -23,9 +23,6 @@ return {
   -- fugitive.vim: a git wrapper so awesome, it should be illegal
   { 'tpope/vim-fugitive' },
 
-  -- neovim dev container support
-  { 'https://codeberg.org/esensar/nvim-dev-container', config = conf.devcontainer },
-
   -- quickly insert templates into file
   -- plugin({ 'glepnir/template.nvim', config = conf.template })
 
