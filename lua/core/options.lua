@@ -108,8 +108,12 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
 vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
-vim.opt.shell = 'bash'
-vim.env.SHELL = '/bin/bash'
+
+if vim.fn.executable('fish') == 1 then
+  vim.opt.shell = 'fish'
+else
+  vim.opt.shell = 'bash'
+end
 
 vim.opt.guifont = 'JetbrainsMono_NF:h9'
 vim.g.neovide_scale_factor = 1.0
