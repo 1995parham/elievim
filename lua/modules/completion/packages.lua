@@ -7,9 +7,6 @@ function packages.go()
   if vim.fn.executable('go') == 1 then
     return {
       'gopls',
-      -- fixed to v0.0.8 due to https://github.com/nametake/golangci-lint-langserver/issues/41
-      -- we remove gosum from go.
-      'golangci-lint-langserver',
       'json-to-struct',
       'gofumpt',
       'gotests',
