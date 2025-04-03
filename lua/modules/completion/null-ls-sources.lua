@@ -10,8 +10,6 @@ return {
   -- Enforce a stricter format than gofmt, while being backwards compatible.
   -- That is, gofumpt is happy with a subset of the formats that gofmt is happy with.
   null_ls.builtins.formatting.gofumpt,
-  -- Markdown style and syntax checker.
-  -- null_ls.builtins.formatting.markdownlint,
   -- The uncompromising Python code formatter
   null_ls.builtins.formatting.black.with({
     condition = function()
@@ -37,10 +35,11 @@ return {
       return vim.fn.executable('isort') == 1
     end,
   }),
+  -- ✨ 📜 🪄 ✨ HTML Template Linter and Formatter.
   null_ls.builtins.formatting.djlint,
-  -- null_ls.builtins.formatting.taplo,
+  -- A shell parser, formatter, and interpreter with bash support.
   null_ls.builtins.formatting.shfmt,
-  -- null_ls.builtins.formatting.rustfmt,
+  -- prettier, as a daemon, for ludicrous formatting speed.
   null_ls.builtins.formatting.prettierd,
 
   null_ls.builtins.diagnostics.selene,
@@ -62,10 +61,14 @@ return {
       return vim.fn.executable('pylint') == 1
     end,
   }),
+  -- ✨ 📜 🪄 ✨ HTML Template Linter and Formatter.
   null_ls.builtins.diagnostics.djlint,
+  -- Actionlint is a static checker for GitHub Actions workflow files.
   null_ls.builtins.diagnostics.actionlint,
+  -- A smarter Dockerfile linter that helps you build best practice Docker images.
   null_ls.builtins.diagnostics.hadolint,
-  -- null_ls.builtins.diagnostics.markdownlint,
+  -- A Go linter aggregator.
+  null_ls.builtins.diagnostics.golangci_lint,
   -- null_ls.builtins.diagnostics.shellcheck,
   null_ls.builtins.formatting.just,
 }
