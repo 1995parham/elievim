@@ -52,11 +52,6 @@ function lsp.on_attach(client, bufnr)
   -- vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG)
   require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
 
-  local float = require('modules.completion.float')
-
-  vim.lsp.handlers['textDocument/hover'] = float.enhanced_float_handler(vim.lsp.handlers.hover)
-  vim.lsp.handlers['textDocument/signatureHelp'] = float.enhanced_float_handler(vim.lsp.handlers.signature_help)
-
   -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)
     if desc then
@@ -81,9 +76,9 @@ function lsp.on_attach(client, bufnr)
   nmap('<Leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<Leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
   nmap('<Leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  -- nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('<leader>uh', function()
     vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
   end, 'Toggle Inlay Hint')

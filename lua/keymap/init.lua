@@ -20,10 +20,9 @@ nmap({
   { '<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent) },
   -- FzfLua
   { '<Leader>bb', cmd('FzfLua buffers'), opts(noremap, silent, 'buffer browser') },
-  { '<Leader>man', cmd('FzfLua man_pages'), opts(noremap, silent) },
+  { '<Leader>man', cmd('FzfLua manpages'), opts(noremap, silent) },
   { '<Leader>fa', cmd('FzfLua live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('FzfLua file_browser'), opts(noremap, silent, 'file browser') },
-  { '<leader>sf', cmd('FzfLua find_files hidden=true'), opts(noremap, silent, '[s]earch [f]iles') },
+  { '<leader>sf', cmd('FzfLua files'), opts(noremap, silent, '[s]earch [f]iles') },
   -- buffers
   { '<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer') },
   { '<Leader>bp', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },

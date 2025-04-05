@@ -1,8 +1,12 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
 local config = {}
+
+function config.fzf_lua()
+  require("fzf-lua").setup{
+    winopts = {
+      split = "belowright new",
+    },
+  }
+end
 
 function config.template()
   local temp = require('template')
