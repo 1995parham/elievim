@@ -18,12 +18,12 @@ nmap({
   { '<Leader>sl', cmd('SessionLoad'), opts(noremap, silent) },
   -- nvimtree
   { '<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent) },
-  -- Telescope
-  { '<Leader>bb', cmd('Telescope buffers'), opts(noremap, silent, 'buffer browser') },
-  { '<Leader>man', cmd('Telescope man_pages'), opts(noremap, silent) },
-  { '<Leader>fa', cmd('Telescope live_grep'), opts(noremap, silent) },
-  { '<Leader>ff', cmd('Telescope file_browser'), opts(noremap, silent, 'file browser') },
-  { '<leader>sf', cmd('Telescope find_files hidden=true'), opts(noremap, silent, '[s]earch [f]iles') },
+  -- FzfLua
+  { '<Leader>bb', cmd('FzfLua buffers'), opts(noremap, silent, 'buffer browser') },
+  { '<Leader>man', cmd('FzfLua man_pages'), opts(noremap, silent) },
+  { '<Leader>fa', cmd('FzfLua live_grep'), opts(noremap, silent) },
+  { '<Leader>ff', cmd('FzfLua file_browser'), opts(noremap, silent, 'file browser') },
+  { '<leader>sf', cmd('FzfLua find_files hidden=true'), opts(noremap, silent, '[s]earch [f]iles') },
   -- buffers
   { '<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer') },
   { '<Leader>bp', cmd('bprevious'), opts(noremap, silent, 'previous buffer') },
