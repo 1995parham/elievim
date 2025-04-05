@@ -1,11 +1,11 @@
 local config = {}
 
 function config.fzf_lua()
-  require('fzf-lua').setup{
+  require('fzf-lua').setup({
     winopts = {
       split = 'belowright new',
     },
-  }
+  })
 end
 
 function config.template()
