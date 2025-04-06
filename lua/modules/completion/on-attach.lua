@@ -18,9 +18,9 @@ function lsp.on_attach(client, bufnr)
   -- setup navigator for lsp client
   require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
   -- enable identifier highlight on hover
-  require("navigator.dochighlight").documentHighlight(bufnr)
+  require('navigator.dochighlight').documentHighlight(bufnr)
   -- configure doc highlight
-  require("navigator.lspclient.highlight").add_highlight()
+  require('navigator.lspclient.highlight').add_highlight()
 
   -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)
