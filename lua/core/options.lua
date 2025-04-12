@@ -17,8 +17,10 @@ vim.opt.viewoptions = 'folds,cursor,curdir,slash,unix'
 vim.opt.sessionoptions = 'curdir,help,tabpages,winsize'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.wildignorecase = true
-vim.opt.wildignore =
-'.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'
+vim.opt.wildignore = (
+  '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip'
+  .. ',**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'
+)
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
