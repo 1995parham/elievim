@@ -18,7 +18,7 @@ vim.opt.sessionoptions = 'curdir,help,tabpages,winsize'
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.wildignorecase = true
 vim.opt.wildignore =
-  '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'
+'.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
@@ -115,18 +115,7 @@ else
   vim.opt.shell = 'bash'
 end
 
-vim.opt.guifont = 'JetbrainsMono_NF:h9'
-vim.g.neovide_scale_factor = 1.0
-vim.g.neovide_transparency = 0.95
-
-if vim.g.neovide then
-  vim.opt.title = true
-  vim.opt.titlestring = '%{fnamemodify(getcwd(), ":~:s?~/Documents/Git? ?")}'
-end
-
 if vim.loop.os_uname().sysname == 'Darwin' then
-  vim.g.neovide_scale_factor = 1.2
-  vim.g.neovide_fullscreen = true
   vim.g.clipboard = {
     name = 'macOS-clipboard',
     copy = {
