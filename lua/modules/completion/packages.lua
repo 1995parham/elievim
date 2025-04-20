@@ -143,6 +143,7 @@ function packages.etc()
     'prettier',
     'prettierd',
     'cspell',
+    'kulala-fmt',
   }
 end
 
