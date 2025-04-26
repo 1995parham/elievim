@@ -25,6 +25,14 @@ ls.add_snippets(nil, {
 # https://stackoverflow.com/questions/3822621/how-to-exit-if-a-command-failed
 set -eu
 set -o pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+main() {
+  # write your code here
+}
+
+main "$@"
       ]],
         {}
       )
