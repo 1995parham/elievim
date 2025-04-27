@@ -1,9 +1,9 @@
-local conf = require('modules.completion.config')
+local conf = require('modules.lsp.config')
 
 return {
   {
     'neovim/nvim-lspconfig',
-    config = conf.nvim_lsp,
+    config = conf.nvim_lspconfig,
   },
 
   -- portable package manager for Neovim that runs everywhere Neovim runs.

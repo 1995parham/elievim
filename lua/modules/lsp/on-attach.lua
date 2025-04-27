@@ -14,13 +14,18 @@ lsp.diagnostic_icons = {
 }
 
 function lsp.on_attach(client, bufnr)
-  -- vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG)
-  -- setup navigator for lsp client
-  require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
-  -- enable identifier highlight on hover
-  require('navigator.dochighlight').documentHighlight(bufnr)
-  -- configure doc highlight
-  require('navigator.lspclient.highlight').add_highlight()
+  vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG, {
+    title = 'elievim',
+  })
+
+  if pcall(require, 'navigator') then
+    -- setup navigator for lsp client
+    require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
+    -- enable identifier highlight on hover
+    require('navigator.dochighlight').documentHighlight(bufnr)
+    -- configure doc highlight
+    require('navigator.lspclient.highlight').add_highlight()
+  end
 
   -- key mapping for lsp and showing lsp before the mapping description.
   local nmap = function(keys, func, desc)

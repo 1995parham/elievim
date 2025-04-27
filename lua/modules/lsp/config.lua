@@ -1,8 +1,8 @@
 local config = {}
 
 -- config server in this function
-function config.nvim_lsp()
-  local _lsp = require('modules.completion.on-attach')
+function config.nvim_lspconfig()
+  local _lsp = require('modules.lsp.on-attach')
 
   -- Diagnostic configuration.
   vim.diagnostic.config({
@@ -144,7 +144,7 @@ function config.mason.setup()
 end
 
 function config.mason.installer()
-  local packages = require('modules.completion.packages')
+  local packages = require('modules.lsp.mason-packages')
 
   require('mason-tool-installer').setup({
     -- a list of all tools you want to ensure are installed upon
@@ -174,7 +174,7 @@ end
 function config.mason.lspconfig()
   -- https://github.com/williamboman/mason-lspconfig.nvim#configuration
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  local _lsp = require('modules.completion.on-attach')
+  local _lsp = require('modules.lsp.on-attach')
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   require('mason-lspconfig').setup()
@@ -228,8 +228,8 @@ end
 
 function config.null_ls()
   local null_ls = require('null-ls')
-  local _lsp = require('modules.completion.on-attach')
-  local _sources = require('modules.completion.null-ls-sources')
+  local _lsp = require('modules.lsp.on-attach')
+  local _sources = require('modules.lsp.null-ls-sources')
 
   null_ls.setup({
     -- you can reuse a shared lspconfig on_attach callback here
@@ -311,7 +311,7 @@ function config.lua_snip()
   ls.filetype_extend('python', { 'django' })
 
   require('luasnip.loaders.from_lua').lazy_load({
-    paths = vim.fn.stdpath('config') .. '/snippets',
+    paths = { vim.fn.stdpath('config') .. '/snippets' },
   })
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({
