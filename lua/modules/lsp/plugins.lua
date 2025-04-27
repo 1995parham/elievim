@@ -1,11 +1,6 @@
 local conf = require('modules.lsp.config')
 
 return {
-  {
-    'neovim/nvim-lspconfig',
-    config = conf.nvim_lspconfig,
-  },
-
   -- portable package manager for Neovim that runs everywhere Neovim runs.
   -- easily install and manage LSP servers, DAP servers, linters,
   -- and formatters.
@@ -20,7 +15,6 @@ return {
     config = conf.navigator,
     dependencies = {
       { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-      { 'neovim/nvim-lspconfig' },
     },
   },
 
@@ -37,8 +31,6 @@ return {
     'williamboman/mason-lspconfig.nvim',
     dependencies = {
       'williamboman/mason.nvim',
-      'neovim/nvim-lspconfig',
-      'hrsh7th/cmp-nvim-lsp',
       'simrat39/rust-tools.nvim',
     },
     config = conf.mason.lspconfig,
@@ -70,13 +62,17 @@ return {
     config = conf.progress,
   },
 
+  --  Performant, batteries-included completion plugin for Neovim
   {
-    'hrsh7th/nvim-cmp',
+    'saghen/blink.cmp',
+    version = '1.*',
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp', dependencies = { 'nvim-lspconfig' } },
-      { 'hrsh7th/cmp-path', dependencies = { 'nvim-cmp' } },
-      { 'hrsh7th/cmp-buffer', dependencies = { 'nvim-cmp' } },
-      { 'saadparwaiz1/cmp_luasnip', dependencies = { 'LuaSnip' } },
+      -- !Important! Make sure you're using the latest release of LuaSnip
+      -- `main` does not work at the moment
+      { 'L3MON4D3/LuaSnip' },
+      -- Bring enjoyment to your auto completion.
+      { 'xzbdmw/colorful-menu.nvim' },
+      --  vscode-like pictograms for neovim lsp completion items
       { 'onsails/lspkind.nvim' },
     },
     config = conf.cmp,
