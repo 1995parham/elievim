@@ -51,7 +51,7 @@ return {
     config = conf.mason.lspconfig,
   },
 
-  { 'L3MON4D3/LuaSnip',            config = conf.lua_snip },
+  { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
 
   -- Set of preconfigured snippets for different languages.
   -- https://github.com/rafamadriz/friendly-snippets/wiki
