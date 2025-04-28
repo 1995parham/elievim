@@ -19,7 +19,6 @@ return {
     config = conf.go_nvim,
     requires = {
       { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-      { 'neovim/nvim-lspconfig' },
     },
   },
 

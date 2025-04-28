@@ -1,6 +1,21 @@
 local conf = require('modules.lsp.config')
 
 return {
+  {
+    'neovim/nvim-lspconfig',
+
+    -- No need to load the plugin—since we just want its configs, adding the
+    -- it to the `runtimepath` is enough.
+    lazy = true,
+    init = function()
+      local lspConfigPath = require('lazy.core.config').options.root .. '/nvim-lspconfig'
+
+      -- INFO `prepend` ensures it is loaded before the user's LSP configs, so
+      -- that the user's configs override nvim-lspconfig.
+      vim.opt.runtimepath:prepend(lspConfigPath)
+    end,
+  },
+
   -- portable package manager for Neovim that runs everywhere Neovim runs.
   -- easily install and manage LSP servers, DAP servers, linters,
   -- and formatters.
@@ -36,7 +51,7 @@ return {
     config = conf.mason.lspconfig,
   },
 
-  { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
+  { 'L3MON4D3/LuaSnip',            config = conf.lua_snip },
 
   -- Set of preconfigured snippets for different languages.
   -- https://github.com/rafamadriz/friendly-snippets/wiki
@@ -56,9 +71,6 @@ return {
 
   {
     'j-hui/fidget.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
     config = conf.progress,
   },
 
