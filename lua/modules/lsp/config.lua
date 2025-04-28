@@ -50,13 +50,13 @@ function config.init()
         vim.lsp.config(server_name, servers[server_name]())
       end
       vim.lsp.enable(server_name)
-    else
-      local msg = string.format(
-        "executable '%s' for server '%s' not found! Server will not be enabled",
-        lsp_executable,
-        server_name
-      )
-      vim.notify(msg, vim.log.levels.WARN, { title = 'Nvim-config' })
+      -- else
+      -- local msg = string.format(
+      --   "executable '%s' for server '%s' not found! Server will not be enabled",
+      --   lsp_executable,
+      --   server_name
+      -- )
+      -- vim.notify(msg, vim.log.levels.WARN, { title = 'Nvim-config' })
     end
   end
 end
