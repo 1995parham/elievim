@@ -2,6 +2,8 @@ local servers = {}
 
 -- these are custom configuration for each lsp, please create lsp configuration
 -- here instead of creating them in config.lua.
+-- :h vim.lsp.Config
+-- :h vim.lsp.ClientConfig
 -- following link, contains information about supported lsp:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
@@ -43,19 +45,19 @@ function servers.lua_ls()
   }
 end
 
-function servers.ltex_ls()
+function servers.ltex()
   return {
     on_attach = function(_, _)
       require('ltex_extra').setup({
         path = os.getenv('HOME') .. '/.config/nvim/spell/',
       })
     end,
-    filetypes = { 'gitcommit', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb' },
+    filetypes = { 'gitcommit', 'markdown', 'org', 'plaintext', 'rst', 'rnoweb' },
     settings = {},
   }
 end
 
-function servers.gols()
+function servers.gopls()
   local util = require('lspconfig/util')
 
   return {
@@ -109,7 +111,6 @@ end
 
 function servers.phpactor()
   return {
-    on_attach = lsp.on_attach,
     init_options = {
       ['language_server_phpstan.enabled'] = false,
       ['language_server_psalm.enabled'] = false,
