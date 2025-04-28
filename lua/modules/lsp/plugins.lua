@@ -13,6 +13,8 @@ return {
       -- INFO `prepend` ensures it is loaded before the user's LSP configs, so
       -- that the user's configs override nvim-lspconfig.
       vim.opt.runtimepath:prepend(lspConfigPath)
+
+      conf.init()
     end,
   },
 
