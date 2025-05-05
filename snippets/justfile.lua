@@ -11,7 +11,7 @@ local fmta = require('luasnip.extras.fmt').fmta
 local fmt = require('luasnip.extras.fmt').fmt
 
 ls.add_snippets(nil, {
-  sh = {
+  justfile = {
     snip(
       {
         trig = 'just',
