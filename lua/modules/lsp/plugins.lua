@@ -22,7 +22,7 @@ return {
   -- easily install and manage LSP servers, DAP servers, linters,
   -- and formatters.
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     config = conf.mason.setup,
   },
 
@@ -38,16 +38,16 @@ return {
   -- install and upgrade third party tools automatically
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    dependencies = { 'williamboman/mason.nvim' },
+    dependencies = { 'mason-org/mason.nvim' },
     config = conf.mason.installer,
   },
 
   -- extension to mason.nvim that makes it easier
   -- to use lspconfig with mason.nvim
   {
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-lspconfig.nvim',
     dependencies = {
-      'williamboman/mason.nvim',
+      'mason-org/mason.nvim',
       'simrat39/rust-tools.nvim',
     },
     config = conf.mason.lspconfig,

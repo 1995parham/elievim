@@ -194,34 +194,24 @@ function config.mason.lspconfig()
   -- https://github.com/williamboman/mason-lspconfig.nvim#configuration
   local servers = require('modules.lsp.servers')
 
-  require('mason-lspconfig').setup()
-  require('mason-lspconfig').setup_handlers({
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-      if server_name == 'tsserver' then
-        server_name = 'ts_ls'
-      end
-
-      if servers[server_name] then
-        -- vim.notify(
-        --   string.format('lsp client %s registered with custom configuration in mason-lspconfig', server_name),
-        --   vim.log.levels.DEBUG,
-        --   {
-        --     title = 'elievim',
-        --   }
-        -- )
-        vim.lsp.config(server_name, servers[server_name]())
-      end
-
-      vim.lsp.enable(server_name)
-    end,
-
-    ['rust_analyzer'] = function()
-      require('rust-tools').setup({})
-    end,
+  require('mason-lspconfig').setup({
+    automatic_enable = false,
   })
+
+  for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
+    if servers[server_name] then
+      -- vim.notify(
+      --   string.format('lsp client %s registered with custom configuration in mason-lspconfig', server_name),
+      --   vim.log.levels.DEBUG,
+      --   {
+      --     title = 'elievim',
+      --   }
+      -- )
+      vim.lsp.config(server_name, servers[server_name]())
+    end
+
+    vim.lsp.enable(server_name)
+  end
 end
 
 function config.null_ls()
