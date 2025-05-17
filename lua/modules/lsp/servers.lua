@@ -99,12 +99,6 @@ function servers.ruff()
         client.server_capabilities.hoverProvider = false
       end
     end,
-    trace = 'messages',
-    init_options = {
-      settings = {
-        logLevel = 'info',
-      },
-    },
   }
 end
 
