@@ -196,7 +196,7 @@ function config.mason.lspconfig()
 
   require('mason-lspconfig').setup({
     automatic_enable = false,
-    ensure_installed = false,
+    ensure_installed = {},
   })
 
   for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
