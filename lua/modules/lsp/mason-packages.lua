@@ -77,7 +77,7 @@ function packages.python()
     -- 'isort',
     -- 'black',
 
-    'pyright',
+    'basedpyright',
   }
 end
 

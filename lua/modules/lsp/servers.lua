@@ -59,6 +59,21 @@ function servers.ltex()
   }
 end
 
+function servers.basedpyright()
+  return {
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = 'standard',
+          autoSearchPaths = true,
+          diagnosticMode = 'openFilesOnly',
+          useLibraryCodeForTypes = true,
+        },
+      },
+    },
+  }
+end
+
 ---@return vim.lsp.Client
 function servers.gopls()
   return {
