@@ -78,6 +78,7 @@ function packages.python()
     -- 'black',
 
     'basedpyright',
+    'ty',
   }
 end
 
