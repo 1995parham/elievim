@@ -43,8 +43,4 @@ return {
     'Fymyte/rasi.vim',
     ft = 'rasi',
   },
-
-  {
-    'fladson/vim-kitty',
-  },
 }
