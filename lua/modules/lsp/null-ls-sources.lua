@@ -10,6 +10,8 @@ return {
   -- Enforce a stricter format than gofmt, while being backwards compatible.
   -- That is, gofumpt is happy with a subset of the formats that gofmt is happy with.
   null_ls.builtins.formatting.gofumpt,
+  null_ls.builtins.formatting.just,
+  null_ls.builtins.formatting.buildifier,
   -- The uncompromising Python code formatter
   null_ls.builtins.formatting.black.with({
     condition = function()
@@ -69,6 +71,5 @@ return {
   null_ls.builtins.diagnostics.hadolint,
   -- A Go linter aggregator.
   null_ls.builtins.diagnostics.golangci_lint,
-  -- null_ls.builtins.diagnostics.shellcheck,
-  null_ls.builtins.formatting.just,
+  null_ls.builtins.diagnostics.buildifier,
 }
