@@ -10,6 +10,8 @@ local silent, noremap = key.silent, key.noremap
 local opts = key.new_opts
 local cmd = key.cmd
 
+vim.keymap.del('i', '<Tab>')
+
 -- normal mode key mapping
 nmap({
   -- dashboard
