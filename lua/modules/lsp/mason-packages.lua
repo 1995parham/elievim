@@ -145,6 +145,7 @@ function packages.etc()
     'prettierd',
     'cspell',
     'kulala-fmt',
+    'gh-actions-language-server',
   }
 end
 
