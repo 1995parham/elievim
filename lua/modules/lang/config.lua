@@ -5,7 +5,7 @@ function config.nvim_treesitter()
   -- vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
   require('nvim-treesitter.configs').setup({
     ensure_installed = 'all',
-    ignore_install = { 'phpdoc', 'latex', 'fortran' },
+    ignore_install = { 'phpdoc', 'latex', 'fortran', 'ipkg' },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = { 'markdown' },
