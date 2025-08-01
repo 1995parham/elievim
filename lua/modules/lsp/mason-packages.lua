@@ -37,7 +37,8 @@ end
 
 function packages.lua()
   return {
-    'lua-language-server',
+    'emmylua_ls',
+    'emmylua-codeformat',
     'stylua',
     'selene',
   }

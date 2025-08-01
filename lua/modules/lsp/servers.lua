@@ -8,46 +8,8 @@ local servers = {}
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 ---@return vim.lsp.Client
-function servers.lua_ls()
-  -- local sumneko_binary_path = vim.fn.exepath('lua-language-server')
-  -- local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
-
-  local runtime_path = vim.split(package.path, ';')
-  table.insert(runtime_path, 'lua/?.lua')
-  table.insert(runtime_path, 'lua/?/init.lua')
-
-  return {
-    -- cmd = { sumneko_binary_path, '-E', sumneko_root_path .. '/main.lua' },
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT',
-          -- Setup your lua path
-          path = runtime_path,
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { 'vim' },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file('', true),
-        },
-        hint = {
-          enable = true,
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  }
-end
-
----@return vim.lsp.Client
 function servers.ltex()
+  ---@diagnostic disable-next-line: return-type-mismatch
   return {
     on_attach = function(_, _)
       require('ltex_extra').setup({
@@ -76,6 +38,7 @@ end
 
 ---@return vim.lsp.Client
 function servers.gopls()
+  ---@diagnostic disable-next-line: return-type-mismatch
   return {
     flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
     completeUnimported = true,
@@ -107,6 +70,7 @@ end
 
 ---@return vim.lsp.Client
 function servers.ruff()
+  ---@diagnostic disable-next-line: return-type-mismatch
   return {
     on_attach = function(client, _)
       if client.name == 'ruff' then
@@ -119,6 +83,7 @@ end
 
 ---@return vim.lsp.Client
 function servers.phpactor()
+  ---@diagnostic disable-next-line: return-type-mismatch
   return {
     init_options = {
       ['language_server_phpstan.enabled'] = false,
@@ -133,6 +98,8 @@ function servers.docker_compose_language_service()
   local util = require('lspconfig/util')
 
   return {
+    ---@return string?
+    ---@diagnostic disable-next-line: assign-type-mismatch
     root_dir = function(fname)
       local helm_root = util.root_pattern('Chart.yaml')
       -- docker-compose-language-service runs on every yaml file and trying to format and lint
@@ -155,6 +122,8 @@ function servers.helm_ls()
   return {
     filetypes = { 'helm' },
     cmd = { 'helm_ls', 'serve' },
+    ---@return string?
+    ---@diagnostic disable-next-line: assign-type-mismatch
     root_dir = function(fname)
       return util.root_pattern('Chart.yaml')(fname)
     end,

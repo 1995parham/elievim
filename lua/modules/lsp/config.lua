@@ -46,7 +46,7 @@ function config.init()
 
   for server_name, lsp_executable in pairs(enabled_lsp_servers) do
     if vim.fn.executable(lsp_executable) == 1 then
-      if servers[server_name] then
+      if servers[server_name] ~= nil then
         vim.lsp.config(server_name, servers[server_name]())
       end
       vim.lsp.enable(server_name)
@@ -200,7 +200,7 @@ function config.mason.lspconfig()
   })
 
   for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
-    if servers[server_name] then
+    if servers[server_name] ~= nil then
       -- vim.notify(
       --   string.format('lsp client %s registered with custom configuration in mason-lspconfig', server_name),
       --   vim.log.levels.DEBUG,
