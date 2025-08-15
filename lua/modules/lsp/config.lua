@@ -4,32 +4,6 @@ local config = {}
 function config.init()
   local _lsp = require('modules.lsp.on-attach')
 
-  -- Diagnostic configuration.
-  vim.diagnostic.config({
-    virtual_text = {
-      -- Show severity icons as prefixes.
-      prefix = function(diagnostic)
-        return _lsp.diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]] .. ' '
-      end,
-      -- Show only the first line of each diagnostic.
-      format = function(diagnostic)
-        return vim.split(diagnostic.message, '\n')[1]
-      end,
-    },
-    float = {
-      border = 'rounded',
-      source = 'if_many',
-      -- Show severity icons as prefixes.
-      prefix = function(diag)
-        local level = vim.diagnostic.severity[diag.severity]
-        local prefix = string.format(' %s ', _lsp.diagnostic_icons[level])
-        return prefix, 'Diagnostic' .. level:gsub('^%l', string.upper)
-      end,
-    },
-    -- Disable signs in the gutter.
-    signs = false,
-  })
-
   for type, icon in pairs(_lsp.diagnostic_icons) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
