@@ -34,4 +34,10 @@ return {
     'akinsho/toggleterm.nvim',
     config = conf.tterm,
   },
+
+  {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 }
