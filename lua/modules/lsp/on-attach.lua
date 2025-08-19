@@ -28,16 +28,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.notify(string.format('lsp client %s registered by calling on_attach', client.name), vim.log.levels.DEBUG, {
       title = 'elievim',
     })
-
-    if pcall(require, 'navigator') then
-      -- setup navigator for lsp client
-      require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
-      -- enable identifier highlight on hover
-      require('navigator.dochighlight').documentHighlight(bufnr)
-      -- configure doc highlight
-      require('navigator.lspclient.highlight').add_highlight()
-    end
-
     -- key mapping for lsp and showing lsp before the mapping description.
     local nmap = function(keys, func, desc)
       if desc then
@@ -49,11 +39,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', keys, func, bufopts)
     end
     -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- Set keymaps only for buffers with an active LSP
     nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]declaration')
     nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
-    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
     nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
+    nmap('gr', require('fzf-lua').lsp_references, '[g]oto [r]eferences')
+    nmap('K', vim.lsp.buf.hover, 'hover documentation')
+    nmap('<C-k>', vim.lsp.buf.signature_help, 'signature documentation')
     nmap('<Leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
     nmap('<Leader>wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
     nmap('<Leader>wl', function()
@@ -62,12 +54,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<Leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
     nmap('<Leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
     nmap('<Leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
-    nmap('gr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
-    nmap('<leader>ds', require('fzf-lua').lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', require('fzf-lua').lsp_live_workspace_symbols, '[W]orkspace [S]ymbols')
+    nmap('<leader>ds', require('fzf-lua').lsp_document_symbols, '[d]ocument [s]ymbols')
+    nmap('<leader>ws', require('fzf-lua').lsp_live_workspace_symbols, '[w]orkspace [s]ymbols')
     nmap('<leader>uh', function()
       vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
-    end, 'Toggle Inlay Hint')
+    end, 'toggle inlay hint')
+
+    if pcall(require, 'navigator') then
+      -- setup navigator for lsp client
+      require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
+      -- enable identifier highlight on hover
+      require('navigator.dochighlight').documentHighlight(bufnr)
+      -- configure doc highlight
+      require('navigator.lspclient.highlight').add_highlight()
+    end
   end,
 })
 
