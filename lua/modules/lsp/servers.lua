@@ -117,7 +117,6 @@ function servers.ts_ls()
   }
 end
 
-
 ---@return vim.lsp.Client
 function servers.ruff()
   return {
