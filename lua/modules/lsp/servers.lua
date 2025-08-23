@@ -106,6 +106,19 @@ function servers.gopls()
 end
 
 ---@return vim.lsp.Client
+function servers.ts_ls()
+  return {
+    on_attach = function(client, _)
+      if client.name == 'ts_ls' then
+        -- Disable formatting in favor of none-ls
+        client.server_capabilities.documentFormattingProvider = false
+      end
+    end,
+  }
+end
+
+
+---@return vim.lsp.Client
 function servers.ruff()
   return {
     on_attach = function(client, _)
