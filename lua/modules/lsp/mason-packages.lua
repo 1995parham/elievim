@@ -141,7 +141,6 @@ function packages.etc()
     'staticcheck',
     'vint',
     'ltex-ls',
-    'prettier',
     'prettierd',
     'cspell',
     'kulala-fmt',
