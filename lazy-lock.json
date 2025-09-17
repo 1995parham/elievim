@@ -9,7 +9,7 @@
   "duck.nvim": { "branch": "main", "commit": "d8a6b08af440e5a0e2b3b357e2f78bb1883272cd" },
   "fidget.nvim": { "branch": "main", "commit": "4d5858bd4c471c895060e1b9f3575f1551184dc5" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
-  "fzf-lua": { "branch": "main", "commit": "f8cf874c7c78deaddb028b80b7116c50cb53e88d" },
+  "fzf-lua": { "branch": "main", "commit": "a9a286e1663e5c26eefa5778322ea2ea2bc0bf6e" },
   "go.nvim": { "branch": "master", "commit": "65a3b811d9dec2a912244a911a8f91de58f145ed" },
   "guihua.lua": { "branch": "master", "commit": "87bea7b98429405caf2a0ce4d029b027bb017c70" },
   "hardtime.nvim": { "branch": "main", "commit": "b4e431934af1fe224a3a801f632c008278cb7628" },
