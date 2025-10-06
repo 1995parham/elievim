@@ -55,7 +55,7 @@ nmap({
   },
   { '<Leader>odo', cmd('LazyDockerToogle'), opts(silent, 'open/close lazydocker') },
   { '<Leader>oi', cmd('IPythonToggle'), opts(silent, 'open/close ipython') },
-  { '<Leader>odj', cmd('DjangoShellPlus'), opts(silent, 'open/close django shell_plus') },
+  { '<Leader>odj', cmd('DjangoShellPlusToggle'), opts(silent, 'open/close django shell_plus') },
   { '<Leader>hc', cmd('GitHistoryToggle'), opts(silent, 'show 5 last commit to help you write your commit message') },
 })
 

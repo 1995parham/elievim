@@ -24,11 +24,11 @@ vim.opt.wildignore = (
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
-vim.opt.directory = cache_dir .. 'swag/'
+vim.opt.directory = cache_dir .. 'swap/'
 vim.opt.undodir = cache_dir .. 'undo/'
 vim.opt.backupdir = cache_dir .. 'backup/'
 vim.opt.viewdir = cache_dir .. 'view/'
-vim.opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
+vim.opt.spellfile = cache_dir .. 'spell/en.utf-8.add'
 vim.opt.history = 2000
 -- if you exit Vim and later start it again, you would normally lose a lot of
 -- information.  the ShaDa file can be used to remember that information, which
