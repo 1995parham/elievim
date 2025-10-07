@@ -24,25 +24,25 @@ its [GitHub repository](https://github.com/neovim/neovim), or its [releases page
 │   ├── 📂 core                    heart of elievim which provides api
 │   │   ├── init.lua
 │   │   ├── keymap.lua             keymap api
+│   │   ├── neovide.lua            neovide-specific configuration
 │   │   └── options.lua            vim options
 │   │
 │   ├── 📂 keymap
 │   │   ├── config.lua
-│   │   └── init.lua
+│   │   ├── init.lua
 │   │   └── plugins.lua
 │   │
 │   ├── 📂 commands
-│   │   │
 │   │   ├── init.lua
-│   │   └── go.lua
-│   │   └── ansible.lua
+│   │   ├── go.lua
+│   │   ├── ansible.lua
+│   │   └── graphql.lua
 │   │
 │   └── 📂 modules
-│       │
-│       ├── 📂 completion
+│       ├── 📂 lang
 │       │   ├── config.lua
 │       │   └── plugins.lua
-│       ├── 📂 lang
+│       ├── 📂 lsp
 │       │   ├── config.lua
 │       │   └── plugins.lua
 │       ├── 📂 tools
@@ -52,8 +52,12 @@ its [GitHub repository](https://github.com/neovim/neovim), or its [releases page
 │           ├── config.lua
 │           └── plugins.lua
 └── 📂 snippets                   snippets
+    ├── all.lua
+    ├── go.lua
+    ├── justfile.lua
     ├── lua.json
-    └── package.json
+    ├── package.json
+    └── sh.lua
 
 ```
 
@@ -151,22 +155,27 @@ Use these APIs to config your key mapping in `keymap` folder. In this folder
 Then config plugins key mapping in `keymap/init.lua`. The example of API usage is as follows:
 
 ```lua
--- genreate keymap in normal mode
+-- generate keymap in normal mode
 nmap {
-  -- packer which is replaced by lazy.nvim
-  {'<Leader>pu',cmd('PackerUpdate'),opts(noremap,silent,'Packer update')},
-  {'<Leader>pi',cmd('PackerInstall'),opts(noremap,silent)},
-  {'<Leader>pc',cmd('PackerCompile'),opts(noremap,silent)},
+  -- dashboard
+  {'<Leader>n', cmd('DashboardNewFile'), opts(noremap, silent)},
+  {'<Leader>ss', cmd('SessionSave'), opts(noremap, silent)},
+  {'<Leader>sl', cmd('SessionLoad'), opts(noremap, silent)},
+  -- nvimtree
+  {'<Leader>pff', cmd('NvimTreeToggle'), opts(noremap, silent)},
+  -- buffers
+  {'<Leader>bn', cmd('bnext'), opts(noremap, silent, 'next buffer')},
+  {'<Leader>bp', cmd('bprevious'), opts(noremap, silent, 'previous buffer')},
 }
 ```
 
 `map` for each table, generate a new table that can pass to `vim.keymap.set` as follows:
 
-> `cmd('PackerUpdate')` just return a string `<cmd>PackerUpdate<CR>` as RHS.
-> LHS is `<leader>pu` and `opts(noremap, silent, 'Packer update')` generate options table as follows:
+> `cmd('DashboardNewFile')` just return a string `<cmd>DashboardNewFile<CR>` as RHS.
+> LHS is `<leader>n` and `opts(noremap, silent)` generate options table as follows:
 
 ```lua
-{noremap = true,silent = true, desc = 'Packer Update' }
+{noremap = true, silent = true}
 ```
 
 For some vim mode remap and Do not need use `cmd` function because
@@ -197,7 +206,7 @@ To utilize Language Servers, you'll typically need the following commands:
 
 ### Configuration
 
-Language servers are configured in `lua/modules/completion/config.lua` based on
+Language servers are configured in `lua/modules/lsp/config.lua` based on
 [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
 
 - Install Language Servers: Use [`mason.nvim`](https://github.com/williamboman/mason.nvim) to install
@@ -205,7 +214,7 @@ Language servers are configured in `lua/modules/completion/config.lua` based on
 - Automatic Configuration (Recommended): Most language servers will be automatically configured
   by [`mason-lspconfig.nvim`](https://github.com/williamboman/mason-lspconfig.nvim).
 - Manual Configuration (Optional): If a server isn't automatically configured, or you prefer manual setup,
-  add configurations to `lua/modules/completion/config.lua`.
+  add configurations to `lua/modules/lsp/config.lua`.
 
 ```lua
 ['taplo'] = function()
