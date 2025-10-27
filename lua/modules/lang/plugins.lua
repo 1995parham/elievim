@@ -35,6 +35,15 @@ return {
   },
 
   {
+    '1995parham/navi',
+    lazy = true,
+    ft = 'cheat',
+    config = function()
+      vim.opt.runtimepath:append(vim.fn.stdpath('data') .. '/lazy/navi/vim')
+    end,
+  },
+
+  {
     'lervag/vimtex',
     ft = 'tex',
   },
