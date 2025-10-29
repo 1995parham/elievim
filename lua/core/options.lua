@@ -24,7 +24,8 @@ vim.opt.wildignore = (
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
-vim.opt.directory = cache_dir .. 'swap/'
+-- No need to set directory since swapfile is disabled
+-- vim.opt.directory = cache_dir .. 'swap/'
 vim.opt.undodir = cache_dir .. 'undo/'
 vim.opt.backupdir = cache_dir .. 'backup/'
 vim.opt.viewdir = cache_dir .. 'view/'
@@ -107,7 +108,7 @@ vim.opt.signcolumn = 'yes'
 -- vim.opt.conceallevel = 2
 -- vim.opt.concealcursor = 'niv'
 vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldenable = false
 vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 

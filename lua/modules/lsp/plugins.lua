@@ -71,8 +71,10 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
+  -- LSP progress notifications
   {
     'j-hui/fidget.nvim',
+    event = 'LspAttach',
     config = conf.progress,
   },
 

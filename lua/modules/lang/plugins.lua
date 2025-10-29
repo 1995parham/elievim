@@ -17,7 +17,7 @@ return {
   {
     'ray-x/go.nvim',
     config = conf.go_nvim,
-    requires = {
+    dependencies = {
       { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
     },
   },

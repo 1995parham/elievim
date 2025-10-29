@@ -21,12 +21,12 @@ function config.dashboard()
   if status then
     local root = lsputil.root_pattern('.git')(cwd)
     if root ~= nil then
-      username = string.format(
-        '%s <%s>',
-        vim.api.nvim_exec2('Git config user.name', { output = true }).output,
-        vim.api.nvim_exec2('Git config user.email', { output = true }).output
-      )
-      cwd = root
+      local ok_name, name = pcall(vim.api.nvim_exec2, 'Git config user.name', { output = true })
+      local ok_email, email = pcall(vim.api.nvim_exec2, 'Git config user.email', { output = true })
+      if ok_name and ok_email then
+        username = string.format('%s <%s>', name.output, email.output)
+        cwd = root
+      end
     end
   end
 
@@ -410,6 +410,45 @@ function config.tterm()
       term:shutdown()
     end
   end, { bang = false, bar = true })
+end
+
+function config.notify()
+  local notify = require('notify')
+
+  -- Configure nvim-notify
+  notify.setup({
+    -- Animation style
+    stages = 'fade_in_slide_out', -- Options: fade_in_slide_out, fade, slide, static
+    -- Timeout for notifications in ms
+    timeout = 3000,
+    -- Background colour
+    background_colour = '#000000',
+    -- Icons for different log levels
+    icons = {
+      ERROR = '',
+      WARN = '',
+      INFO = '',
+      DEBUG = '',
+      TRACE = '✎',
+    },
+    -- Max width of notification window
+    max_width = 80,
+    -- Max height of notification window
+    max_height = 10,
+    -- Render function for messages
+    render = 'default', -- Options: default, minimal, simple, compact
+    -- Top down or bottom up
+    top_down = true,
+    -- Minimum level to show
+    level = vim.log.levels.INFO,
+    -- Function to execute on notification open
+    on_open = nil,
+    -- Function to execute on notification close
+    on_close = nil,
+  })
+
+  -- Set nvim-notify as the default notification handler
+  vim.notify = notify
 end
 
 return config

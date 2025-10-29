@@ -40,4 +40,10 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
+
+  -- Fancy notification manager
+  {
+    'rcarriga/nvim-notify',
+    config = conf.notify,
+  },
 }
