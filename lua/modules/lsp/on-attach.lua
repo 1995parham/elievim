@@ -26,14 +26,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = event_context.buf
 
     -- Show a fancy notification when LSP attaches
-    vim.notify(
-      string.format('Language server "%s" attached', client.name),
-      vim.log.levels.INFO,
-      {
-        title = 'LSP',
-        timeout = 2000,
-      }
-    )
+    vim.notify(string.format('Language server "%s" attached', client.name), vim.log.levels.INFO, {
+      title = 'LSP',
+      timeout = 2000,
+    })
     -- key mapping for lsp and showing lsp before the mapping description.
     local nmap = function(keys, func, desc)
       if desc then
@@ -83,14 +79,10 @@ vim.api.nvim_create_autocmd('LspDetach', {
   callback = function(event_context)
     local client = vim.lsp.get_client_by_id(event_context.data.client_id)
     if client then
-      vim.notify(
-        string.format('Language server "%s" detached', client.name),
-        vim.log.levels.WARN,
-        {
-          title = 'LSP',
-          timeout = 2000,
-        }
-      )
+      vim.notify(string.format('Language server "%s" detached', client.name), vim.log.levels.WARN, {
+        title = 'LSP',
+        timeout = 2000,
+      })
     end
   end,
 })
