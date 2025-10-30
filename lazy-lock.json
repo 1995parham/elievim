@@ -23,7 +23,7 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "517ef5994ef9d6b738322664d5fdd948f0fdeb46" },
   "mason.nvim": { "branch": "main", "commit": "ad7146aa61dcaeb54fa900144d768f040090bff0" },
   "navi": { "branch": "main", "commit": "77027dd2b4fc99bb652c2398a77b5d4694fbe4ce" },
-  "navigator.lua": { "branch": "master", "commit": "546982c1e4be3f6b56f0ebe4cd234073565bcadb" },
+  "navigator.lua": { "branch": "master", "commit": "deaf00338fe288d24f5632b1842130f8d9c15b0a" },
   "naz.vim": { "branch": "main", "commit": "df8d4d517131b9ddb8e3b4ced9439281be485eee" },
   "none-ls.nvim": { "branch": "main", "commit": "a96172f673f720cd4f3572e1fcd08400ed3eb25d" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
