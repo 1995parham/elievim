@@ -14,6 +14,140 @@ function config.init()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
+  -- Configure LSP file watching to improve detection of new files
+  -- This helps LSP servers automatically pick up changes without manual restart
+  vim.lsp.set_log_level('warn') -- Reduce log spam
+
+  -- Set up better file watching patterns
+  local default_workspace_config = {
+    -- Configure workspace folders and file watching
+    workspace = {
+      -- Maximum number of file changes to monitor (increase if you have large projects)
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+        relativePatternSupport = true,
+      },
+    },
+  }
+
+  -- Create user commands for LSP management
+  vim.api.nvim_create_user_command('LspRestart', function(opts)
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if opts.bang then
+      -- LspRestart! restarts all clients
+      clients = vim.lsp.get_clients()
+    end
+
+    if #clients == 0 then
+      vim.notify('No LSP clients to restart', vim.log.levels.WARN, { title = 'LSP' })
+      return
+    end
+
+    for _, client in pairs(clients) do
+      vim.lsp.stop_client(client.id)
+      vim.notify(string.format('Restarting %s...', client.name), vim.log.levels.INFO, { title = 'LSP' })
+    end
+
+    vim.defer_fn(function()
+      if opts.bang then
+        vim.cmd('bufdo edit')
+      else
+        vim.cmd('edit')
+      end
+      vim.notify('LSP clients restarted', vim.log.levels.INFO, { title = 'LSP' })
+    end, 100)
+  end, {
+    bang = true,
+    desc = 'Restart LSP clients (use ! to restart all)',
+  })
+
+  vim.api.nvim_create_user_command('LspInfo', function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if #clients == 0 then
+      vim.notify('No LSP clients attached to this buffer', vim.log.levels.WARN, { title = 'LSP' })
+      return
+    end
+
+    local lines = { 'LSP Client Information:', '' }
+    for _, client in pairs(clients) do
+      table.insert(lines, string.format('• %s (id: %d)', client.name, client.id))
+      table.insert(lines, string.format('  Status: %s', client.is_stopped() and 'stopped' or 'running'))
+      table.insert(lines, string.format('  Root: %s', client.config.root_dir or 'none'))
+
+      if client.workspace_folders then
+        table.insert(lines, '  Workspace folders:')
+        for _, folder in ipairs(client.workspace_folders) do
+          table.insert(lines, string.format('    - %s', folder.name))
+        end
+      end
+
+      -- Show capabilities
+      if client.server_capabilities then
+        local caps = {}
+        if client.server_capabilities.completionProvider then
+          table.insert(caps, 'completion')
+        end
+        if client.server_capabilities.hoverProvider then
+          table.insert(caps, 'hover')
+        end
+        if client.server_capabilities.definitionProvider then
+          table.insert(caps, 'definition')
+        end
+        if client.server_capabilities.referencesProvider then
+          table.insert(caps, 'references')
+        end
+        if client.server_capabilities.documentFormattingProvider then
+          table.insert(caps, 'formatting')
+        end
+        if #caps > 0 then
+          table.insert(lines, string.format('  Capabilities: %s', table.concat(caps, ', ')))
+        end
+      end
+      table.insert(lines, '')
+    end
+
+    vim.notify(table.concat(lines, '\n'), vim.log.levels.INFO, { title = 'LSP Info', timeout = 10000 })
+  end, {
+    desc = 'Show LSP client information',
+  })
+
+  vim.api.nvim_create_user_command('LspRefresh', function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if #clients == 0 then
+      vim.notify('No LSP clients attached', vim.log.levels.WARN, { title = 'LSP' })
+      return
+    end
+
+    for _, client in pairs(clients) do
+      -- Clear and refresh diagnostics
+      vim.diagnostic.reset(nil, client.id)
+
+      -- Notify the server about workspace changes
+      if client.server_capabilities.workspace then
+        vim.notify(
+          string.format('Refreshing workspace for %s', client.name),
+          vim.log.levels.INFO,
+          { title = 'LSP' }
+        )
+      end
+
+      -- Request fresh diagnostics
+      vim.lsp.buf_request(bufnr, 'textDocument/diagnostic', {
+        textDocument = vim.lsp.util.make_text_document_params(bufnr),
+      })
+    end
+
+    vim.notify('Workspace refreshed', vim.log.levels.INFO, { title = 'LSP' })
+  end, {
+    desc = 'Refresh LSP workspace and diagnostics',
+  })
+
   local servers = require('modules.lsp.servers')
 
   -- A mapping from lsp server name to the executable name

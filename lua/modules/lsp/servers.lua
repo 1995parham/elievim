@@ -33,6 +33,10 @@ function servers.lua_ls()
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file('', true),
+          -- Better file watching
+          checkThirdParty = false,
+          maxPreload = 5000,
+          preloadFileSize = 10000,
         },
         hint = {
           enable = true,
@@ -68,7 +72,17 @@ function servers.basedpyright()
           autoSearchPaths = true,
           diagnosticMode = 'openFilesOnly',
           useLibraryCodeForTypes = true,
+          -- Better workspace symbol scanning
+          indexing = true,
+          -- Auto-import completions
+          autoImportCompletions = true,
         },
+      },
+    },
+    -- Enable workspace configuration
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
       },
     },
   }
@@ -100,6 +114,21 @@ function servers.gopls()
           regenerate_cgo = true,
           vendor = false,
         },
+        -- Better workspace management
+        directoryFilters = {
+          '-**/node_modules',
+          '-**/.git',
+          '-**/vendor',
+        },
+        -- Enable better symbol search across workspace
+        symbolMatcher = 'FastFuzzy',
+        symbolStyle = 'Dynamic',
+      },
+    },
+    -- Enable workspace configuration
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
       },
     },
   }
@@ -114,6 +143,36 @@ function servers.ts_ls()
         client.server_capabilities.documentFormattingProvider = false
       end
     end,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
+    -- Enable workspace configuration
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    },
   }
 end
 

@@ -62,6 +62,72 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
     end, 'toggle inlay hint')
 
+    -- LSP restart and workspace management keymaps
+    nmap('<Leader>lr', function()
+      -- Restart the specific LSP client for this buffer
+      vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = bufnr }))
+      vim.defer_fn(function()
+        vim.cmd('edit')
+      end, 100)
+    end, '[l]sp [r]estart for current buffer')
+
+    nmap('<Leader>lR', function()
+      -- Restart all LSP clients
+      local clients = vim.lsp.get_clients()
+      for _, client in pairs(clients) do
+        vim.lsp.stop_client(client.id)
+      end
+      vim.defer_fn(function()
+        vim.cmd('bufdo edit')
+      end, 100)
+      vim.notify('All LSP clients restarted', vim.log.levels.INFO, { title = 'LSP' })
+    end, '[l]sp [R]estart all clients')
+
+    nmap('<Leader>lf', function()
+      -- Refresh workspace folders and diagnostics
+      for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+        if c.server_capabilities.workspace then
+          -- Trigger workspace refresh if supported
+          if c.server_capabilities.workspace.workspaceFolders then
+            vim.notify(
+              string.format('Refreshing workspace for %s', c.name),
+              vim.log.levels.INFO,
+              { title = 'LSP' }
+            )
+          end
+        end
+        -- Refresh diagnostics
+        vim.diagnostic.reset(nil, c.id)
+        vim.lsp.buf_request(bufnr, 'textDocument/diagnostic', {
+          textDocument = vim.lsp.util.make_text_document_params(bufnr),
+        })
+      end
+    end, '[l]sp re[f]resh workspace')
+
+    nmap('<Leader>li', function()
+      -- Show LSP client info and status
+      local clients = vim.lsp.get_clients({ bufnr = bufnr })
+      if #clients == 0 then
+        vim.notify('No LSP clients attached', vim.log.levels.WARN, { title = 'LSP' })
+        return
+      end
+
+      local lines = {}
+      for _, c in pairs(clients) do
+        table.insert(lines, string.format('Client: %s (id: %d)', c.name, c.id))
+        table.insert(lines, string.format('  Root: %s', c.config.root_dir or 'none'))
+        if c.workspace_folders then
+          table.insert(lines, '  Workspace folders:')
+          for _, folder in ipairs(c.workspace_folders) do
+            table.insert(lines, string.format('    - %s', folder.name))
+          end
+        end
+        table.insert(lines, '')
+      end
+
+      vim.notify(table.concat(lines, '\n'), vim.log.levels.INFO, { title = 'LSP Info', timeout = 5000 })
+    end, '[l]sp [i]nfo')
+
     if pcall(require, 'navigator') then
       -- setup navigator for lsp client
       require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
