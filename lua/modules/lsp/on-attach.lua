@@ -62,7 +62,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
     end, 'toggle inlay hint')
 
-    -- LSP restart and workspace management keymaps
     nmap('<Leader>lr', function()
       -- Restart the specific LSP client for this buffer
       vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = bufnr }))
@@ -72,7 +71,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[l]sp [r]estart for current buffer')
 
     nmap('<Leader>lR', function()
-      -- Restart all LSP clients
       local clients = vim.lsp.get_clients()
       for _, client in pairs(clients) do
         vim.lsp.stop_client(client.id)
@@ -84,10 +82,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[l]sp [R]estart all clients')
 
     nmap('<Leader>lf', function()
-      -- Refresh workspace folders and diagnostics
       for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
         if c.server_capabilities.workspace then
-          -- Trigger workspace refresh if supported
           if c.server_capabilities.workspace.workspaceFolders then
             vim.notify(
               string.format('Refreshing workspace for %s', c.name),
@@ -96,7 +92,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
             )
           end
         end
-        -- Refresh diagnostics
         vim.diagnostic.reset(nil, c.id)
         vim.lsp.buf_request(bufnr, 'textDocument/diagnostic', {
           textDocument = vim.lsp.util.make_text_document_params(bufnr),
@@ -105,7 +100,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[l]sp re[f]resh workspace')
 
     nmap('<Leader>li', function()
-      -- Show LSP client info and status
       local clients = vim.lsp.get_clients({ bufnr = bufnr })
       if #clients == 0 then
         vim.notify('No LSP clients attached', vim.log.levels.WARN, { title = 'LSP' })
@@ -135,20 +129,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       require('navigator.dochighlight').documentHighlight(bufnr)
       -- configure doc highlight
       require('navigator.lspclient.highlight').add_highlight()
-    end
-  end,
-})
-
--- Show notification when LSP detaches
-vim.api.nvim_create_autocmd('LspDetach', {
-  group = vim.api.nvim_create_augroup('lsp_detach_notif', { clear = true }),
-  callback = function(event_context)
-    local client = vim.lsp.get_client_by_id(event_context.data.client_id)
-    if client then
-      vim.notify(string.format('Language server "%s" detached', client.name), vim.log.levels.WARN, {
-        title = 'LSP',
-        timeout = 2000,
-      })
     end
   end,
 })

@@ -38,7 +38,7 @@ end
 function packages.lua()
   return {
     'lua-language-server',
-    'stylua',
+    -- 'stylua',
     'selene',
   }
 end
