@@ -85,11 +85,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
         if c.server_capabilities.workspace then
           if c.server_capabilities.workspace.workspaceFolders then
-            vim.notify(
-              string.format('Refreshing workspace for %s', c.name),
-              vim.log.levels.INFO,
-              { title = 'LSP' }
-            )
+            vim.notify(string.format('Refreshing workspace for %s', c.name), vim.log.levels.INFO, { title = 'LSP' })
           end
         end
         vim.diagnostic.reset(nil, c.id)

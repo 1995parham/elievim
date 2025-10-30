@@ -130,11 +130,7 @@ function config.init()
 
       -- Notify the server about workspace changes
       if client.server_capabilities.workspace then
-        vim.notify(
-          string.format('Refreshing workspace for %s', client.name),
-          vim.log.levels.INFO,
-          { title = 'LSP' }
-        )
+        vim.notify(string.format('Refreshing workspace for %s', client.name), vim.log.levels.INFO, { title = 'LSP' })
       end
 
       -- Request fresh diagnostics
