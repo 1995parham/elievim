@@ -1,7 +1,7 @@
 local config = {}
 
 function config.naz()
-  require('naz')
+  vim.cmd('colorscheme naz')
 end
 
 function config.dashboard()
