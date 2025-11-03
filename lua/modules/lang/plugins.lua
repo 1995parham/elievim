@@ -24,6 +24,10 @@ return {
 
   {
     'davidmh/cspell.nvim',
+    -- cspell requires Node.js
+    cond = function()
+      return require('core.runtime').has_nodejs()
+    end,
   },
 
   {

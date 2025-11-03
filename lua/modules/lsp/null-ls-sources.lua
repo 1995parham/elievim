@@ -1,8 +1,9 @@
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 local null_ls = require('null-ls')
+local runtime = require('core.runtime')
 -- local cspell = require('cspell')
 
-return {
+local sources = {
   -- An opinionated code formatter for Lua.
   null_ls.builtins.formatting.stylua,
   -- A whitespace formatter for different query languages
@@ -37,12 +38,8 @@ return {
       return vim.fn.executable('isort') == 1
     end,
   }),
-  -- ✨ 📜 🪄 ✨ HTML Template Linter and Formatter.
-  null_ls.builtins.formatting.djlint,
   -- A shell parser, formatter, and interpreter with bash support.
   null_ls.builtins.formatting.shfmt,
-  -- prettier, as a daemon, for ludicrous formatting speed.
-  null_ls.builtins.formatting.prettierd,
 
   null_ls.builtins.diagnostics.selene,
   -- cspell.diagnostics.with({
@@ -63,8 +60,6 @@ return {
       return vim.fn.executable('pylint') == 1
     end,
   }),
-  -- ✨ 📜 🪄 ✨ HTML Template Linter and Formatter.
-  null_ls.builtins.diagnostics.djlint,
   -- Actionlint is a static checker for GitHub Actions workflow files.
   null_ls.builtins.diagnostics.actionlint,
   -- A smarter Dockerfile linter that helps you build best practice Docker images.
@@ -73,3 +68,18 @@ return {
   null_ls.builtins.diagnostics.golangci_lint,
   null_ls.builtins.diagnostics.buildifier,
 }
+
+-- Add Node.js-dependent sources if Node.js is available
+if runtime.has_nodejs() then
+  -- prettier, as a daemon, for ludicrous formatting speed.
+  table.insert(sources, null_ls.builtins.formatting.prettierd)
+end
+
+-- Add Python-dependent sources if Python is available
+if runtime.has_python() then
+  -- ✨ 📜 🪄 ✨ HTML Template Linter and Formatter.
+  table.insert(sources, null_ls.builtins.formatting.djlint)
+  table.insert(sources, null_ls.builtins.diagnostics.djlint)
+end
+
+return sources

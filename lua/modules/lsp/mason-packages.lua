@@ -1,6 +1,7 @@
 -- packages that are installed automatically using mason.
 -- each function groups tools related with a specific language,
 -- and they all called using all method to list them together.
+local runtime = require('core.runtime')
 local packages = {}
 
 function packages.go()
@@ -18,11 +19,18 @@ function packages.go()
 end
 
 function packages.shell()
-  return {
-    'bash-language-server',
-    'shfmt',
-    'shellcheck',
-  }
+  local pkgs = {}
+
+  -- bash-language-server requires Node.js
+  if runtime.has_nodejs() then
+    table.insert(pkgs, 'bash-language-server')
+  end
+
+  -- shfmt and shellcheck are standalone binaries
+  table.insert(pkgs, 'shfmt')
+  table.insert(pkgs, 'shellcheck')
+
+  return pkgs
 end
 
 function packages.c()
@@ -44,9 +52,14 @@ function packages.lua()
 end
 
 function packages.vim()
-  return {
-    'vim-language-server',
-  }
+  -- vim-language-server requires Node.js
+  if runtime.has_nodejs() then
+    return {
+      'vim-language-server',
+    }
+  else
+    return {}
+  end
 end
 
 function packages.sql()
@@ -56,10 +69,14 @@ function packages.sql()
 end
 
 function packages.json()
-  return {
-    'jq',
-    'json-lsp',
-  }
+  local pkgs = { 'jq' } -- jq is a standalone binary
+
+  -- json-lsp requires Node.js
+  if runtime.has_nodejs() then
+    table.insert(pkgs, 'json-lsp')
+  end
+
+  return pkgs
 end
 
 -- function packages.ansible()
@@ -69,16 +86,21 @@ end
 -- end
 
 function packages.python()
-  return {
-    -- install packages like mypy or pylint locally instead of
-    -- globally so they can search virtualenv.
-    -- 'mypy',
-    -- 'pylint',
-    -- 'isort',
-    -- 'black',
+  -- basedpyright requires Node.js (it's built with Node.js despite being a Python LSP)
+  if runtime.has_nodejs() then
+    return {
+      -- install packages like mypy or pylint locally instead of
+      -- globally so they can search virtualenv.
+      -- 'mypy',
+      -- 'pylint',
+      -- 'isort',
+      -- 'black',
 
-    'basedpyright',
-  }
+      'basedpyright',
+    }
+  else
+    return {}
+  end
 end
 
 function packages.toml()
@@ -88,29 +110,48 @@ function packages.toml()
 end
 
 function packages.docker()
-  return {
-    'dockerfile-language-server',
-    'docker-compose-language-service',
-    'hadolint',
-  }
+  local pkgs = { 'hadolint' } -- hadolint is a standalone binary
+
+  -- dockerfile-language-server and docker-compose-language-service require Node.js
+  if runtime.has_nodejs() then
+    table.insert(pkgs, 'dockerfile-language-server')
+    table.insert(pkgs, 'docker-compose-language-service')
+  end
+
+  return pkgs
 end
 
 function packages.markdown()
-  return {
-    'markdownlint',
-  }
+  -- markdownlint requires Node.js
+  if runtime.has_nodejs() then
+    return {
+      'markdownlint',
+    }
+  else
+    return {}
+  end
 end
 
 function packages.jinja()
-  return {
-    'djlint',
-  }
+  -- djlint requires Python
+  if runtime.has_python() then
+    return {
+      'djlint',
+    }
+  else
+    return {}
+  end
 end
 
 function packages.graphql()
-  return {
-    'graphql-language-service-cli',
-  }
+  -- graphql-language-service-cli requires Node.js
+  if runtime.has_nodejs() then
+    return {
+      'graphql-language-service-cli',
+    }
+  else
+    return {}
+  end
 end
 
 function packages.rust()
@@ -134,18 +175,24 @@ function packages.java()
 end
 
 function packages.etc()
-  return {
+  local pkgs = {
     'editorconfig-checker',
     'impl',
     'misspell',
     'staticcheck',
     'vint',
-    'ltex-ls',
-    'prettierd',
-    'cspell',
+    'ltex-ls', -- Java-based, standalone
     'kulala-fmt',
-    'gh-actions-language-server',
   }
+
+  -- Node.js-dependent packages
+  if runtime.has_nodejs() then
+    table.insert(pkgs, 'prettierd')
+    table.insert(pkgs, 'cspell')
+    table.insert(pkgs, 'gh-actions-language-server')
+  end
+
+  return pkgs
 end
 
 function packages.all()

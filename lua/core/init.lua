@@ -80,3 +80,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(plugins())
 require('commands')
 require('keymap')
+
+-- Check runtime dependencies and notify user if something is missing
+-- Use defer to avoid blocking startup
+vim.defer_fn(function()
+  require('core.runtime').notify_missing_runtimes()
+end, 1000) -- Wait 1 second after startup
+
+-- Create user command to check runtime status
+vim.api.nvim_create_user_command('RuntimeStatus', function()
+  require('core.runtime').print_summary()
+end, { desc = 'Show runtime environment status (Node.js, Python, etc.)' })
