@@ -62,10 +62,7 @@ function M.notify_missing_runtimes()
 
   if not M.has_nodejs() then
     table.insert(missing, 'Node.js')
-    table.insert(
-      features,
-      '  • LSP servers (bash, vim, json, dockerfile, graphql, python/basedpyright)'
-    )
+    table.insert(features, '  • LSP servers (bash, vim, json, dockerfile, graphql, python/basedpyright)')
     table.insert(features, '  • Formatters (prettierd)')
     table.insert(features, '  • Linters (cspell, markdownlint)')
     table.insert(features, '  • GitHub Actions language server')
