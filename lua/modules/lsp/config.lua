@@ -150,7 +150,6 @@ function config.init()
   -- for those servers that are not installed using mason.
   local enabled_lsp_servers = {
     ruff = 'ruff',
-    kulala_ls = 'kulala-ls',
   }
 
   for server_name, lsp_executable in pairs(enabled_lsp_servers) do
