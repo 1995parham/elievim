@@ -3,13 +3,18 @@ local conf = require('modules.lang.config')
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
     config = conf.nvim_treesitter,
   },
 
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
+    lazy = false,
     dependencies = { 'nvim-treesitter' },
+    config = conf.nvim_treesitter_textobjects,
   },
 
   -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,

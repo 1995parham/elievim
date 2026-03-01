@@ -1,91 +1,109 @@
 local config = {}
 
+-- Curated list of parsers to install
+local ensure_installed = {
+  -- Neovim essentials
+  'lua',
+  'vim',
+  'vimdoc',
+  'query',
+  -- Main programming languages
+  'go',
+  'python',
+  'php',
+  'rust',
+  'c',
+  'cpp',
+  -- Web development
+  'typescript',
+  'tsx',
+  'javascript',
+  'html',
+  'css',
+  'scss',
+  -- Scripting
+  'bash',
+  'fish',
+  -- Config & data formats
+  'json',
+  'yaml',
+  'toml',
+  'xml',
+  'ini',
+  'csv',
+  -- Documentation & markup
+  'markdown',
+  'markdown_inline',
+  'rst',
+  -- DevOps & infrastructure
+  'dockerfile',
+  'helm',
+  'terraform',
+  'hcl',
+  -- Git
+  'git_config',
+  'git_rebase',
+  'gitcommit',
+  'gitignore',
+  'gitattributes',
+  -- Build systems & tools
+  'make',
+  'cmake',
+  'just',
+  'ninja',
+  -- GraphQL & APIs
+  'graphql',
+  'http',
+  -- Databases
+  'sql',
+  -- Other useful parsers
+  'regex',
+  'diff',
+  'jq',
+  'proto',
+  'requirements',
+}
+
 function config.nvim_treesitter()
-  -- vim.api.nvim_command('set foldmethod=expr')
-  -- vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
-  require('nvim-treesitter.configs').setup({
-    -- Use 'all' to install all parsers (slower startup but maximum coverage)
-    -- ensure_installed = 'all',
-    -- Curated list based on actual usage for faster startup
-    ensure_installed = {
-      -- Neovim essentials
-      'lua',
-      'vim',
-      'vimdoc',
-      'query',
-      -- Main programming languages (based on your file usage)
-      'go',
-      'python',
-      'php',
-      'rust',
-      'c',
-      'cpp',
-      -- Web development
-      'typescript',
-      'tsx',
-      'javascript',
-      'html',
-      'css',
-      'scss',
-      -- Scripting
-      'bash',
-      'fish',
-      -- Config & data formats
-      'json',
-      'yaml',
-      'toml',
-      'xml',
-      'ini',
-      'csv',
-      -- Documentation & markup
-      'markdown',
-      'markdown_inline',
-      'rst',
-      -- DevOps & infrastructure
-      'dockerfile',
-      'helm',
-      'terraform',
-      'hcl',
-      -- Git
-      'git_config',
-      'git_rebase',
-      'gitcommit',
-      'gitignore',
-      'gitattributes',
-      -- Build systems & tools
-      'make',
-      'cmake',
-      'just',
-      'ninja',
-      -- GraphQL & APIs
-      'graphql',
-      'http',
-      -- Databases
-      'sql',
-      -- Other useful parsers
-      'regex',
-      'diff',
-      'jq',
-      'proto',
-      'requirements',
-    },
-    ignore_install = { 'phpdoc' },
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = { 'markdown' },
-    },
-    textobjects = {
-      select = {
-        enable = true,
-        keymaps = {
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['ac'] = '@class.outer',
-          ['ic'] = '@class.inner',
-        },
-      },
+  require('nvim-treesitter').setup()
+
+  -- Install parsers (async, non-blocking)
+  require('nvim-treesitter').install(ensure_installed)
+
+  -- Enable treesitter highlighting for all filetypes that have a parser
+  vim.api.nvim_create_autocmd('FileType', {
+    callback = function(args)
+      -- Only start treesitter if a parser is available for this filetype
+      if pcall(vim.treesitter.start, args.buf) then
+        -- Enable treesitter-based folding for this buffer
+        vim.wo[args.buf][0].foldmethod = 'expr'
+        vim.wo[args.buf][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      end
+    end,
+  })
+end
+
+function config.nvim_treesitter_textobjects()
+  require('nvim-treesitter-textobjects').setup({
+    select = {
+      lookahead = true,
     },
   })
+
+  -- Textobject keymaps
+  local select = require('nvim-treesitter-textobjects.select').select_textobject
+  vim.keymap.set({ 'x', 'o' }, 'af', function()
+    select('@function.outer', 'textobjects')
+  end, { desc = 'Select outer function' })
+  vim.keymap.set({ 'x', 'o' }, 'if', function()
+    select('@function.inner', 'textobjects')
+  end, { desc = 'Select inner function' })
+  vim.keymap.set({ 'x', 'o' }, 'ac', function()
+    select('@class.outer', 'textobjects')
+  end, { desc = 'Select outer class' })
+  vim.keymap.set({ 'x', 'o' }, 'ic', function()
+    select('@class.inner', 'textobjects')
+  end, { desc = 'Select inner class' })
 end
 
 function config.go_nvim()

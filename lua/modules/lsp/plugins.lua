@@ -48,9 +48,16 @@ return {
     'mason-org/mason-lspconfig.nvim',
     dependencies = {
       'mason-org/mason.nvim',
-      'simrat39/rust-tools.nvim',
     },
     config = conf.mason.lspconfig,
+  },
+
+  -- Supercharge your Rust experience in Neovim
+  -- Successor to rust-tools.nvim, auto-configures rust-analyzer
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5',
+    lazy = false,
   },
 
   { 'L3MON4D3/LuaSnip', config = conf.lua_snip },

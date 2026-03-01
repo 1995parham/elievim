@@ -14,8 +14,11 @@ return {
     'wakatime/vim-wakatime',
   },
 
-  -- a vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
-  { 'airblade/vim-gitgutter' },
+  -- Git signs in the gutter, hunk actions, and inline blame (Lua-native replacement for vim-gitgutter)
+  {
+    'lewis6991/gitsigns.nvim',
+    config = conf.gitsigns,
+  },
   -- a powerful git log viewer
   { 'cohama/agit.vim' },
   -- fugitive.vim: a git wrapper so awesome, it should be illegal
