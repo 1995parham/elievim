@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v6
       - name: Install selene
         run: |
-          gh release download --repo Kampfkarren/selene -p '*linux-gnu.zip' -D /tmp
-          unzip /tmp/*linux-gnu.zip -d /usr/local/bin
+          gh release download --repo Kampfkarren/selene -p 'selene-*-linux.zip' -D /tmp
+          unzip /tmp/selene-*-linux.zip -d /usr/local/bin
           chmod +x /usr/local/bin/selene
         env:
           GH_TOKEN: ${{ github.token }}
