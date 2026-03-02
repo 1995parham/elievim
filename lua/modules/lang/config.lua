@@ -76,8 +76,8 @@ function config.nvim_treesitter()
       -- Only start treesitter if a parser is available for this filetype
       if pcall(vim.treesitter.start, args.buf) then
         -- Enable treesitter-based folding for this buffer
-        vim.wo[args.buf][0].foldmethod = 'expr'
-        vim.wo[args.buf][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.api.nvim_set_option_value('foldmethod', 'expr', { scope = 'local' })
+        vim.api.nvim_set_option_value('foldexpr', 'v:lua.vim.treesitter.foldexpr()', { scope = 'local' })
       end
     end,
   })

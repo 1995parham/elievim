@@ -8,13 +8,13 @@
       "set -eu",
       "set -o pipefail",
       "",
-      "root=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"",
+      "root=\"\\$(cd \"\\$(dirname \"\\${BASH_SOURCE[0]}\")\" && pwd)\"",
       "",
       "main() {",
       "  # write your code here",
       "}",
       "",
-      "main \"$@\""
+      "main \"\\$@\""
     ],
     "description": "Shabang and error handling in bash"
   }
