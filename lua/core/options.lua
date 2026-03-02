@@ -89,6 +89,7 @@ vim.opt.display = 'lastline'
 vim.opt.showbreak = '↳  '
 vim.opt.pumblend = 10
 vim.opt.winblend = 10
+vim.o.winborder = 'rounded'
 
 vim.opt.undofile = true
 vim.opt.synmaxcol = 2500
@@ -118,7 +119,7 @@ else
   vim.opt.shell = 'bash'
 end
 
-if vim.loop.os_uname().sysname == 'Darwin' then
+if vim.uv.os_uname().sysname == 'Darwin' then
   vim.g.clipboard = {
     name = 'macOS-clipboard',
     copy = {

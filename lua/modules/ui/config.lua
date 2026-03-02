@@ -17,7 +17,7 @@ function config.dashboard()
 
   local cwd = vim.fn.getcwd()
   local username = (os.getenv('USER') or '')
-  local status, lsputil = pcall(require, 'lspconfig/util')
+  local status, lsputil = pcall(require, 'lspconfig.util')
   if status then
     local root = lsputil.root_pattern('.git')(cwd)
     if root ~= nil then
@@ -296,7 +296,9 @@ function config.tterm()
 
   vim.api.nvim_create_autocmd({ 'FileType' }, {
     pattern = { 'gitcommit', 'gitrebase', 'gitconfig' },
-    command = 'set bufhidden=delete',
+    callback = function(ev)
+      vim.bo[ev.buf].bufhidden = 'delete'
+    end,
   })
 
   require('toggleterm').setup({

@@ -75,9 +75,7 @@ end
 
 --@private
 local keymap_set = function(mode, tbl)
-  vim.validate({
-    tbl = { tbl, 'table' },
-  })
+  vim.validate('tbl', tbl, 'table')
   local len = #tbl
   if len < 2 then
     vim.notify('keymap must has rhs')
@@ -91,9 +89,7 @@ end
 
 local function map(mod)
   return function(tbl)
-    vim.validate({
-      tbl = { tbl, 'table' },
-    })
+    vim.validate('tbl', tbl, 'table')
 
     if type(tbl[1]) == 'table' and type(tbl[2]) == 'table' then
       for _, v in pairs(tbl) do

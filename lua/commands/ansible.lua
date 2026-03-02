@@ -8,6 +8,8 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufNewFile' }, {
     '*/*ansible*/*.yml',
     '*/*ansible*/*.yaml',
   },
-  command = 'set ft=yaml.ansible',
+  callback = function(ev)
+    vim.bo[ev.buf].filetype = 'yaml.ansible'
+  end,
   desc = 'use yaml.ansible filetype for ansible-ls to work',
 })

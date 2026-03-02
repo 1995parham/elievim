@@ -9,7 +9,7 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_buf_conf', { clear = true }),
   callback = function(event_context)
-    local client = vim.lsp.get_client_by_id(event_context.data.client_id)
+    local client = vim.lsp.get_clients({ id = event_context.data.client_id })[1]
 
     if not client then
       return
@@ -38,12 +38,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
     nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
     nmap('gr', require('fzf-lua').lsp_references, '[g]oto [r]eferences')
-    nmap('K', function()
-      vim.lsp.buf.hover({ border = 'rounded' })
-    end, 'hover documentation')
-    nmap('<C-k>', function()
-      vim.lsp.buf.signature_help({ border = 'rounded' })
-    end, 'signature documentation')
+    nmap('K', vim.lsp.buf.hover, 'hover documentation')
+    nmap('<C-k>', vim.lsp.buf.signature_help, 'signature documentation')
     nmap('<Leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
     nmap('<Leader>wr', vim.lsp.buf.remove_workspace_folder, '[w]orkspace [r]emove Folder')
     nmap('<Leader>wl', function()
@@ -55,24 +51,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>ds', require('fzf-lua').lsp_document_symbols, '[d]ocument [s]ymbols')
     nmap('<leader>ws', require('fzf-lua').lsp_live_workspace_symbols, '[w]orkspace [s]ymbols')
     nmap('<leader>uh', function()
-      vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
     end, 'toggle inlay hint')
     nmap('gl', vim.diagnostic.open_float, 'Show diagnostic float')
-    nmap('[d', vim.diagnostic.goto_prev, 'Previous diagnostic')
-    nmap(']d', vim.diagnostic.goto_next, 'Next diagnostic')
 
     nmap('<Leader>lr', function()
       -- Restart the specific LSP client for this buffer
-      vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = bufnr }))
+      for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+        c:stop()
+      end
       vim.defer_fn(function()
         vim.cmd('edit')
       end, 100)
     end, '[l]sp [r]estart for current buffer')
 
     nmap('<Leader>lR', function()
-      local clients = vim.lsp.get_clients()
-      for _, c in pairs(clients) do
-        vim.lsp.stop_client(c.id)
+      for _, c in pairs(vim.lsp.get_clients()) do
+        c:stop()
       end
       vim.defer_fn(function()
         vim.cmd('bufdo edit')
@@ -81,14 +76,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[l]sp [R]estart all clients')
 
     nmap('<Leader>lf', function()
+      vim.diagnostic.reset(nil, bufnr)
       for _, c in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
         if c.server_capabilities.workspace then
           if c.server_capabilities.workspace.workspaceFolders then
             vim.notify(string.format('Refreshing workspace for %s', c.name), vim.log.levels.INFO, { title = 'LSP' })
           end
         end
-        vim.diagnostic.reset(nil, c.id)
-        vim.lsp.buf_request(bufnr, 'textDocument/diagnostic', {
+        c:request('textDocument/diagnostic', {
           textDocument = vim.lsp.util.make_text_document_params(bufnr),
         })
       end
@@ -137,7 +132,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       nmap('<Leader>la', vim.lsp.codelens.run, 'Run Code [L]ens [A]ction')
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
         buffer = bufnr,
-        callback = vim.lsp.codelens.refresh,
+        callback = function()
+          vim.lsp.codelens.refresh({ bufnr = bufnr })
+        end,
       })
     end
 

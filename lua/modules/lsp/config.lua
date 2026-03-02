@@ -33,7 +33,6 @@ function config.init()
     severity_sort = true,
     virtual_lines = false,
     float = {
-      border = 'rounded',
       source = true,
     },
   })
@@ -46,7 +45,7 @@ function config.init()
 
   -- Configure LSP file watching to improve detection of new files
   -- This helps LSP servers automatically pick up changes without manual restart
-  vim.lsp.set_log_level('warn') -- Reduce log spam
+  vim.lsp.log.set_level('warn') -- Reduce log spam
 
   -- Create user commands for LSP management
   vim.api.nvim_create_user_command('LspRestart', function(opts)
@@ -64,7 +63,7 @@ function config.init()
     end
 
     for _, client in pairs(clients) do
-      vim.lsp.stop_client(client.id)
+      client:stop()
       vim.notify(string.format('Restarting %s...', client.name), vim.log.levels.INFO, { title = 'LSP' })
     end
 
@@ -93,7 +92,7 @@ function config.init()
     local lines = { 'LSP Client Information:', '' }
     for _, client in pairs(clients) do
       table.insert(lines, string.format('• %s (id: %d)', client.name, client.id))
-      table.insert(lines, string.format('  Status: %s', client.is_stopped() and 'stopped' or 'running'))
+      table.insert(lines, string.format('  Status: %s', client:is_stopped() and 'stopped' or 'running'))
       table.insert(lines, string.format('  Root: %s', client.config.root_dir or 'none'))
 
       if client.workspace_folders then
@@ -142,17 +141,17 @@ function config.init()
       return
     end
 
-    for _, client in pairs(clients) do
-      -- Clear and refresh diagnostics
-      vim.diagnostic.reset(nil, client.id)
+    -- Clear diagnostics for this buffer
+    vim.diagnostic.reset(nil, bufnr)
 
+    for _, client in pairs(clients) do
       -- Notify the server about workspace changes
       if client.server_capabilities.workspace then
         vim.notify(string.format('Refreshing workspace for %s', client.name), vim.log.levels.INFO, { title = 'LSP' })
       end
 
       -- Request fresh diagnostics
-      vim.lsp.buf_request(bufnr, 'textDocument/diagnostic', {
+      client:request('textDocument/diagnostic', {
         textDocument = vim.lsp.util.make_text_document_params(bufnr),
       })
     end
@@ -473,7 +472,7 @@ function config.progress()
       ignore_done_already = false, -- Ignore new tasks that are already complete
       ignore_empty_message = false, -- Ignore new tasks that don't contain a message
       clear_on_detach = function(client_id)
-        local client = vim.lsp.get_client_by_id(client_id)
+        local client = vim.lsp.get_clients({ id = client_id })[1]
         return client and client.name or nil
       end,
       notification_group = function(msg)
