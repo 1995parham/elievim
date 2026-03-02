@@ -170,11 +170,7 @@ function config.lualine()
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, vim.bo.filetype) ~= -1 then
-        if client.name == 'null-ls' then
-          msg = string.format('%s 󰟢', msg)
-        else
-          msg = string.format('%s %s', msg, client.name)
-        end
+        msg = string.format('%s %s', msg, client.name)
       end
     end
 

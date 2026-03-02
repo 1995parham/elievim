@@ -60,8 +60,6 @@ return {
     lazy = false,
   },
 
-  { 'L3MON4D3/LuaSnip', config = conf.lua_snip },
-
   -- Set of preconfigured snippets for different languages.
   -- https://github.com/rafamadriz/friendly-snippets/wiki
   { 'rafamadriz/friendly-snippets' },
@@ -70,12 +68,19 @@ return {
   -- (off-spec lsp) and other functions.
   { 'barreiroleo/ltex_extra.nvim' },
 
-  -- null-ls.nvim reloaded / Use Neovim as a language server to inject LSP diagnostics,
-  -- code actions, and more via Lua.
+  -- Lightweight yet powerful formatter plugin
   {
-    'nvimtools/none-ls.nvim',
-    config = conf.null_ls,
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
+    config = conf.conform,
+  },
+
+  -- Asynchronous linter plugin complementing the built-in LSP support
+  {
+    'mfussenegger/nvim-lint',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = conf.lint,
   },
 
   -- LSP progress notifications
@@ -90,9 +95,6 @@ return {
     'saghen/blink.cmp',
     version = '1.*',
     dependencies = {
-      -- !Important! Make sure you're using the latest release of LuaSnip
-      -- `main` does not work at the moment
-      { 'L3MON4D3/LuaSnip' },
       -- Bring enjoyment to your auto completion.
       { 'xzbdmw/colorful-menu.nvim' },
       --  vscode-like pictograms for neovim lsp completion items

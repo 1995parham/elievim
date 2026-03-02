@@ -19,8 +19,8 @@ return {
     'lewis6991/gitsigns.nvim',
     config = conf.gitsigns,
   },
-  -- a powerful git log viewer
-  { 'cohama/agit.vim' },
+  -- Single tabpage interface for cycling through diffs and git log
+  { 'sindrets/diffview.nvim' },
   -- fugitive.vim: a git wrapper so awesome, it should be illegal
   { 'tpope/vim-fugitive' },
 

@@ -176,16 +176,8 @@ function config.navigator()
       enable = true,
     },
     lsp = {
-      display_diagnostic_qf = false, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it
-      format_on_save = function(bufnr)
-        local uri = vim.uri_from_bufnr(bufnr)
-        for _, pattern in ipairs(format_exclude_patterns) do
-          if string.find(uri, pattern) then
-            return false
-          end
-        end
-        return true
-      end,
+      display_diagnostic_qf = false,
+      format_on_save = false, -- handled by conform.nvim
       hover = {
         enable = true,
       },
@@ -326,13 +318,104 @@ function config.mason.lspconfig()
   end
 end
 
-function config.null_ls()
-  local null_ls = require('null-ls')
-  local _sources = require('modules.lsp.null-ls-sources')
+function config.conform()
+  local runtime = require('core.runtime')
 
-  null_ls.setup({
-    sources = _sources,
-    diagnostics_format = '[#{c}] #{m} (#{s})',
+  local formatters_by_ft = {
+    lua = { 'stylua' },
+    go = { 'gofumpt' },
+    sql = { 'sql_formatter' },
+    just = { 'just' },
+    bzl = { 'buildifier' },
+    sh = { 'shfmt' },
+    bash = { 'shfmt' },
+  }
+
+  -- Add Python formatters only if available
+  if vim.fn.executable('black') == 1 then
+    formatters_by_ft.python = formatters_by_ft.python or {}
+    table.insert(formatters_by_ft.python, 'isort')
+    table.insert(formatters_by_ft.python, 'black')
+  end
+
+  -- Add Node.js-dependent formatters
+  if runtime.has_nodejs() then
+    local prettier_fts = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'css',
+      'scss',
+      'html',
+      'json',
+      'jsonc',
+      'yaml',
+      'markdown',
+      'graphql',
+    }
+    for _, ft in ipairs(prettier_fts) do
+      formatters_by_ft[ft] = { 'prettierd' }
+    end
+  end
+
+  -- Add Python-dependent formatters
+  if runtime.has_python() then
+    formatters_by_ft.htmldjango = formatters_by_ft.htmldjango or {}
+    table.insert(formatters_by_ft.htmldjango, 'djlint')
+    formatters_by_ft.jinja = { 'djlint' }
+  end
+
+  require('conform').setup({
+    formatters_by_ft = formatters_by_ft,
+    format_on_save = function(bufnr)
+      local bufname = vim.api.nvim_buf_get_name(bufnr)
+      for _, pattern in ipairs(format_exclude_patterns) do
+        if string.find(bufname, pattern) then
+          return
+        end
+      end
+      return { timeout_ms = 3000, lsp_format = 'fallback' }
+    end,
+  })
+end
+
+function config.lint()
+  local runtime = require('core.runtime')
+  local lint = require('lint')
+
+  lint.linters_by_ft = {
+    lua = { 'selene' },
+    go = { 'golangcilint' },
+    dockerfile = { 'hadolint' },
+    bzl = { 'buildifier' },
+  }
+
+  -- Add Python linters only if available
+  if vim.fn.executable('mypy') == 1 then
+    lint.linters_by_ft.python = lint.linters_by_ft.python or {}
+    table.insert(lint.linters_by_ft.python, 'mypy')
+  end
+  if vim.fn.executable('pylint') == 1 then
+    lint.linters_by_ft.python = lint.linters_by_ft.python or {}
+    table.insert(lint.linters_by_ft.python, 'pylint')
+  end
+
+  -- GitHub Actions linting
+  if vim.fn.executable('actionlint') == 1 then
+    lint.linters_by_ft.yaml = { 'actionlint' }
+  end
+
+  -- Python-dependent linters
+  if runtime.has_python() then
+    lint.linters_by_ft.htmldjango = { 'djlint' }
+    lint.linters_by_ft.jinja = { 'djlint' }
+  end
+
+  vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+    callback = function()
+      lint.try_lint()
+    end,
   })
 end
 
@@ -357,7 +440,7 @@ function config.cmp()
       nerd_font_variant = 'mono',
     },
 
-    snippets = { preset = 'luasnip' },
+    snippets = { preset = 'default' },
 
     completion = {
       menu = {
@@ -415,6 +498,18 @@ function config.cmp()
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+      providers = {
+        snippets = {
+          opts = {
+            search_paths = { vim.fn.stdpath('config') .. '/snippets' },
+            global_snippets = { 'all' },
+            extended_filetypes = {
+              yaml = { 'kubernetes' },
+              python = { 'django' },
+            },
+          },
+        },
+      },
     },
 
     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -423,34 +518,6 @@ function config.cmp()
     --
     -- See the fuzzy documentation for more information
     fuzzy = { implementation = 'prefer_rust_with_warning' },
-  })
-end
-
-function config.lua_snip()
-  local ls = require('luasnip')
-  local types = require('luasnip.util.types')
-  ls.config.set_config({
-    history = true,
-    enable_autosnippets = true,
-    updateevents = 'TextChanged,TextChangedI',
-    ext_opts = {
-      [types.choiceNode] = {
-        active = {
-          virt_text = { { '<- choiceNode', 'Comment' } },
-        },
-      },
-    },
-  })
-
-  ls.filetype_extend('yaml', { 'kubernetes' })
-  ls.filetype_extend('python', { 'django' })
-
-  require('luasnip.loaders.from_lua').lazy_load({
-    paths = { vim.fn.stdpath('config') .. '/snippets' },
-  })
-  require('luasnip.loaders.from_vscode').lazy_load()
-  require('luasnip.loaders.from_vscode').lazy_load({
-    paths = vim.fn.stdpath('config') .. '/snippets',
   })
 end
 

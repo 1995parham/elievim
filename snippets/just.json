@@ -1,0 +1,10 @@
+{
+  "Just default target": {
+    "prefix": "just",
+    "body": [
+      "default:",
+      "    @just --list"
+    ],
+    "description": "Just default target to list targets"
+  }
+}

@@ -4,6 +4,18 @@
       {
         "language": "lua",
         "path": "./lua.json"
+      },
+      {
+        "language": "go",
+        "path": "./go.json"
+      },
+      {
+        "language": "sh",
+        "path": "./sh.json"
+      },
+      {
+        "language": "just",
+        "path": "./just.json"
       }
     ]
   }

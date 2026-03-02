@@ -139,7 +139,7 @@ function servers.ts_ls()
   return {
     on_attach = function(client, _)
       if client.name == 'ts_ls' then
-        -- Disable formatting in favor of none-ls
+        -- Disable formatting in favor of conform.nvim
         client.server_capabilities.documentFormattingProvider = false
       end
     end,
