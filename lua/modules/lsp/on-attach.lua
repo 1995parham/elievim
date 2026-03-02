@@ -6,18 +6,10 @@ if not lsp.augroup then
   lsp.augroup[2] = vim.api.nvim_create_augroup('LspDiagnostic', {})
 end
 
-lsp.diagnostic_icons = {
-  [vim.diagnostic.severity.ERROR] = '',
-  [vim.diagnostic.severity.HINT] = '',
-  [vim.diagnostic.severity.INFO] = '',
-  [vim.diagnostic.severity.WARN] = '',
-}
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_buf_conf', { clear = true }),
   callback = function(event_context)
     local client = vim.lsp.get_client_by_id(event_context.data.client_id)
-    -- vim.print(client.name, client.server_capabilities)
 
     if not client then
       return
@@ -61,6 +53,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('<leader>uh', function()
       vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
     end, 'toggle inlay hint')
+    nmap('gl', vim.diagnostic.open_float, 'Show diagnostic float')
+    nmap('[d', vim.diagnostic.goto_prev, 'Previous diagnostic')
+    nmap(']d', vim.diagnostic.goto_next, 'Next diagnostic')
 
     nmap('<Leader>lr', function()
       -- Restart the specific LSP client for this buffer
@@ -72,8 +67,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     nmap('<Leader>lR', function()
       local clients = vim.lsp.get_clients()
-      for _, client in pairs(clients) do
-        vim.lsp.stop_client(client.id)
+      for _, c in pairs(clients) do
+        vim.lsp.stop_client(c.id)
       end
       vim.defer_fn(function()
         vim.cmd('bufdo edit')
@@ -118,14 +113,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.notify(table.concat(lines, '\n'), vim.log.levels.INFO, { title = 'LSP Info', timeout = 5000 })
     end, '[l]sp [i]nfo')
 
-    if pcall(require, 'navigator') then
-      -- setup navigator for lsp client
-      require('navigator.lspclient.mapping').setup({ bufnr = bufnr, client = client })
-      -- enable identifier highlight on hover
-      require('navigator.dochighlight').documentHighlight(bufnr)
-      -- configure doc highlight
-      require('navigator.lspclient.highlight').add_highlight()
+    -- Native document highlight on hover (replaces navigator.dochighlight)
+    if client.server_capabilities.documentHighlightProvider then
+      local hl_group = vim.api.nvim_create_augroup('lsp_document_highlight_' .. bufnr, { clear = true })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        group = hl_group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        group = hl_group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+      })
     end
+
+    -- CodeLens support (replaces navigator.codelens)
+    if client.server_capabilities.codeLensProvider then
+      nmap('<Leader>la', vim.lsp.codelens.run, 'Run Code [L]ens [A]ction')
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        buffer = bufnr,
+        callback = vim.lsp.codelens.refresh,
+      })
+    end
+
+    -- Visual mode code action (replaces navigator.codeAction.range_code_action)
+    vim.keymap.set('v', '<Leader>ca', vim.lsp.buf.code_action, {
+      buffer = bufnr,
+      desc = 'LSP: Range [C]ode [A]ction',
+    })
   end,
 })
 

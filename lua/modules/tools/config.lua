@@ -67,15 +67,6 @@ function config.fzf_lua()
   })
 end
 
-function config.template()
-  local temp = require('template')
-
-  -- template directory
-  temp.temp_dir = '~/.config/nvim/templates'
-  temp.author = 'Parham Alvani'
-  temp.email = 'parham.alvani@gmail.com'
-end
-
 function config.overseer()
   require('overseer').setup()
 end

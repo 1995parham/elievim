@@ -17,16 +17,6 @@ return {
     config = conf.nvim_treesitter_textobjects,
   },
 
-  -- A feature-rich Go development plugin, leveraging gopls, treesitter AST, Dap,
-  -- and various Go tools to enhance the development experience.
-  {
-    'ray-x/go.nvim',
-    config = conf.go_nvim,
-    dependencies = {
-      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-    },
-  },
-
   {
     'davidmh/cspell.nvim',
     -- cspell requires Node.js

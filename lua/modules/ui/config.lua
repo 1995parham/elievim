@@ -383,7 +383,7 @@ function config.tterm()
     },
   })
 
-  vim.api.nvim_create_user_command('LazyDockerToogle', function()
+  vim.api.nvim_create_user_command('LazyDockerToggle', function()
     lazydocker:toggle()
   end, {})
 
@@ -406,45 +406,6 @@ function config.tterm()
       term:shutdown()
     end
   end, { bang = false, bar = true })
-end
-
-function config.notify()
-  local notify = require('notify')
-
-  -- Configure nvim-notify
-  notify.setup({
-    -- Animation style
-    stages = 'fade_in_slide_out', -- Options: fade_in_slide_out, fade, slide, static
-    -- Timeout for notifications in ms
-    timeout = 3000,
-    -- Background colour
-    background_colour = '#000000',
-    -- Icons for different log levels
-    icons = {
-      ERROR = '',
-      WARN = '',
-      INFO = '',
-      DEBUG = '',
-      TRACE = '✎',
-    },
-    -- Max width of notification window
-    max_width = 80,
-    -- Max height of notification window
-    max_height = 10,
-    -- Render function for messages
-    render = 'default', -- Options: default, minimal, simple, compact
-    -- Top down or bottom up
-    top_down = true,
-    -- Minimum level to show
-    level = vim.log.levels.INFO,
-    -- Function to execute on notification open
-    on_open = nil,
-    -- Function to execute on notification close
-    on_close = nil,
-  })
-
-  -- Set nvim-notify as the default notification handler
-  vim.notify = notify
 end
 
 return config

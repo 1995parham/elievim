@@ -7,28 +7,46 @@ local format_exclude_patterns = {
 
 -- config server in this function
 function config.init()
-  local _lsp = require('modules.lsp.on-attach')
+  require('modules.lsp.on-attach')
 
-  for type, icon in pairs(_lsp.diagnostic_icons) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  -- Modern declarative diagnostic config (Neovim 0.11+)
+  vim.diagnostic.config({
+    virtual_text = {
+      prefix = '●',
+      spacing = 4,
+      source = 'if_many',
+    },
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '',
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+        [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+      },
+    },
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    virtual_lines = false,
+    float = {
+      border = 'rounded',
+      source = true,
+    },
+  })
+
+  -- Toggle virtual_lines diagnostics (shows full diagnostic text below the line)
+  vim.keymap.set('n', '<leader>uv', function()
+    local current = vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = not current })
+  end, { desc = 'Toggle diagnostic virtual lines' })
 
   -- Configure LSP file watching to improve detection of new files
   -- This helps LSP servers automatically pick up changes without manual restart
   vim.lsp.set_log_level('warn') -- Reduce log spam
-
-  -- Set up better file watching patterns
-  local default_workspace_config = {
-    -- Configure workspace folders and file watching
-    workspace = {
-      -- Maximum number of file changes to monitor (increase if you have large projects)
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-        relativePatternSupport = true,
-      },
-    },
-  }
 
   -- Create user commands for LSP management
   vim.api.nvim_create_user_command('LspRestart', function(opts)
@@ -158,75 +176,8 @@ function config.init()
         vim.lsp.config(server_name, servers[server_name]())
       end
       vim.lsp.enable(server_name)
-      -- else
-      -- local msg = string.format(
-      --   "executable '%s' for server '%s' not found! Server will not be enabled",
-      --   lsp_executable,
-      --   server_name
-      -- )
-      -- vim.notify(msg, vim.log.levels.WARN, { title = 'Nvim-config' })
     end
   end
-end
-
-function config.navigator()
-  require('navigator').setup({
-    default_mapping = false,
-    ts_fold = {
-      enable = true,
-    },
-    lsp = {
-      display_diagnostic_qf = false,
-      format_on_save = false, -- handled by conform.nvim
-      hover = {
-        enable = true,
-      },
-      disable_lsp = 'all',
-    },
-    keymaps = {
-      -- https://github.com/ray-x/navigator.lua/blob/master/lua/navigator/lspclient/mapping.lua
-      {
-        key = 'gp',
-        mode = 'n',
-        func = require('navigator.definition').definition_preview,
-        desc = 'LSP: definition [P]review',
-      },
-      {
-        key = '<Leader>ca',
-        mode = 'v',
-        func = require('navigator.codeAction').range_code_action,
-        desc = 'LSP: Range [C]ode [A]ction',
-      },
-      {
-        key = '<Leader>la',
-        mode = 'n',
-        func = require('navigator.codelens').run_action,
-        desc = 'LSP: Run Code [L]ens [A]ction',
-      },
-      {
-        key = ']r',
-        func = require('navigator.treesitter').goto_next_usage,
-        desc = 'goto_next_usage',
-      },
-      {
-        key = '[r',
-        func = require('navigator.treesitter').goto_previous_usage,
-        desc = 'goto_previous_usage',
-      },
-      {
-        key = '<Leader>osl',
-        mode = 'n',
-        func = require('navigator.symbols').side_panel,
-        desc = 'LSP: [O]pen LSP [S]ymbols',
-      },
-      {
-        key = '<Leader>ost',
-        mode = 'n',
-        func = require('navigator.treesitter').side_panel,
-        desc = 'LSP: [O]pen Treesitter [S]ymbols',
-      },
-    },
-  })
 end
 
 config.mason = {}
@@ -304,13 +255,6 @@ function config.mason.lspconfig()
 
   for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
     if servers[server_name] then
-      -- vim.notify(
-      --   string.format('lsp client %s registered with custom configuration in mason-lspconfig', server_name),
-      --   vim.log.levels.DEBUG,
-      --   {
-      --     title = 'elievim',
-      --   }
-      -- )
       vim.lsp.config(server_name, servers[server_name]())
     end
 
@@ -412,7 +356,7 @@ function config.lint()
     lint.linters_by_ft.jinja = { 'djlint' }
   end
 
-  vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+  vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost' }, {
     callback = function()
       lint.try_lint()
     end,
@@ -567,13 +511,8 @@ function config.progress()
       poll_rate = 10, -- How frequently to update and render notifications
       filter = vim.log.levels.INFO, -- Minimum notifications level
       history_size = 128, -- Number of removed messages to retain in history
-      override_vim_notify = false, -- Let nvim-notify handle vim.notify
+      override_vim_notify = true,
       configs = { default = require('fidget.notification').default_config },
-      redirect = function(msg, level, opts)
-        if opts and opts.on_open then
-          return require('fidget.integration.nvim-notify').delegate(msg, level, opts)
-        end
-      end,
       view = {
         stack_upwards = true, -- Display notification items from bottom to top
         icon_separator = ' ', -- Separator between group name and icon

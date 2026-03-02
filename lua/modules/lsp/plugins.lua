@@ -26,15 +26,6 @@ return {
     config = conf.mason.setup,
   },
 
-  -- code analysis & navigation plugin
-  {
-    'ray-x/navigator.lua',
-    config = conf.navigator,
-    dependencies = {
-      { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-    },
-  },
-
   -- install and upgrade third party tools automatically
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',

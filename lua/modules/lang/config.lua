@@ -106,8 +106,4 @@ function config.nvim_treesitter_textobjects()
   end, { desc = 'Select inner class' })
 end
 
-function config.go_nvim()
-  require('go').setup()
-end
-
 return config
