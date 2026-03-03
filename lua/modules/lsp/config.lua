@@ -344,9 +344,9 @@ function config.lint()
     table.insert(lint.linters_by_ft.python, 'pylint')
   end
 
-  -- GitHub Actions linting
+  -- GitHub Actions linting (only in .github/workflows)
   if vim.fn.executable('actionlint') == 1 then
-    lint.linters_by_ft.yaml = { 'actionlint' }
+    lint.linters_by_ft.ghaction = { 'actionlint' }
   end
 
   -- Python-dependent linters
@@ -355,9 +355,23 @@ function config.lint()
     lint.linters_by_ft.jinja = { 'djlint' }
   end
 
+  -- Linters that require a project config file to run correctly
+  local linter_config_markers = {
+    selene = { 'selene.toml' },
+    golangcilint = { '.golangci.yml', '.golangci.yaml', '.golangci.toml', '.golangci.json' },
+  }
+
   vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost' }, {
     callback = function()
-      lint.try_lint()
+      local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
+      local filtered = {}
+      for _, name in ipairs(linters) do
+        local markers = linter_config_markers[name]
+        if markers == nil or vim.fs.find(markers, { path = vim.fn.expand('%:p:h'), upward = true })[1] then
+          table.insert(filtered, name)
+        end
+      end
+      lint.try_lint(filtered)
     end,
   })
 end
