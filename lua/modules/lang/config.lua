@@ -67,15 +67,23 @@ local ensure_installed = {
 function config.nvim_treesitter()
   require('nvim-treesitter').setup()
 
-  -- Install parsers (async, non-blocking)
-  require('nvim-treesitter').install(ensure_installed)
+  -- Create a user command to install all parsers on demand
+  vim.api.nvim_create_user_command('TSInstallAll', function()
+    require('nvim-treesitter').install(ensure_installed)
+  end, { desc = 'Install all configured treesitter parsers' })
 
-  -- Enable treesitter highlighting for all filetypes that have a parser
+  -- Install missing parsers on demand when a file is opened
   vim.api.nvim_create_autocmd('FileType', {
     callback = function(args)
-      -- Only start treesitter if a parser is available for this filetype
+      local ft = args.match
+      local lang = vim.treesitter.language.get_lang(ft)
+      if lang and vim.list_contains(ensure_installed, lang) then
+        if not pcall(vim.treesitter.language.inspect, lang) then
+          require('nvim-treesitter').install({ lang })
+        end
+      end
+
       if pcall(vim.treesitter.start, args.buf) then
-        -- Enable treesitter-based folding for this buffer
         vim.api.nvim_set_option_value('foldmethod', 'expr', { scope = 'local' })
         vim.api.nvim_set_option_value('foldexpr', 'v:lua.vim.treesitter.foldexpr()', { scope = 'local' })
       end
