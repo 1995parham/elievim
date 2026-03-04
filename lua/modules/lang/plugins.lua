@@ -6,6 +6,9 @@ return {
     branch = 'main',
     lazy = false,
     build = ':TSUpdate',
+    cond = function()
+      return require('core.runtime').has_treesitter_cli()
+    end,
     config = conf.nvim_treesitter,
   },
 
@@ -14,6 +17,9 @@ return {
     branch = 'main',
     lazy = false,
     dependencies = { 'nvim-treesitter' },
+    cond = function()
+      return require('core.runtime').has_treesitter_cli()
+    end,
     config = conf.nvim_treesitter_textobjects,
   },
 

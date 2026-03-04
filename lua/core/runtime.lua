@@ -35,6 +35,11 @@ function M.has_pip()
   return is_executable('pip') or is_executable('pip3')
 end
 
+-- Check if tree-sitter CLI is available
+function M.has_treesitter_cli()
+  return is_executable('tree-sitter')
+end
+
 -- Get a summary of available runtimes
 function M.summary()
   return {
@@ -71,6 +76,11 @@ function M.notify_missing_runtimes()
   if not M.has_python() then
     table.insert(missing, 'Python')
     table.insert(features, '  • Jinja/Django linter and formatter (djlint)')
+  end
+
+  if not M.has_treesitter_cli() then
+    table.insert(missing, 'tree-sitter CLI')
+    table.insert(features, '  • Treesitter parsers (syntax highlighting, folding, textobjects)')
   end
 
   if #missing > 0 then
