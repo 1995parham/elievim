@@ -31,7 +31,6 @@ local ensure_installed = {
   'tmux',
   -- Config & data formats
   'json',
-  'jsonc',
   'yaml',
   'toml',
   'xml',
