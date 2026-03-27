@@ -4,11 +4,15 @@ local config = {}
 local ensure_installed = {
   -- Neovim essentials
   'lua',
+  'luadoc',
   'vim',
   'vimdoc',
   'query',
   -- Main programming languages
   'go',
+  'gomod',
+  'gosum',
+  'gotmpl',
   'python',
   'php',
   'rust',
@@ -24,13 +28,16 @@ local ensure_installed = {
   -- Scripting
   'bash',
   'fish',
+  'tmux',
   -- Config & data formats
   'json',
+  'jsonc',
   'yaml',
   'toml',
   'xml',
   'ini',
   'csv',
+  'editorconfig',
   -- Documentation & markup
   'markdown',
   'markdown_inline',
@@ -40,6 +47,9 @@ local ensure_installed = {
   'helm',
   'terraform',
   'hcl',
+  'ssh_config',
+  'nginx',
+  'pem',
   -- Git
   'git_config',
   'git_rebase',
