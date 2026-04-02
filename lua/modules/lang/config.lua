@@ -9,6 +9,7 @@ local ensure_installed = {
   'vimdoc',
   'query',
   -- Main programming languages
+  'zig',
   'go',
   'gomod',
   'gosum',
