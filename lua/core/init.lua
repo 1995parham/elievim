@@ -61,6 +61,16 @@ vim.g.mapleader = ' '
 
 require('core.options')
 
+-- Enable Neovim 0.12+ experimental UI (ui2): redesigned messages and
+-- commandline UI that removes "Press ENTER" prompts and adds cmdline
+-- syntax highlighting. See `:h ui2`.
+if vim.fn.has('nvim-0.12') == 1 then
+  local ok, ui2 = pcall(require, 'vim._core.ui2')
+  if ok then
+    ui2.enable()
+  end
+end
+
 if vim.g.neovide then
   require('core.neovide')
 end
