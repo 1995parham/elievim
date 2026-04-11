@@ -47,7 +47,6 @@ return {
   -- Successor to rust-tools.nvim, auto-configures rust-analyzer
   {
     'mrcjkb/rustaceanvim',
-    version = '^5',
     lazy = false,
   },
 
