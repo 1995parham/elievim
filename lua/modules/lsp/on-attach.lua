@@ -130,12 +130,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- CodeLens support (replaces navigator.codelens)
     if client.server_capabilities.codeLensProvider then
       nmap('<Leader>la', vim.lsp.codelens.run, 'Run Code [L]ens [A]ction')
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.codelens.refresh({ bufnr = bufnr })
-        end,
-      })
+      vim.lsp.codelens.enable(true, { bufnr = bufnr })
     end
 
     -- Visual mode code action (replaces navigator.codeAction.range_code_action)
