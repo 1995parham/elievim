@@ -59,7 +59,9 @@ return {
 
       local function run(cmd, err)
         vim.fn.system(cmd)
-        if vim.v.shell_error ~= 0 then error(err .. ' (exit ' .. vim.v.shell_error .. ')') end
+        if vim.v.shell_error ~= 0 then
+          error(err .. ' (exit ' .. vim.v.shell_error .. ')')
+        end
       end
 
       -- 1. kulala-core backend binary --------------------------------------
@@ -75,9 +77,17 @@ return {
       local bin_dir = data .. '/kulala.nvim/bin'
       vim.fn.mkdir(bin_dir, 'p')
       local bin_out = bin_dir .. '/kulala-core'
-      run({ 'curl', '-fL', '-o', bin_out, string.format(
-        'https://github.com/mistweaverco/kulala-core/releases/download/v%s/%s', Globals.BACKEND_VERSION, bin
-      ) }, 'kulala: failed to download kulala-core')
+      run({
+        'curl',
+        '-fL',
+        '-o',
+        bin_out,
+        string.format(
+          'https://github.com/mistweaverco/kulala-core/releases/download/v%s/%s',
+          Globals.BACKEND_VERSION,
+          bin
+        ),
+      }, 'kulala: failed to download kulala-core')
       vim.fn.system({ 'chmod', '+x', bin_out })
 
       -- 2. tree-sitter grammar repo ----------------------------------------
@@ -88,11 +98,20 @@ return {
       end
       -- Self-heal a missing/incorrect origin (the state that broke fetching).
       if vim.fn.system({ 'git', '-C', src, 'remote' }):find('origin') then
-        run({ 'git', '-C', src, 'remote', 'set-url', 'origin', Globals.TREESITTER_REPO_URL }, 'kulala: git remote set-url failed')
+        run(
+          { 'git', '-C', src, 'remote', 'set-url', 'origin', Globals.TREESITTER_REPO_URL },
+          'kulala: git remote set-url failed'
+        )
       else
-        run({ 'git', '-C', src, 'remote', 'add', 'origin', Globals.TREESITTER_REPO_URL }, 'kulala: git remote add failed')
+        run(
+          { 'git', '-C', src, 'remote', 'add', 'origin', Globals.TREESITTER_REPO_URL },
+          'kulala: git remote add failed'
+        )
       end
-      run({ 'git', '-C', src, 'fetch', '--depth', '1', 'origin', Globals.TREESITTER_VERSION }, 'kulala: grammar fetch failed')
+      run(
+        { 'git', '-C', src, 'fetch', '--depth', '1', 'origin', Globals.TREESITTER_VERSION },
+        'kulala: grammar fetch failed'
+      )
       run({ 'git', '-C', src, 'checkout', '--quiet', 'FETCH_HEAD' }, 'kulala: grammar checkout failed')
 
       -- 3. build parser + sync queries into the site dir -------------------
@@ -101,8 +120,10 @@ return {
       local query_dir = data .. '/site/queries/kulala_http'
       vim.fn.mkdir(parser_dir, 'p')
       vim.fn.mkdir(query_dir, 'p')
-      run({ 'tree-sitter', 'build', '-o', parser_dir .. '/kulala_http.' .. ext, src },
-        'kulala: tree-sitter build failed (is the tree-sitter CLI installed?)')
+      run(
+        { 'tree-sitter', 'build', '-o', parser_dir .. '/kulala_http.' .. ext, src },
+        'kulala: tree-sitter build failed (is the tree-sitter CLI installed?)'
+      )
       for _, scm in ipairs(vim.fn.glob(src .. '/queries/kulala_http/*.scm', false, true)) do
         vim.fn.system({ 'cp', '-f', scm, query_dir })
       end
