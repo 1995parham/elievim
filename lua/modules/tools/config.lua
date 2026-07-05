@@ -79,6 +79,14 @@ end
 
 function config.kulala()
   require('kulala').setup({
+    -- Pin kulala-core to the already-installed binary so a BACKEND_VERSION
+    -- bump never re-triggers the ~100MB async download (which nvim kills on
+    -- exit if you quit before it finishes, flashing the release URL on close).
+    -- To upgrade the backend later: delete this dir and reopen an .http file,
+    -- keeping nvim open ~15s so the download completes.
+    kulala_core = {
+      path = vim.fn.stdpath('data') .. '/kulala.nvim/bin/kulala-core',
+    },
     global_keymaps = {
 
       ['Open scratchpad'] = {
