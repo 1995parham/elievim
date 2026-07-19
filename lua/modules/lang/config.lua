@@ -29,7 +29,6 @@ local ensure_installed = {
   -- Scripting
   'bash',
   'fish',
-  'tmux',
   -- Config & data formats
   'json',
   'yaml',
