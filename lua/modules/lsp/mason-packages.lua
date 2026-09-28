@@ -182,7 +182,6 @@ function packages.etc()
     'staticcheck',
     'vint',
     'ltex-ls', -- Java-based, standalone
-    'kulala-fmt',
   }
 
   -- Node.js-dependent packages
