@@ -109,6 +109,17 @@ function packages.toml()
   }
 end
 
+function packages.typescript()
+  -- vtsls requires Node.js
+  if runtime.has_nodejs() then
+    return {
+      'vtsls',
+    }
+  else
+    return {}
+  end
+end
+
 function packages.docker()
   local pkgs = { 'hadolint' } -- hadolint is a standalone binary
 

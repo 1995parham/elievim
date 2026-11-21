@@ -122,37 +122,37 @@ function servers.gopls()
   }
 end
 
+-- vtsls wraps the typescript extension of vscode, so its settings carry the names vscode uses
+-- and it knows what that extension knows (move a file and its imports follow, monorepos with
+-- one server). it replaced ts_ls here; the two must never run together.
 ---@return vim.lsp.Config
-function servers.ts_ls()
+function servers.vtsls()
+  local language = {
+    updateImportsOnFileMove = { enabled = 'always' },
+    inlayHints = {
+      parameterNames = { enabled = 'all', suppressWhenArgumentMatchesName = true },
+      parameterTypes = { enabled = true },
+      variableTypes = { enabled = true },
+      propertyDeclarationTypes = { enabled = true },
+      functionLikeReturnTypes = { enabled = true },
+      enumMemberValues = { enabled = true },
+    },
+  }
+
   return {
     on_attach = function(client, _)
-      if client.name == 'ts_ls' then
+      if client.name == 'vtsls' then
         -- Disable formatting in favor of conform.nvim
         client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
       end
     end,
     settings = {
-      typescript = {
-        inlayHints = {
-          includeInlayParameterNameHints = 'all',
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-        },
-      },
-      javascript = {
-        inlayHints = {
-          includeInlayParameterNameHints = 'all',
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-        },
+      typescript = language,
+      javascript = language,
+      vtsls = {
+        -- use the typescript of the project (node_modules) when it has one
+        autoUseWorkspaceTsdk = true,
       },
     },
   }

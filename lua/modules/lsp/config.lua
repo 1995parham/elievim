@@ -252,12 +252,18 @@ function config.mason.lspconfig()
     ensure_installed = {},
   })
 
-  for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
-    if servers[server_name] then
-      vim.lsp.config(server_name, servers[server_name]())
-    end
+  -- servers that another one replaced. a machine may still have the old package in mason, and
+  -- two typescript servers on one buffer answer everything twice.
+  local replaced = { ts_ls = 'vtsls' }
 
-    vim.lsp.enable(server_name)
+  for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
+    if not replaced[server_name] then
+      if servers[server_name] then
+        vim.lsp.config(server_name, servers[server_name]())
+      end
+
+      vim.lsp.enable(server_name)
+    end
   end
 end
 
